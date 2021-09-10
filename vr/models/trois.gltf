@@ -1,0 +1,124 @@
+{
+  "accessors": [
+    {
+      "bufferView": 0,
+      "byteOffset": 0,
+      "componentType": 5125,
+      "count": 132384,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 0,
+      "componentType": 5126,
+      "count": 23539,
+      "max": [
+        2.77376630000000012899e+01,
+        1.06819186000000001968e+02,
+        3.71501400000000003843e+01
+      ],
+      "min": [
+        -2.93426819999999999311e+01,
+        2.36047000000000006814e-01,
+        -3.70585230000000009909e+01
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 12,
+      "componentType": 5126,
+      "count": 23539,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 24,
+      "componentType": 5126,
+      "count": 23539,
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 32,
+      "componentType": 5126,
+      "count": 23539,
+      "type": "VEC4"
+    }
+  ],
+  "asset": {
+    "generator": "Wings 3D 2.2.7",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 529536,
+      "byteOffset": 0
+    },
+    {
+      "buffer": 0,
+      "byteLength": 1129872,
+      "byteOffset": 529536,
+      "byteStride": 48
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 1659408,
+      "uri": "trois.bin"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "emissiveFactor": [
+        0.00000000000000000000e+00,
+        0.00000000000000000000e+00,
+        0.00000000000000000000e+00
+      ],
+      "name": "blinn4SG",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          1.00000000000000000000e+00,
+          1.00000000000000000000e+00,
+          1.00000000000000000000e+00,
+          1.00000000000000000000e+00
+        ],
+        "metallicFactor": 1.00000000000000005551e-01,
+        "roughnessFactor": 8.00000000000000044409e-01
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "C_officeChair002_PLY",
+      "primitives": [
+        {
+          "attributes": {
+            "COLOR_0": 4,
+            "NORMAL": 2,
+            "POSITION": 1,
+            "TEXCOORD_0": 3
+          },
+          "indices": 0,
+          "material": 0
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "mesh": 0,
+      "name": "C_officeChair002_PLY"
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "nodes": [
+        0
+      ]
+    }
+  ]
+}
