@@ -2,390 +2,266 @@
 <html>
 
 <head>
-	<title>p1</title>
-        <script src="vr/js/aframe-v1.2.0.min.js"></script>
-<!--<script src="vr/js/aframe-extras.min.js"></script>-->
-<script src="vr/js/n5ro/aframe-extras.controls.min.js"></script>
-<script src='vr/js/aframe-environment-component.min.js'></script>
-<script src='vr/js/aframe-htmlembed-component.js'></script>
+  <title>P2</title>
+  <script src="vr/js/aframe-v1.2.0.min.js"></script>
+  <!--<script src="vr/js/aframe-extras.min.js"></script>
+   <script src='vr/js/aframe-environment-component.min.js'></script>-->
+   
+   <script src="vr/js/aframe-environment-component.min.js"></script>
+   <script src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
+   <script src="vr/js/aframe-presentation-component.min.js"></script>
+  
+  
+    <link rel="stylesheet" href="p2.css">
+ 
+    <script>
+      AFRAME.registerComponent('slide-environment', {
+          schema: {
+              settings: { type: 'string', default: 'preset: default' },
+          },
 
-<script src="vr/js/lzma.js"></script>
-<script src="vr/js/ctm.js"></script>
-<script src="vr/js/CTMLoader.js"></script>
-<script src="https://mixedreality.mozilla.org/ammo.js/builds/ammo.wasm.js"></script>
-<!--<script src="http://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>-->
-<script src='vr/js/aframe-physics-system.min.js'></script>
-<script src="vr/js/extended-wasd-controls.js"></script>
-<script src="vr/js/aframe-teleport-controls.min.js"></script>
-<script src="vr/js/spheres_anim.js"></script>
-<script src="vr/js/anim_1.js"></script>
-<script src="vr/js/anim_2.js"></script>
-<script src="vr/js/mocap.js"></script>
+          init: function() {
+              this.el.addEventListener('a-presentation.slide-active', () => {
+                  const { settings } = this.data;
 
-<script src="vr/js/ctm_component.js"></script>
-<script src="vr/js/mobile_component.js"></script>
-<script src="vr/js/aframe-door.min.js"></script>
-<script src="vr/js/aframe-gui.js"></script>
+                  if (this.el.sceneEl.getAttribute('environment') === settings) {
+                      return;
+                  }
 
-<script src="vr/js/gui-dropdown.js"></script>
-<script src="vr/js/gui-env.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-<style>
-    body {
-        /* disable long press in iOS? */
-        -webkit-touch-callout: none;
-    }
-    h1{
-      font-size: 52px;
-    }
-    .dark{
-      background-color: rgba(0,0,0,0.2);
-      border-radius:50px;  
-      background-repeat: no-repeat;
-      background-position: bottom right;
-      padding: 40px;
-    }
-    .main{
-      width: 1500px;
-      height: 800px;
-      overflow: hidden;
-    }
-    .menu{
-      width: 250px;
-      height: 768px;
-      text-align: center;
-    }
-    .menu ul{
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-    }
-    a.button{
-      display: inline-block;
-      width: 100%;
-      border-radius: 20px;
-      background-color: #000;
-      color: #fff;
-      text-decoration: none;
-      text-align: center;
-      padding: 10px 0;
-      margin-bottom: 20px;
-    }
-    a.button:hover{
-      background-color: #fff;
-      color: #888;
-    }
-    a.button:active{
-      background-color: #fff;
-      color: #888;
-      box-shadow: 0px 0px 50px #00d2ff;
-    }
-    a.imgLink{
-      width: 100%;
-      border-radius: 20px;
-      color: #fff;
-      text-decoration: none;
-      text-align: center;
-      padding: 10px 0;
-      margin-bottom: 20px;
-      background-color: #444;
-      border: 3px solid #444;
-      text-shadow: none;
-      display: block;
-    }
-    a.imgLink:hover{
-      border: 3px solid #fff;
-      background-color: #444;
-    }
-    .code{
-      white-space: pre;
-      font-size: 0.7em;
-      background-color: #000;
-      margin-bottom: 30px;
-    }
-    .next,.prev{
-      position: absolute;
-      bottom: 0px;
-      right: 30px;
-      display: inline-block;
-      width: auto !important;
-      padding: 20px 30px !important;
-    }
-    .prev{
-      right: auto;
-      left: 30px;
-    }
-    #page1{
-      position: relative;
-      height: 100%;
-    }
-    #page2, #page3, #page4{
-      display: none;
-      position: relative;
-      height: 100%;
-    }
-    .slide{
-      height:100%;
-    }
-    .slide:target #page1{
-      display: none;
-    }
-    #slide2:target #page2{
-      display: block;
-    }
-    #slide3:target #page3{
-      display: block;
-    }
-    #slide4:target #page4{
-      display: block;
-    }
-    #page4 ul{
-      list-style-type: square;
-      font-size: 0.8em;
-    }
+                  const elements = [].slice.call(document.querySelectorAll('.environment'));
+                  elements.forEach((element) => {
+                      element.parentNode.removeChild(element);
+                  });
 
-    .mainUI {
-        border: 0px solid pink;
-        position: fixed;
-        top: 0px;
-        width: 99%;
-        height: 99%;
-        z-index: 1;
-        pointer-events: none;
-        /* allow click-through in transparent areas */
-    }
-
-    .regionUI {
-        border: 0px solid yellow;
-        position: absolute;
-        display: flex;
-        flex-direction: row;
-        pointer-events: none;
-    }
-
-    .buttonUI {
-        border: 0px solid lime;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        pointer-events: auto;
-        filter: drop-shadow(0px 0px 20px white);
-    }
-</style>
-<script>
-    AFRAME.registerComponent('showbutton', {
-      schema: {
-        'target': {type: 'selector'},
-      },
-      init: function () {
-        var show=false;    
-        this.el.addEventListener("click",()=>{
-          if(show){
-            this.data.target.setAttribute("visible","false");
-            this.el.querySelector("a").innerHTML="Show Box";
-          }else{
-            this.data.target.setAttribute("visible","true");
-            this.el.querySelector("a").innerHTML="Hide Box";
+                  this.el.sceneEl.removeAttribute('environment');
+                  this.el.sceneEl.setAttribute('environment', settings);
+              });
           }
-          show=!show;
-        });
-      }
-    });
-</script>
+      });
+
+      AFRAME.registerPrimitive('a-slide-environment', {
+          defaultComponents: {
+              'slide-environment': {},
+          },
+
+          mappings: {
+              'settings': 'slide-environment.settings',
+          }
+      });
+  </script>
 </head>
 <!--note: by using red base images for buttons, can tint (HSV) using filter: hue-rotate(); etc.-->
-<body>
-    <div class='mainUI' id='uiDiv' oncontextmenu='return false;'>
 
-        <!-- top-left -->
-        <div class='regionUI skyColor' style='top: 10px; left: 10px;' oncontextmenu='return false;'>
+<body style="background-color: black">
+  <<main>
+    <aside>
+      <p class="asideList">Orci nunc naeos sduis sed oin aesent luctus min. Oin sapienma nequesed sodale uam arcused. Torquent liquam necmae malesu volutpa congue lobortis habitas llus. Libero augue facili cras anunc ultricie euismodd maurisin. Esque risusut miin duinulla aesent odioin fermen ras. Lus varius eroscu pretiu non arcu tortor purusp. Varius miquis nequenu euismod integer massased enean molestie phasel. Lectuss imperdie ipsumnam dignis portado in scras. Posuered itur consect usce metiam nibh iaculis quamut.</p>
+    </aside>
+    <section>
+      <input type="checkbox" id="myInput">
+      <label for="myInput">
+        <span class="bar top"></span>
+        <span class="bar middle"></span>
+        <span class="bar bottom"></span>
+      </label>
+      <div class="content">
+      <a-scene  environment="preset: forest" vr-mode-ui="enabled: false" style="background-color: black">
+        <a-entity id="intro" position="0 3 0">
+  <a-plane
+          id="slide-background"
+          position="0 0 -1"
+          scale="50 5 5"
+          color="#333"
+          shader="flat"
+          animation__fadeout="property: opacity; from: 1; to: 0; dur: 500; autoplay: false"
+  ></a-plane>
+  <a-entity id="slide-1">
+      <a-text position="0 .15 -.5" scale=".35 .35 .35" align="center" value="aframe-presentation-component"></a-text>
+      <a-text position="0 .05 -.5" scale=".25 .25 .25" align="center" value="By Ruben van der Leun (@rvdleun)"></a-text>
+      <a-text position="0 -.2 -.5" scale=".25 .25 .25" align="center" value="Use left/right arrow keys or swipe left/right the screen to navigate"></a-text>
+  </a-entity>
 
-        </div>
+  <a-entity id="slide-2">
+      <a-text position="2 0 -.5" scale=".3 .3 .3" align="center" value="These AFrame components are\n setup to let you create a presentation..."></a-text>
+  </a-entity>
 
-        <!-- top-right -->
-        <div class='regionUI' style='top: 10px; right: 10px;'>
-        </div>
-
-        <!-- bottom-left -->
-        <div class='regionUI baseColor' style='bottom: 10px; left: 10px;'>
-            <div class='buttonUI'>
-                <img src='vr/images/buttons/red/left.png' id='buttonMoveLeft' />
-            </div>
-            <div class='buttonUI'>
-                <img src='vr/images/buttons/red/up.png' id='buttonMoveForward' /><br />
-                <img src='vr/images/buttons/red/down.png' id='buttonMoveBackward' />
-            </div>
-            <div class='buttonUI'>
-                <img src='vr/images/buttons/red/right.png' id='buttonMoveRight' />
-            </div>
-        </div>
-
-        <!-- bottom-right -->
-        <div class='regionUI baseColor' style='bottom: 10px; right: 500px;'>
-            <div class='buttonUI'>
-                <img src='vr/images/buttons/red/up.png' id='buttonMoveUp' /><br />
-                <img src='vr/images/buttons/red/down.png' id='buttonMoveDown' />
-            </div>
-        </div>
-
-    </div>
-
-    <script>
-        function haltEvent(event) {
-            event.preventDefault && event.preventDefault();
-            event.stopPropagation && event.stopPropagation();
-            event.cancelBubble = true;
-            event.returnValue = false;
-            return false;
-        }
-
-        // prevent right-click menus from appearing
-        document.addEventListener('contextmenu', haltEvent);
-        // more attempts to prevent right-click menus from appearing -- avoid; they block touchscreen/iPad controls
-        // document.addEventListener('touchmove', haltEvent );
-        // document.addEventListener('touchcancel', haltEvent );
-
-        // add events for both touch and mouse controls
-        function addButtonEventListeners(buttonElementID, startFunction, endFunction) {
-            let element = document.getElementById(buttonElementID);
-            element.addEventListener('touchstart', startFunction);
-            element.addEventListener('mousedown', startFunction);
-            element.addEventListener('touchend', endFunction);
-            element.addEventListener('mouseup', endFunction);
-        }
-
-        function associateMovementControls(buttonElementID, component, keyName) {
-            addButtonEventListeners(buttonElementID,
-                function (event) {
-                    component.registerKeyDown(keyName);
-                    return haltEvent(event);
-                },
-                function (event) {
-                    component.registerKeyUp(keyName);
-                    return haltEvent(event);
-                }
-            );
-        }
-
-        // need to run javascript code after a-scene entities and components are loaded
-        AFRAME.registerComponent('screen-controls', {
-            init: function () {
-                let component = document.getElementById('cameraRig').components['extended-wasd-controls'];
-
-                associateMovementControls('buttonMoveForward', component, component.data.moveForwardKey);
-                associateMovementControls('buttonMoveBackward', component, component.data.moveBackwardKey);
-                associateMovementControls('buttonMoveLeft', component, component.data.moveLeftKey);
-                associateMovementControls('buttonMoveRight', component, component.data.moveRightKey);
-                associateMovementControls('buttonMoveUp', component, component.data.moveUpKey);
-                associateMovementControls('buttonMoveDown', component, component.data.moveDownKey);
-            },
-
-            tick: function (time, deltaTime) {
-
-            }
-        });
-        
-        var sceneEl = document.querySelector('a-scene');
-        AFRAME.registerComponent('selectionne', {
-            
-  init: function () {
-    console.log(this.el.sceneEl);
-    console.log(sceneEl.querySelectorAll('.clickable'));  // Reference to the scene element.
-  }
-});
-AFRAME.registerComponent('recitclickable', {
-              schema:{
-          'linkto':{type:"string",default:""},
-        },
-      
-      init: function () {
-        var clickclick = document.querySelector('[recitclickable]');
-        var link = clickclick.getAttribute('recitclickable');   
-        this.el.addEventListener("click",()=>{
-            console.log ("click");
-          window.open(link, "_self");
-        });
-      }
-    });
-    </script>
-
-<a-scene stats joystick shadow="type: pcfsoft; autoUpdate: true;" renderer="antialias: true; colorManagement: true; physicallyCorrectLights: true;">
-    <a-sky src="#sky" color="#6EBAA7"></a-sky>
-    <a-sphere  recitclickable="p1.html" class="clickable" color="blue" radius="0.5"position='0 0 1'></a-sphere>
-    <a-sphere  recitclickable="index.html" class="clickable" color="pink" radius="0.5"></a-sphere>
-    <a-assets>
-        <!--Lecteur video-->
-        <canvas id="canvasObj" crossorigin="anonymous" webkit-playsinline=""></canvas>
-        
-        <a-asset-item id="murv2-obj" src="vr/models/mur4/murv4.obj"></a-asset-item>
-        <a-asset-item id="murv2-mtl" src="vr/models/mur4/murv4.mtl"></a-asset-item>
-        </a-assets>
-        <a-obj-model 
-                src="#murv2-obj" 
-                mtl="#murv2-mtl" 
-                position='0 0 0' 
-                rotation='0 0 0' 
-                 >
-            </a-obj-model>
-            <a-obj-model 
-                src="#murv2-obj" 
-                mtl="#murv2-mtl" 
-                position='1.5 0 0' 
-                rotation='0 0 0' 
-                 >
-            </a-obj-model>
-            <a-obj-model 
-                src="#murv2-obj" 
-                mtl="#murv2-mtl" 
-                position='3 0 0' 
-                rotation='0 0 0' 
-                 >
-            </a-obj-model>
-            <a-obj-model 
-                src="#murv2-obj" 
-                mtl="#murv2-mtl" 
-                position='3.75 0 0.75' 
-                rotation='0 90 0' 
-                 >
-            </a-obj-model>
-            <a-obj-model 
-                src="#murv2-obj" 
-                mtl="#murv2-mtl" 
-                position='3.75 0 2.25' 
-                rotation='0 90 0' 
-                 >
-            </a-obj-model>
-<!-- Camera -->
-<a-entity id="player" 
-position="6 2 6" 
-movement-controls="speed: 0.10000000149011612;">
-<a-entity id="camera" 
-    camera="near: 0.001" 
-    position="0 1.7000000476837158 0" 
-    look-controls="pointerLockEnabled: false">
-       <!-- <a-entity id="cursor1" cursor="fuse: false;" animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 50; from: 	0.1 0.1 0.1; to: 1 1 1"
-            position="0 0 -0.1"
-            geometry="primitive: circle; radius: 0.001;"
-            material="color: #CCC; shader: flat;"
-            raycaster = "far: 10.0; interval: 1500.0; objects: .clickable,.links,[gui-interactable]">
-        </a-entity>--->
-        <a-gui-cursor 
-                id="cursor" 
-                
-                         fuse="true" 
-                fuse-timeout="2000"
-                position="0 0 -0.1"
-                geometry="primitive: circle; radius: 0.001;"
-                material="color: #CCC; shader: flat;"
-                raycaster = " objects: [recitclickable],.links,[gui-interactable]"
-                design="ring">
-                </a-gui-cursor>
+  <a-entity id="slide-3">
+      <a-text position="4 0 -.5" scale=".3 .3 .3" align="center" value="that instead of being 2D..."></a-text>
+  </a-entity>
 </a-entity>
-    <a-entity id="leftHand" oculus-touch-controls="hand: left" vive-controls="hand: left"></a-entity>
-    <a-entity id="rightHand" laser-controls oculus-touch-controls="hand: right" vive-controls="hand: right" raycaster = "far: 10.0; interval: 1500.0; objects: .clickable,.links"></a-entity>
+
+<a-entity id="3d-intro">
+  <a-text position="10 20 13" rotation="0 180 0" align="center" scale="3 3 3" value="is 3D instead!"></a-text>
+  <a-text
+          id="look-at-features"
+          position="10 19 13"
+          rotation="0 180 0"
+          align="center"
+          scale="2 0 2"
+          value="Let's have a look at the features"
+          animation__appear="property: scale; from: 2 0 2; to: 2 2 2; delay: 250; autoplay: false"
+  ></a-text>
+
+  <a-text
+          id="move-the-camera"
+          position="27 5 20"
+          rotation="0 -270 0"
+          align="center"
+          scale="2 2 2"
+          value="Move the camera around."
+          animation__appear="property: position; from: -20 5 20; to: -13 5 20; dur: 4000; autoplay: false"
+          animation__disappear="property: rotation; from: 0 -270 0; to: 0 -90 0; dur: 1200; autoplay: false"
+  ></a-text>
+
+  <a-text
+          id="trigger-animations"
+          position="-13 5 20"
+          rotation="0 -90 0"
+          align="center"
+          scale="2 2 2"
+          value="Trigger animations."
+          animation__appear="property: rotation; from: 0 -450 0; to: 0 -270 0; dur: 1200; autoplay: false"
+          animation__disappear="property: rotation; from: 0 -270 0; to: 0 -90 0; dur: 1200; autoplay: false"
+  ></a-text>
+
+  <a-box
+          id="animation-box"
+          color="red"
+          position="-15 6 30"
+          visible="false"
+          animation__position="property: position; from: -15 6 29; to: -15 6 11; dur: 2500; autoplay: false"
+          animation__rotation="property: rotation; from: 0 0 0; to: 360 360 360; dur: 2500; autoplay: false"
+  ></a-box>
+
+  <a-text
+          id="visibility"
+          position="-13 5 20"
+          rotation="0 -90 0"
+          align="center"
+          scale="2 2 2"
+          value="Change entities' visibility."
+          animation__appear="property: rotation; from: 0 -450 0; to: 0 -270 0; dur: 1200; autoplay: false"
+          animation__disappear="property: rotation; from: 0 -270 0; to: 0 -90 0; dur: 1200; autoplay: false"
+  ></a-text>
+
+  <a-box
+          id="visibility-red"
+          position="-13 6 21.5"
+          color="red"
+          shader="flat"
+          visible="false"
+  ></a-box>
+
+  <a-box
+          id="visibility-green"
+          position="-13 6 20"
+          color="green"
+          shader="flat"
+          visible="false"
+  ></a-box>
+
+  <a-box
+          id="visibility-blue"
+          position="-13 6 18.5"
+          color="blue"
+          shader="flat"
+          visible="false"
+  ></a-box>
+
+  <a-text
+          id="custom-triggers"
+          position="-13 5 20"
+          rotation="0 -90 0"
+          align="center"
+          scale="2 2 2"
+          value="Hook into the slide events\nto create custom triggers"
+          animation__appear="property: rotation; from: 0 -450 0; to: 0 -270 0; dur: 1200; autoplay: false"
+          animation__disappear="property: rotation; from: 0 -270 0; to: 0 -90 0; dur: 1200; autoplay: false"
+  ></a-text>
 </a-entity>
-<a-box material="src:#tex1" scale="0.5 0.5 0.5" position="0 0.5 -4" id="box" visible="false"></a-box>
+
+<a-entity id="conclusion">
+  <a-text
+          id="text-conclusion"
+          position="-10 10 21.5"
+          rotation="0 -180 0"
+          align="center"
+          value="THE END\n\nClick on the icon\nin the upper-right to learn more\n\nOr visit /examples.html"
+          visible="false"
+  ></a-text>
+</a-entity>
+
+<a-entity camera></a-entity>
+<a-presentation aspect-ratio="16:9">
+  <a-slide>
+      <a-slide-camera position="0 3 0"></a-slide-camera>
+  </a-slide>
+  <a-slide>
+      <a-slide-camera position="2 3 0" easing="easeInElastic"></a-slide-camera>
+  </a-slide>
+  <a-slide>
+      <a-slide-camera position="4 3 0" easing="easeInQuad"></a-slide-camera>
+  </a-slide>
+  <a-slide>
+      <a-slide-camera position="10 20 10" rotation="0 -180 0" duration="3000" easing="easeInOutQuad"></a-slide-camera>
+      <a-slide-animation selector="#slide-background" animations="fadeout"></a-slide-animation>
+  </a-slide>
+  <a-slide>
+      <a-slide-camera position="10 19 10" rotation="0 -180 0" duration="1000"></a-slide-camera>
+      <a-slide-animation selector="#look-at-features" animations="appear"></a-slide-animation>
+  </a-slide>
+  <a-slide>
+      <a-slide-animation selector="#move-the-camera" animations="appear"></a-slide-animation>
+      <a-slide-camera position="-10 5 20" rotation="0 -270 360" duration="2500"></a-slide-camera>
+  </a-slide>
+  <a-slide>
+      <a-slide-camera position="-10 6 20" rotation="0 -270 360" duration="1500"></a-slide-camera>
+      <a-slide-animation selector="#move-the-camera" animations="disappear"></a-slide-animation>
+      <a-slide-animation selector="#trigger-animations" animations="appear"></a-slide-animation>
+      <a-slide-visibility selector="#animation-box" visibility="true"></a-slide-visibility>
+  </a-slide>
+  <a-slide>
+      <a-slide-animation selector="#animation-box" animations="position,rotation"></a-slide-animation>
+  </a-slide>
+  <a-slide>
+      <a-slide-animation selector="#trigger-animations" animations="disappear"></a-slide-animation>
+      <a-slide-animation selector="#visibility" animations="appear"></a-slide-animation>
+  </a-slide>
+  <a-slide>
+      <a-slide-visibility selector="#visibility-red" visibility="true"></a-slide-visibility>
+  </a-slide>
+  <a-slide>
+      <a-slide-visibility selector="#visibility-green" visibility="true"></a-slide-visibility>
+  </a-slide>
+  <a-slide>
+      <a-slide-visibility selector="#visibility-blue" visibility="true"></a-slide-visibility>
+  </a-slide>
+  <a-slide>
+      <a-slide-visibility selector="#visibility-red" visibility="false"></a-slide-visibility>
+  </a-slide>
+  <a-slide>
+      <a-slide-visibility selector="#visibility-green" visibility="false"></a-slide-visibility>
+  </a-slide>
+  <a-slide>
+      <a-slide-visibility selector="#visibility-blue" visibility="false"></a-slide-visibility>
+  </a-slide>
+  <a-slide>
+      <a-slide-animation selector="#visibility" animations="disappear"></a-slide-animation>
+      <a-slide-animation selector="#custom-triggers" animations="appear"></a-slide-animation>
+      <a-slide-environment settings="preset: tron"></a-slide-environment>
+  </a-slide>
+  <a-slide>
+      <a-slide-environment settings="preset: starry"></a-slide-environment>
+  </a-slide>
+  <a-slide>
+      <a-slide-visibility selector="#text-conclusion" visibility="true"></a-slide-visibility>
+      <a-slide-camera position="-10 10 20" rotation="0 -180 360" duration="1500"></a-slide-camera>
+  </a-slide>
+</a-presentation>
 </a-scene>
+      </div>
+</section>
+</main>
+<!--<script src='vr/js/aframe-inspector.js'></script>-->
 </body>
-    <!--<script src='vr/js/aframe-inspector.js'></script>-->
-</body>
+</html>
