@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>p1</title>
+  <script src="vr/js/aframe-v1.2.0.min.js"></script>
+  <!--<script src="vr/js/aframe-extras.min.js"></script>-->
+  <script src="vr/js/n5ro/aframe-extras.controls.min.js"></script>
+  <script src='vr/js/aframe-environment-component.min.js'></script>
+  <script src='vr/js/aframe-htmlembed-component.js'></script>
+  <script src='vr/js/aframe-websurfaces.umd.js'></script>
+  <script src='vr/js/aframe-presentation-component.min.js'></script>
+  <script src="https://unpkg.com/aframe-simple-sun-sky@^1.2.2/simple-sun-sky.js"></script>
+  <script src="vr/js/lzma.js"></script>
+  <script src="vr/js/ctm.js"></script>
+  <script src="vr/js/CTMLoader.js"></script>
+  <script src="https://mixedreality.mozilla.org/ammo.js/builds/ammo.wasm.js"></script>
+  <!--<script src="http://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>-->
+  <script src='vr/js/aframe-physics-system.min.js'></script>
+  <script src="vr/js/extended-wasd-controls.js"></script>
+  <script src="vr/js/aframe-teleport-controls.min.js"></script>
+  <script src="vr/js/spheres_anim.js"></script>
+  <script src="vr/js/anim_1.js"></script>
+  <script src="vr/js/anim_2.js"></script>
+  <script src="vr/js/mocap.js"></script>
+  <script src="vr/js/aframe-dialog-popup-component.min.js"></script>
+  <script src="vr/js/ctm_component.js"></script>
+  <script src="vr/js/mobile_component.js"></script>
+  <script src="vr/js/aframe-door.min.js"></script>
+  <script src="vr/js/aframe-gui.js"></script>
+
+  <script src="vr/js/gui-dropdown.js"></script>
+  <script src="vr/js/gui-env.js"></script>
+  <script src="vr/js/p1.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+    integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="p1.css">
+ 
+  <script>
+   
+  </script>
+</head>
+<!--note: by using red base images for buttons, can tint (HSV) using filter: hue-rotate(); etc.-->
+
+<body>
+  <!--<main>
+    <aside>
+      <p class="asideList">Orci nunc naeos sduis sed oin aesent luctus min. Oin sapienma nequesed sodale uam arcused. Torquent liquam necmae malesu volutpa congue lobortis habitas llus. Libero augue facili cras anunc ultricie euismodd maurisin. Esque risusut miin duinulla aesent odioin fermen ras. Lus varius eroscu pretiu non arcu tortor purusp. Varius miquis nequenu euismod integer massased enean molestie phasel. Lectuss imperdie ipsumnam dignis portado in scras. Posuered itur consect usce metiam nibh iaculis quamut.</p>
+    </aside>
+    <section>
+      <input type="checkbox" id="myInput">
+      <label for="myInput">
+        <span class="bar top"></span>
+        <span class="bar middle"></span>
+        <span class="bar bottom"></span>
+      </label>-->
+  
+      
+    
+  
+    <!-- top-right 
+    <div class="regionUI" style="top: 10px; right: 10px;">
+    </div>-->
+  
+    <!-- bottom-left 
+    <div class="regionUI" style="bottom: 10px; left: 10px;">
+    </div>-->
+  
+    <!-- bottom-right 
+    <div class="regionUI baseColor" style="bottom: 10px; right: 10px;">
+      <div class="buttonUI">
+          <img src="images/buttons/red/left.png" id="buttonMoveLeft" />
+        </div>
+        <div class="buttonUI">
+          <img src="images/buttons/red/up.png" id="buttonMoveForward" /><br/>
+          <img src="images/buttons/red/down.png" id="buttonMoveBackward" />
+        </div>
+        <div class="buttonUI">
+          <img src="images/buttons/red/right.png" id="buttonMoveRight" />
+        </div>
+    </div>-->
+  
+  
+  
+
+  <script>
+    
+  </script>
+
+  <a-scene class="content" joystick shadow="type: pcfsoft; autoUpdate: true;"
+    renderer="antialias: true; colorManagement: true; physicallyCorrectLights: true;">
+   <!-- <a-simple-sun-sky position="-10 10 -10"></a-simple-sun-sky>-->
+   <!-- <a-sky src="#sky" color="blue"></a-sky>-->
+    <a-sphere recitclickable="index.html" class="clickable" color="yellow" radius="0.1" position='0 2 1'></a-sphere>
+    <a-sphere recitclickable="p2.html" class="clickable" color="red" radius="0.1" position='1 2 1'></a-sphere>
+    <a-assets>
+      <a-asset-item id="books.001" src="vr/models/books/books.002.gltf"></a-asset-item>
+      <a-asset-item id="murv2f-obj" src="vr/models/murf1.gltf"></a-asset-item>
+      <a-asset-item id="murv2a-obj" src="vr/models/murer1a.gltf"></a-asset-item>
+      <a-asset-item id="desk1-obj" src="vr/models/desk1/desk1.obj"></a-asset-item>
+      <a-asset-item id="desk1-mtl" src="vr/models/desk1/desk1.mtl"></a-asset-item>
+      <a-asset-item id="fenetre1-obj" src="vr/models/fenetre.gltf"></a-asset-item>
+      <a-asset-item id="murv2p-obj" src="vr/models/murer1p.gltf"></a-asset-item>
+      
+    </a-assets>
+
+    <a-entity light="intensity: 1; castShadow: true; shadowBias: -0.001; shadowCameraFar: 501.02; shadowCameraBottom: 12; shadowCameraFov: 101.79; shadowCameraNear: 0; shadowCameraTop: -5; shadowCameraRight: 10; shadowCameraLeft: -10; shadowRadius: 2" position="2 1.5 -5"></a-entity>
+			<a-entity light="type: ambient; intensity: 0.1"></a-entity>
+   <a-entity id="page1" websurface="url:http://devserver/shared/doc2.html; width:4; height:2; isInteractable:true;"
+      position="3.63 1.5 3" rotation="0 -90 0"></a-entity>
+    <a-entity id="door"
+      door="width: 1; height: 2; color: #4D4437;  depth: 0.10; type: double; open_direction: left; texture:#crate"
+      position="1.5 1 0" rotation='0 0 0'></a-entity>
+      <!-- plancher-->
+    <a-box id="floor" shadow="receive:true" material="#000: true; opacity 1" static-body="shape: box; mass: 2000" position="0 0 3.50" width="7.5" height="0.01"
+      depth="7.5" ></a-box>
+      <!-- plancher-->
+      <!-- plafond-->
+    <a-box id="plafond" static-body="shape: box; mass: 2000" shadow="receive:true"    position="0 2.9 3.50" width="7.5" height="0.01" depth="7.5" >
+    </a-box>
+    <!-- plafond-->
+    <a-entity
+        id="dialog"
+        cursor="rayOrigin: [mouse, entity]" 
+        position="0 1.5 2"
+        dialog-popup="
+          openIconImage: vr/assets/info.jpg;
+          closeIconImage: vr/assets/close.jpg;
+          title: Information;
+          body: Volutpat lus sapienma lum est tincid mollis. Fermen gravida purusd entum proin eratquis ger ent. Miquis suscip ligulam uamnam quam nec metusd ntum iain convall. Ris oin oin eu odiophas aenean lacusp leoetiam enulla. Volutp que vitae duis uis vestib nequenu. Rosed eduis tortorp vitaenul facili quis lla non id ras. Volutpat quispr in vehicula molesti mipraese lacini convalli. Sapien risusut uis euismo arcuduis portamor erdum tiam ullamco.;
+          "></a-entity>
+    <a-gltf-model src="#fenetre1-obj" position='-3.75 1.1 2.45' rotation='0 90 0' scale='1.1 0.95 1'>
+    </a-gltf-model>
+    <a-gltf-model src="#fenetre1-obj" position='-3.75 1.1 5.5' rotation='0 90 0' scale='1.1 0.95 1'>
+    </a-gltf-model>
+    
+    
+    <a-gltf-model src="#murv2f-obj"  shadow="receive:true" position='-3.75 0 2.25' rotation='0 90 0'  opacity="1.0">
+    </a-gltf-model>
+    <a-gltf-model src="#murv2f-obj" shadow="receive:true" position='-3.75 0 5.25' rotation='0 90 0'  opacity="1.0">
+    </a-gltf-model>
+   
+    
+    </a-gltf-model>
+    <a-gltf-model src="#books.001" shadow="receive:true" scale="0.2 0.2 0.2" position='3 1 1' rotation='0 0 0'  opacity="1.0">
+    </a-gltf-model>
+    <a-gltf-model src="#murv2p-obj" shadow="receive:true" position='1.5 0 0' rotation='0 0 0'  opacity="1.0">
+    </a-gltf-model>
+   
+      <a-gui-flex-container flex-direction="column" justify-content="center" align-items="normal"
+        component-padding="0.5" opacity="0.7" width="0.3" height="1.5" panel-color="#072B73" panel-rounded="0.2"
+        position="0.8 1 0.1" rotation="0 0 0">
+        <a-gui-button position="0 1 0.001" width="0.3" height="0.3" base-depth="0.005" depth="0.01" gap="0.1"
+          font-size="0.1" active-color="red" onclick="changepage" value="O"
+          font-family="vr/assets/fonts/PermanentMarker-Regular.ttf" font-size="0.25" margin="0.05 0.05 0.05 0.05"
+          font-color="black" active-color="red" hover-color="yellow" border-color="white" focus-color="black"
+          background-color="orange" bevel="false">
+      </a-gui-flex-container>
+      <!-- Camera -->
+      <a-entity id="player" position="2 0 6" movement-controls="speed: 0.10000000149011612;">
+        <a-entity id="camera" camera="near: 0.001" position="0 1.7000000476837158 0"
+          look-controls="pointerLockEnabled: false">
+         
+          <a-gui-cursor id="cursor" fuse="true" fuse-timeout="2000" 
+            cursor="rayOrigin: [mouse, entity]" 
+            geometry="primitive: circle; radius: 0.001;" material="color: #CCC; shader: flat;"
+          raycaster=" objects: [dialog-popup],[websurface],[recitclickable],.links,[gui-interactable]" design="ring">
+          </a-gui-cursor>
+        </a-entity>
+        
+      </a-entity>
+      
+  </a-scene>
+  <script>
+  var scene = document.querySelector('a-scene');
+    for (var i = -2.5; i < 2.6; i = i + 1.5) {
+      for (var j = 1; j < 6; j = j + 1) {
+        var posit = i + ' 0.2 ' + j;
+        desk(posit);
+    }} 
+  </script>
+  <script>
+    var scene = document.querySelector('a-scene');
+    const posit1=['-3 0 0','0 0 0','3 0 0','-1.5 0 0','-3 0 6.5','0 0 6.5','3 0 6.5','-1.5 0 6.5','1.5 0 6.5'];
+    const posit2=['-3.75 0 6.25','3.75 0 0.75','3.75 0 2.25','3.75 0 3.75','3.75 0 4.25','3.75 0 5.75'];
+      posit1.forEach(cemur)
+        function cemur(item){
+          wall(item, '0 0 0');
+        }
+        posit2.forEach(cemur2)
+        function cemur2(item){
+          wall(item, '0 90 0');
+        }
+          
+      
+    </script>
+    <!--</section>
+  </main>-->
+  <!--<script src='vr/js/aframe-inspector.js'></script>-->
+</body>
