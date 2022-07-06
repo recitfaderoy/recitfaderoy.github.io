@@ -1,0 +1,16 @@
+<a-player locomotion w>
+  <a-entity class="nametag myname" text="value: Nom; align:center;" position="0 2 0" rotation="0 180 0" scale="8 8 8"></a-entity>
+  <a-entity id="avatar-app" class="avatar" avance gltf-model="#avatar-app1" animation-mixer="clip: Idle;" rotation="0 180 0" scale="1 1 1" position="0.5 -1.5 -0.5"  visible="false"  ></a-entity>
+  <a-camera>
+  <a-gui-cursor cursor="rayOrigin: mouse" position="0 1.5 0" id="cursor" fuse="false" 
+    geometry="primitive: circle;" material="color: #CCC; shader: flat;"
+    raycaster="objects: [websurface],[recitclickable],.links,[gui-interactable],[draggable]"  
+    super-hands="colliderEvent: raycaster-intersection;
+               colliderEventProperty: els;
+               colliderEndEvent:raycaster-intersection-cleared;
+               colliderEndEventProperty: clearedEls;">
+  </a-gui-cursor>
+</a-camera>
+  <a-hand side="left" color="red"></a-hand>
+  <a-hand side="right" color="blue"></a-hand>
+</a-player>

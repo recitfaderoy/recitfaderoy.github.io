@@ -1,0 +1,20 @@
+<a-player>
+     <a-camera  id="camera2" active=false;
+                  
+                
+                look-controls=" enabled: true; pointerLockEnabled: false, touchEnabled: false "
+                wasd-controls="enabled: true; acceleration:12; "
+                position="0 1.6 0"
+                cursor="rayOrigin: mouse" 
+              raycaster="objects:[button], [grabbable], [gui-interactable]"
+              super-hands="colliderEvent: raycaster-intersection;
+                   colliderEventProperty: els;
+                   colliderEndEvent:raycaster-intersection-cleared;
+                   colliderEndEventProperty: clearedEls;">
+      
+                >   
+          
+      </a-camera>
+  <a-hand side="left" color="red"></a-hand>
+      <a-hand side="right"oculus-touch-controls="hand: right" haptics="events: press; dur: 500; force: 1.0" color="blue"></a-hand>
+  </a-player>

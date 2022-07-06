@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="fr">
+    
+    <head>
+        <title>Laboratoire de science</title>
+        <link rel="icon" type="image/png" href="favicon.ico"/>
+        <meta name="description" content="3D Application">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./js/aframe-v1.2.0.min.js"></script>
+    <!--    <script src="https://unpkg.com/super-hands/dist/super-hands.min.js"></script>-->
+    <script src="https://unpkg.com/aframe-event-set-component@^4.1.1/dist/aframe-event-set-component.min.js"></script>
+      <script src="./js/aframe-environment-component.min.js"></script>
+      <script src="./js/aframe-extras.min.js"></script>
+        <script src="./js/aframe-animation-timeline-component.min.js"></script>
+        <script src="../a-recit-master/arecit/a-recit.js"></script>
+        <script src="./js/aframe-proxemic-component.js"></script> 
+        
+          
+        <script src="./js/aframe-gui.js"></script>
+        <script src="./js/gui-env.js"></script>
+        <script src="./js/aframe-haptics-component.min.js"></script>
+        <script type="text/javascript" src="./js/webxr.js"></script>
+        <script type="text/javascript" src="./js/joystick.js"></script>
+        <script type="text/javascript" src="./js/camera-cube-env.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/bootstrap-slider.min.js" integrity="sha512-f0VlzJbcEB6KiW8ZVtL+5HWPDyW1+nJEjguZ5IVnSQkvZbwBt2RfCBY0CBO1PsMAqxxrG4Di6TfsCPP3ZRwKpA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <!-- CSS only -->
+        <link rel="stylesheet" type="text/css" href="./style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+          integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+          integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/css/bootstrap-slider.css" integrity="sha512-SZgE3m1he0aEF3tIxxnz/3mXu/u/wlMNxQSnE0Cni9j/O8Gs+TjM9tm1NX34nRQ7GiLwUEzwuE3Wv2FLz2667w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <!-- Custom CSS -->
+      <style>
+        .a-enter-ar-button, .a-enter-vr-button {right:40px; top:40px;  padding:12px; } </style>
+      
+      
+        <!-- Bootstrap Dependencies -->
+        <link rel="stylesheet" href="./bootstrap/bootstrap4.min.css">
+        <script src="./bootstrap/jquery-3.2.1.slim.min.js" "></script>
+       <script src=" ./bootstrap/popper.min.js"></script>
+        <script src="./bootstrap/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="./assets/css/style.css" />
+      
+      
+        <!-- ==================== 
+          REGISTER OUR COMPONENT
+        ========================= -->
+      
+      
+        <script>
+             // forward mouse and touch events to the super-hands entity
+      AFRAME.registerComponent('capture-mouse', {
+        init: function () {
+            console.log("capture mouse is on")
+          this.eventRepeater = this.eventRepeater.bind(this)
+          this.el.sceneEl.addEventListener('loaded', () => {
+            this.el.sceneEl.canvas.addEventListener('mousedown', this.eventRepeater)
+            this.el.sceneEl.canvas.addEventListener('mouseup', this.eventRepeater)
+            this.el.sceneEl.canvas.addEventListener('touchstart', this.eventRepeater)
+            this.el.sceneEl.canvas.addEventListener('touchmove', this.eventRepeater)
+            this.el.sceneEl.canvas.addEventListener('touchend', this.eventRepeater)
+          }, {once: true})
+        },
+        eventRepeater: function (evt) {
+          if (evt.type.startsWith('touch')) {
+            evt.preventDefault()
+            // avoid repeating touchmove because it interferes with look-controls
+            if (evt.type === 'touchmove') { return }
+          }
+          this.el.emit(evt.type, evt.detail)
+        }
+      })
+         /* window.onload = function recitonload() {
+    var scene = document.querySelector('a-scene');
+    console.log(scene + "camera 1 activate first");
+var plyr = scene.querySelector('a-player');
+console.log(plyr + "camera 1 activate first");
+plyr.setAttribute('include', "./_player1.html")
+
+}*/
+           AFRAME.registerComponent('toggleouverture', {
+      schema: {
+        clip1: { default: 'default' },
+        clip2: { default: 'default' }
+      },
+      init: function () {
+        var data = this.data;
+        var el = this.el;
+        var ouvert = this.el.getAttribute('animation-mixer');
+        el.addEventListener('press', function () {
+          console.log("ouvert ==  " + ouvert);
+          if (ouvert.clip == data.clip2) {
+            el.setAttribute('animation-mixer', 'clip: ' + data.clip1 + ';loop:once; clampWhenFinished:true;');
+            console.log('ouvert');
+          }
+          else {
+            el.setAttribute('animation-mixer', 'clip: ' + data.clip2 + ';loop:once; clampWhenFinished:true;');
+            console.log("fermé");
+          };
+        })
+        el.addEventListener('click', function () {
+          console.log("ouvert ==  " + ouvert);
+if (ouvert.clip == data.clip2) {
+  el.setAttribute('animation-mixer', 'clip: ' + data.clip1 + ';loop:once; clampWhenFinished:true;');
+  console.log('ouvert');
+}
+else {
+  el.setAttribute('animation-mixer', 'clip: ' + data.clip2 + ';loop:once; clampWhenFinished:true;');
+  console.log("fermé");
+};
+})
+      },
+    })        
+        </script>
+      
+      
+      </head>
+      
+      <body>
+      
+      
+        <div id="aframe">
+            <a-scene touch-to-click-converter id="a-scene"  
+                    physics="workerUrl:./js/cannonWorker.min.js; gravity:0 -10 0; debug: true;"
+          shadow="enabled:true; type: basic; autoUpdate: true;"
+          renderer="colorManagement: false; physicallyCorrectLights: false; precision: mediump; antialias: false; alpha: true; logarithmicDepthBuffer: false; ">
+          <a-assets timeout="100000">
+           
+      
+            <img id="floor" preload="true" src="./assets/floor.png">
+            <a-asset-item id="b100" preload="true" response-type="arraybuffer" src="./assets/bank/laboratoire/beaker100/b100a_minified.gltf"></a-asset-item>
+            <a-asset-item id="eprou1" preload="true" response-type="arraybuffer" src="./assets/bank/laboratoire/eprouvette/eprouvetter.gltf"></a-asset-item>
+            <a-asset-item id="cy100" preload="true" response-type="arraybuffer" src="./assets/bank/laboratoire/cylindergraduate2.gltf"></a-asset-item>
+            
+            <a-asset-item id="poste" preload="true" response-type="arraybuffer" src="./assets/bank/laboratoire/Poste_travail_1gltf.gltf"></a-asset-item>
+            <a-asset-item id="navemsh" preload="true" response-type="arraybuffer" src="./assets/bank/coin_mur.gltf"></a-asset-item>
+            <a-asset-item id="poste-top" preload="true" response-type="arraybuffer" src="./assets/bank/laboratoire/t2.gltf"></a-asset-item>
+            <a-asset-item id="sc-cab1" preload="true" response-type="arraybuffer" src="./assets/bank/laboratoire/minivb3.gltf"></a-asset-item>
+            <a-asset-item id="tray" preload="true" response-type="arraybuffer" src="./assets/bank/laboratoire/tray.gltf"></a-asset-item>
+            <a-asset-item id="chem1" preload="true" response-type="arraybuffer" src="./assets/bank/laboratoire/chemicals/b1a.gltf"></a-asset-item>
+            <a-asset-item id="chem2" preload="true" response-type="arraybuffer" src="./assets/bank/laboratoire/chemicals/b2.gltf"></a-asset-item>
+            <a-asset-item id="chem3" preload="true" response-type="arraybuffer" src="./assets/bank/laboratoire/chemicals/b3.gltf"></a-asset-item>
+            <a-asset-item id="chem4" preload="true" response-type="arraybuffer" src="./assets/bank/laboratoire/chemicals/p1.gltf"></a-asset-item>
+            <a-asset-item id="chem5" preload="true" response-type="arraybuffer" src="./assets/bank/laboratoire/chemicals/p2.gltf"></a-asset-item>
+            <a-asset-item id="CaCO_3" preload="true" response-type="arraybuffer" src="./assets/bank/laboratoire/chemicals/CaCO_3.gltf"></a-asset-item>
+
+            <a-asset-item id="erl100" preload="true" response-type="arraybuffer" src="./assets/bank/laboratoire/erlenmeyer.gltf"></a-asset-item>
+            
+    </a-assets>
+          <a-box id="montcharge23A" height="0.001" width="0.001" depth="0.001""  position=".32 1.5 -1.9"></a-box>
+         <a-player grabbing locomotion="speed:0.01;" position="-0.5 0 1"  >
+          <a-camera look-controls="mouseEnabled:true" wasd-controls="acceleration:12;" 
+          capture-mouse
+          raycaster cursor="rayOrigin:mouse"
+          body="type: static; shape: sphere; sphereRadius: 0.001"
+          super-hands="colliderEvent: raycaster-intersection;
+                       colliderEventProperty: els;
+                       colliderEndEvent:raycaster-intersection-cleared;
+                       colliderEndEventProperty: clearedEls;">
+            </a-camera>
+            <a-hand side="left" color="red"></a-hand>
+            <a-hand side="right"oculus-touch-controls="hand: right" haptics="events: press; dur: 500; force: 1.0" color="blue"></a-hand>
+       
+         </a-player>
+          
+           
+            
+      
+      
+         <a-main> 
+          <a-plane floor material="src:#floor; repeat: 700 700; transparent: true;" height="500" width="500"
+            rotation="-90 0 0"></a-plane>
+          <a-sky color="grey"></a-sky>
+          <a-entity light="type: ambient;  intensity: 1"></a-entity>
+          
+      
+         <!-- <a-fluorescent id="flu1" position="0.5 4 4" rotation="90 90 0" intensity="2.5"></a-fluorescent>-->
+           <a-laboratory alaboratory>
+    
+            <a-box id="floor" visible="true" floor position="0 -0.05 0" width="40" height="0.01" depth="40" opacity="1"></a-box>
+            <a-fluorescent id="flu1" position="0.5 2 0" rotation="90 90 0"  intensity="2.5"></a-fluorescent>
+            <a-gltf-model src="#navemsh"floor wall position="2 0.01 -1" rotation="0 180 0"></a-gltf-model>
+            <a-gltf-model src="#poste" position="0 0 -1" rotation="0 -90 0"></a-gltf-model>
+            <a-gltf-model src="#poste-top" scale="0.1 0.1 0.1"  wall body="type:static; " floor position="-0.84 0 -0.6" rotation="0 0 0"  visible="true" "></a-gltf-model>
+            
+         <!--   <a-gltf-model src="#sc-cab1" wall body="type:static; " floor position="-1 0 -0.7" rotation="0 0 .20"  visible="true" animation-mixer="clip: openleft; loop:once; clampWhenFinished:true;" toggleouverture="clip1 : open; clip2 : close;"></a-gltf-model>-->
+            
+          <a-entity ></a-entity>
+              <a-image src="./assets/bank/laboratoire/chemicals/sel.jpg"  width="0.1" height="0.1" rotation="-90 0 0"  receptacle="radius:0.25; autoDrop:true;" position="1.11 0.94 -0.4" body="type:static" shape="box"></a-image>
+              <a-gltf-model id="tar1" src="#tray" scale=" 0.5 0.5 0.5" receptacle="objects:#NaCl;radius:0.25; autoDrop:true;" position="0.31 0.94 -0.4" body="type:static" shape="box"  rotation="0 0 0"  visible="true" ></a-gltf-model>
+              <a-gltf-model id="tar2" src="#tray" scale=" 0.5 0.5 0.5" receptacle="radius:0.25; autoDrop:true;" position="0.31 0.94 -0.55" body="type:static" shape="box"  rotation="0 0 0"  visible="true" ></a-gltf-model>
+          
+         <!--<a-entity  rotation="0 0 0" grabbable  position="-1 1.1 -0.8">
+          <a-gltf-model src="#chem1"   body="type:kinematic; autoShape:false; restitution:0;"  visible="true" ></a-gltf-model>
+        </a-entity>
+          <a-gltf-model src="#chem2"   rotation="0 0 0" position="-1.3 1.1 -0.8" shape="cylinder" body="type:dynamic; restitution:0; "  visible="true" ></a-gltf-model>
+          <a-gltf-model src="#chem3"  grabbable rotation="0 0 0" position="-1.21 1.1 -0.82" shape="cylinder" body="type:kinematic; restitution:0; " visible="true" ></a-gltf-model>
+          <a-gltf-model src="#chem4"  grabbable  rotation="0 0 0" position="-1.4 1.1 -0.8" shape="cylinder" body="type:kinematic; restitution:0; " visible="true" ></a-gltf-model>
+          <a-gltf-model src="#chem5"   grabbable rotation="0 0 0" position="-1.5 1.1 -0.8" shape="cylinder" body="type:kinematic; restitution:0; "  visible="true" ></a-gltf-model>-->
+            
+      <a-entity body="type:static;" bind__text="value: score" text="value: 0; color: #000; width: 1; align: center" geometry="primitive: plane; height:0.5; width:0.5;"" material="color: #fff" rotation="0 0 0" position="0 1 1"></a-entity>
+          <a-reagent class="cube"nom-action grabbable="physics:true;"
+          id="NaCl" name= "NaCl"  rotation="0 0 0" scale="1 1 1"  
+          position="-0.4 1.2 -0.5" visible="true"   >
+          </a-reagent>
+          <a-reagent class="cube" grabbable="physics:false;" info="l'l'Hydroxyde de sodium est une substance baique...."
+          id="NaOH" name= "NaOH"  rotation="0 0 0" scale="1 1 1"  
+          position="-0.7 1.2 -0.5" visible="true"   >
+          </a-reagent>
+          <a-reagent class="cube" grabbable="physics:false;"
+          id="NCCl_2" name= "CCl_2"  rotation="0 0 0" scale="1 1 1"  
+          position="-0.8 1.2 -0.5" visible="true"   >
+          </a-reagent>
+          <a-reagent class="cube" grabbable="physics:false;"
+          id="CaCO_3" name= "CaCO_3" position="-0.9 1.2 -0.5" rotation="0 0 0" scale="1 1 1"  
+          position="0.3 1.02 -0.2" visible="true"   >
+          </a-reagent>
+          <a-reagent id="C_6H_12O_6" grabbable="physics:false;" name= "C_6H_12O_6"     rotation="0 0 0" scale="1 1 1" position="-1.05 1.2 -0.5" visible="true"    >
+          </a-reagent> 
+           <a-beaker id="becher1a" name= "bécher A" colorliq="olive"  percent=0 volume= "100ml"     opacity="0"  rotation="0 0 0" scale="1 1 1" position="-1.05 0.75 -0.3" visible="true"   grabbable="physics:false;" onstate__grabbed=" property:colorliq; on:red; off:green;">
+            </a-beaker>
+            <a-pipette position="-0.58 0.75 -0.63" rotation="90 30 0"></a-pipette>
+              <a-pipette position="-0.60 0.75 -0.63" pipettecolor=" bleu" rotation="0 0 90"></a-pipette>
+            <a-pince position="-0.72 0.75 -0.33" rotation="90 0 0"></a-pince>
+            <a-testtube id="becher1a" name= "eprouvete A" colorliq="olive"  percent=0  opacity="0.0"  rotation="0 0 0" scale="1 1 1" position="-1.15 0.75 -0.35" visible="true"  grabbable="physics:false;" onstate__grabbed=" property:colorliq; on:red; off:green;">
+            
+            </a-testtube>
+            <a-erlenmeyer id="becher1a" grabbable="physics:false;" name= "erleinmeyer A" colorliq="#FF1493"  percent=0 volume= 0.0 opacity="0.0"  rotation="0 0 0" scale="1 1 1" position="-1.2 0.75 -0.35" visible="true" grabbable onstate__grabbed=" property:colorliq; on:red; off:green;">
+            </a-erlenmeyer>
+            <a-cylindergraduate id="cylindergraduate1a"  name= "Cylindre A" colorliq="blue"  percent=0  opacity="0.0"  rotation="0 0 0" scale="0 1 1" position="-1.237 0.75 -0.35" visible="true" grabbable="physics:false;" onstate__grabbed=" property:colorliq; on:red; off:green;">
+            </a-cylindergraduate>
+            <a-beaker id="becher2a" name= "bécher B"   colorliq="blue" percent=0 volume= "100ml" opacity="0.0" rotation="0 0 0" scale="1 1 1" position="-0.95 0.75 -0.35"  visible="true" grabbable="physics:false;" onstate__grabbed=" property:colorliq; on:red; off:blue;">
+                
+            </a-beaker>
+        
+           
+          </a-laboratory >
+          </a-main>
+      
+         
+      
+        </a-scene>
+      </div>
+      <div  id= "pan2" class="m-3"  style="display: block ; width:10%; background-color: white; position:absolute; top:50px; right:120px; padding:12px;">
+        <h4 >Résultat : </h4><h4 id="result">0: </h4></div>
+        </div>
+     <button type="input" class="btn btn-primary" style="left:30px; top:30px; padding:12px; position:absolute; ; "  id="ex20a">Info</button>
+    
+      <div  id= "pan1" class="m-3"  style="display: none ; width:25%; background-color: white; position:absolute; top:70px; left:20px; padding:12px;">
+        
+       <h1> Laboratoire de science</h1> <form method="post">
+        <div class="form-row">
+          <div class="col-md-6 mb-3"> 
+            <div class="form-group">
+            <label for="select_player_type">Sélectionnez votre activité</label>
+            <select class="custom-select custom-select-lg mb-6" id="select_player_type" onchange="select_change()" >
+              <option value='./_player1.html'>Labo 1</option>
+              <option value='./_player2.html'>Labo 2</option>
+              <option value='./_player3.html'>Labo 3</option>
+            </select>
+          </div>
+        </div>
+            
+        <div class="col-md-6 mb-3">
+          <h4> Description</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+        </div>
+      </div>
+          <h2> Laboratoire 1: nom du labo</h2> 
+        </form>
+        <form class="needs-validation" novalidate>
+          <div class="form-row">
+            <div class="col-md-6 mb-3">
+               <label for="ex42">Paramètre 1</label>
+               <input class="form-control"  id="ex42" data-slider-id="ex26Slider" type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="10"/>
+               <script>
+                 var slider = new Slider('#ex42');
+slider.refresh({ useCurrentValue: true });
+               </script>
+              <div class="valid-tooltip">
+                Looks good!
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="ex43">Paramètre 2</label>
+              <input class="form-control"  id="ex43" data-slider-id="ex26Slider" type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="10"/>
+              <script>
+                var slider = new Slider('#ex43');
+slider.refresh({ useCurrentValue: true });
+              </script>
+              <div class="valid-tooltip">
+                Looks good!
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-md-6 mb-3">
+                 <label for="ex52">Paramètre 3</label>
+                 <input class="form-control"  id="ex52" data-slider-id="ex26Slider" type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="10"/>
+                 <script>
+                   var slider = new Slider('#ex52');
+  slider.refresh({ useCurrentValue: true });
+                 </script>
+                <div class="valid-tooltip">
+                  Looks good!
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="ex53">Paramètre 4</label>
+                <input class="form-control"  id="ex53" data-slider-id="ex26Slider" type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="10"/>
+                <script>
+                  var slider = new Slider('#ex53');
+  slider.refresh({ useCurrentValue: true });
+                </script>
+                <div class="valid-tooltip">
+                  Looks good!
+                </div>
+              </div>
+            
+        
+          <button class="btn btn-primary" type="submit">Remmettre le labo</button>
+        </form>
+        </div>
+ </div>
+        <script>
+         $( "#ex20a" ).click(function() {     
+   $('#pan1').toggle("slide", { direction: "right" }, 1000);
+});
+
+var scene = document.querySelector('a-scene');
+var result = document.querySelector('#result');
+scene.eti = scene.systems.state.state.score;
+result.innerHTML = scene.eti;
+console.log(scene.eti)
+scene.addEventListener('increasescore', function () {
+scene.eti = scene.systems.state.state.score;
+result.innerHTML = scene.eti;
+console.log(scene.eti)
+      });
+        </script>
+      </body>
+     </html>
