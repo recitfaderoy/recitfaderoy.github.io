@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<title>WAll animation</title>
+<link rel="icon" type="image/png" href="favicon.ico"/>
+<meta name="description" content="3D Application">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./js/aframe-v1.3.0.min.js"></script>
+<script src="./js/aframe-gui.js"></script>
+        <script src="./js/gui-env.js"></script>
+   
+<script src="./js/aframe-extras.min.js"></script>
+<script src="./js/aframe-environment-component.min.js"></script>
+
+
+<script src="./js/aframe-animation-timeline-component.min.js"></script>
+
+<script src="./js/a-recit.js"></script>
+<script src="./js/aframe-proxemic-component.js"></script> 
+<script src="./js/a-recitroom/dist/a-recitroom.js" ></script>
+
+ <!-- CSS only -->
+ <link rel="stylesheet" type="text/css" href="./style.css">
+
+ <!-- Custom CSS -->
+<style>
+ .a-enter-ar-button, .a-enter-vr-button {
+  left:40px;
+   top:150px; 
+   
+   padding:12px;
+ }
+</style>
+
+
+ <!-- Bootstrap Dependencies -->
+
+
+
+
+<!-- ==================== 
+  REGISTER OUR COMPONENT
+========================= -->
+ 
+ 
+<script>
+
+</script>
+</head>
+<body> 
+<a-scene 
+         >
+<a-assets timeout="100000">
+         
+ <img id="floor"  src="./assets/floor.png">
+</a-assets>
+        <a-plane floor material=" src:#floor; repeat: 700 700; transparent: true;" height="500" width="500"
+            rotation="-90 0 0"></a-plane>
+          <a-sky color="grey"></a-sky>
+          
+  
+              <a-recitroom id="room1" para = '{
+               "0": {"longueur":  7, "angle": 0, "door": "none","window": false, "material":"side:double; shader: standard; src:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_basecolor.jpg;height:450; repeat: 9 3; ambientOcclusionMap:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_ambientOcclusion.jpg; ambientOcclusionTextureRepeat:9 3;normalMap:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_normal.jpg; normalTextureRepeat: 9 3; displacementMap:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_height.png; displacementBias:0.0; displacementScale:0.1;displacementTextureRepeat:9 3; roughness: 0.8; metalness: 0.8"},
+               "1": { "longueur":  7, "angle": 60, "door": "none","window": "true","material":"side:double; shader: standard; src:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_basecolor.jpg;height:450; repeat: 9 3; ambientOcclusionMap:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_ambientOcclusion.jpg; ambientOcclusionTextureRepeat:9 3;normalMap:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_normal.jpg; normalTextureRepeat: 9 3; displacementMap:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_height.png; displacementBias:0.0; displacementScale:0.1;displacementTextureRepeat:9 3; roughness: 0.8; metalness: 0.8"},
+               "2": { "longueur":  7, "angle": 120, "door": "center","window": true,"material":"side:double; shader: standard; src:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_basecolor.jpg;height:450; repeat: 9 3; ambientOcclusionMap:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_ambientOcclusion.jpg; ambientOcclusionTextureRepeat:9 3;normalMap:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_normal.jpg; normalTextureRepeat: 9 3; displacementMap:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_height.png; displacementBias:0.0; displacementScale:0.1;displacementTextureRepeat:9 3; roughness: 0.8; metalness: 0.8"},
+               "3": { "longueur":  7, "angle": 180, "door": "none","window": true,"material":"side:double; shader: standard; src:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_basecolor.jpg;height:450; repeat: 9 3; ambientOcclusionMap:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_ambientOcclusion.jpg; ambientOcclusionTextureRepeat:9 3;normalMap:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_normal.jpg; normalTextureRepeat: 9 3; displacementMap:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_height.png; displacementBias:0.0; displacementScale:0.1;displacementTextureRepeat:9 3; roughness: 0.8; metalness: 0.8"},
+               "4": { "longueur":  7, "angle": -120, "door": "none","window": false,"material":"side:double; shader: standard; src:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_basecolor.jpg;height:450; repeat: 9 3; ambientOcclusionMap:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_ambientOcclusion.jpg; ambientOcclusionTextureRepeat:9 3;normalMap:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_normal.jpg; normalTextureRepeat: 9 3; displacementMap:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_height.png; displacementBias:0.0; displacementScale:0.1;displacementTextureRepeat:9 3; roughness: 0.8; metalness: 0.8"},
+               "5": { "longueur":  7, "angle": -60, "door": "right","window": true,"material":"side:double; shader: standard; src:./assets/Sci-Fi_Wall_011_SD/Sci-Fi_Wall_011_basecolor.jpg;height:450; repeat:  15 5; ambientOcclusionMap:./assets/Sci-Fi_Wall_011_SD/Sci-Fi_Wall_011_ambientOcclusion.jpg; ambientOcclusionTextureRepeat: 15 5;normalMap:./assets/Sci-Fi_Wall_011_SD/Sci-Fi_Wall_011_normal.jpg; normalTextureRepeat: 15 5; displacementMap:./assets/Sci-Fi_Wall_011_SD/Sci-Fi_Wall_011_height.png; displacementBias:0.0; displacementScale:0.1;displacementTextureRepeat: 15 5; roughness: 0.8; metalness: 0.8"}
+              }'
+             >
+            <a-entity position="11 1 1" id="das"</a-entity> 
+              <a-entity light="type: point;  intensity: 0.5 target:model;" position="9 2.8  5" ></a-entity>
+              <a-entity light="type: point;  intensity: 0.5 target:model;" position="0 2.8  3" ></a-entity>
+              <a-entity light="type: point;  intensity: 0.5 target:model;" position="3 2.8  3" ></a-entity>
+              <a-entity light="type: spot;  intensity: 0.5; angle: 10; target:das;" position="3 9.8  3" ></a-entity>
+              </a-recitroom>
+        
+
+         <a-player locomotion   position="5 0 -2" rotation="0 270 0" >
+          <a-camera capture-mouse wasd-controls 
+          raycaster=" objects: [dragndrop] , [grabbable], [gui-interactable]; 
+          showLine: true;" 
+          cursor="rayOrigin:mouse"
+          static-body="shape: sphere; sphereRadius: 0.001"
+          super-hands="colliderEvent: raycaster-intersection;
+                       colliderEventProperty: els;
+                       colliderEndEvent:raycaster-intersection-cleared;
+                       colliderEndEventProperty: clearedEls;">
+            </a-camera>
+         </a-player>
+</a-scene>
+<script>
+  
+</script>
+</body>
+</html>
