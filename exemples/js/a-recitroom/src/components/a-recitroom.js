@@ -36,7 +36,7 @@
                       pos[i] = new THREE.Vector3()
                       if (i === 0) { 
                         pos[0].x = 0;
-                        pos[0].y = 3;
+                        pos[0].y = 0;
                         coord[0] =new THREE.Vector3(0, 0, 0);
                       plaf[0]=new THREE.Vector2(0, 0);}
                       else{
@@ -71,7 +71,7 @@
                         "rotation" : {x:0, y: 90 - data[1].angle, z:0},
                         "scale" :   {x:1.05, y:0, z:1.05},
                         "position" :   {x:-0.2, y:0.01, z:-0.2},
-                        "start"  :""
+                        "material"  :"side:double; shader: standard; src:./assets/Metal_ArtDeco_Tiles_001_SD/Metal_ArtDeco_Tiles_001_basecolor.jpg;height:450; repeat: 9 9; ambientOcclusionMap:./assets/Metal_ArtDeco_Tiles_001_SD/Metal_ArtDeco_Tiles_001_ambientOcclusion.jpg; ambientOcclusionTextureRepeat:9 9;normalMap:./assets/Metal_ArtDeco_Tiles_001_SD/Metal_ArtDeco_Tiles_001_normal.jpg; normalTextureRepeat: 9 9; displacementMap:./assets/Metal_ArtDeco_Tiles_001_SD/Metal_ArtDeco_Tiles_001_height.png; displacementBias:0.0; displacementScale:0.1;displacementTextureRepeat:9 9; roughness: 0.3; metalness: 0.9"
                       })
        /* *****Ajout d'une primitive plafond ***** */
                       this.el.ensure(".recitceiling"+ i, "a-recitceiling", {

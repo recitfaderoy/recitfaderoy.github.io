@@ -694,7 +694,9 @@ class BSPNode {
               this.material1 = new THREE.MeshBasicMaterial( { color:  "#c2d6d6"} );
               this.material2 = new THREE.MeshBasicMaterial( { color:  "blue"} );
               this.material3 = new THREE.MeshBasicMaterial( {color: "brown"} );
-              this.material4 = new THREE.MeshBasicMaterial( {color: "red"} );
+              this.material4 = new THREE.MeshBasicMaterial( {color: new THREE.Color(1.000, 0.766, 0.336),
+                roughness: 0.3,
+                metalness: 1} );
         /* *****construction de murs par somment ***** */
           /* *****sommets d'un protptype de   mur ***** */
                 /* ***** fin de Extrusion et positionnement du mur ***** */    
@@ -717,7 +719,10 @@ class BSPNode {
                 
                 this.porte4.position.y = (1)
       
-                const mur4 = new THREE.BoxBufferGeometry( data.longueur, 6, 0.2 );
+                const mur4 = new THREE.BoxBufferGeometry( data.longueur, 6, 0.2,50,50,1 );
+                /*mur4.widthSegments = 50
+                mur4.heightSegments  =50
+                mur4.depthSegments = 50*/
                 this.meshmur4 = new THREE.Mesh( mur4, this.el.components.material.material );
                 this.meshmur4.rotation.y = THREE.Math.degToRad(( 90))
                 this.meshmur4.position.z = (data.longueur/2)
@@ -739,7 +744,7 @@ class BSPNode {
             switch(data.door){
           
                   case "none" :
-                    if(data.window){
+                    if(data.window=== true){
                         this.fen4.position.z = (data.longueur/2 + 1)
                         this.meshmur4.updateMatrix()
                             this.fen4.updateMatrix()
@@ -923,6 +928,10 @@ class BSPNode {
                 }
                           
             break
+            default:
+              this.mur.add( this.meshmur4 ); 
+              break
+
         }
           /* *****Fin forme a estruder pour le mur avwc porte au centre***** */
 

@@ -1,0 +1,9 @@
+﻿"Symbol";"Value";"Unit";
+"TraceParts.PartNumber";"10-19122001-075576";"";
+"REFERENCE";"UNI 5679 IPN 80 x l 1";"";
+"STANDARD";"UNI 5679";"";
+"TraceParts.PartTitle";"Poutrelle IPN 80 x 1 m - UNI 5679";"";
+"TraceParts.InstanceId";"10-19122001-075576AEGW2EIY7UP0I7Z55GYMODBD0";"";
+"DESIGN";"Poutrelle IPN 80 x 1 m - UNI 5679";"";
+"TraceParts.PartVersion";"1.2.3";"";
+"TraceParts.PartLanguage";"fr";"";

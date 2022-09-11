@@ -68,7 +68,7 @@
         const mesh =new THREE.Mesh( new THREE.ExtrudeGeometry( plafond, extrudeSettings ), material);
                     mesh.rotation.x = THREE.Math.degToRad(( -90))
                     mesh.rotation.z = THREE.Math.degToRad(( -90))
-                    mesh.position.set(0, 5.9, 0)
+                    mesh.position.set(0,5.9,0)
                     ceiling.add( mesh );
                     this.el.setObject3D('group',mesh)
           

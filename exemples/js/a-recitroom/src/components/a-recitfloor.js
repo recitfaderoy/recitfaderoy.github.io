@@ -60,9 +60,16 @@
                 depth: 0.002,
                 bevelEnabled: false
             };
-            const material = new THREE.MeshBasicMaterial( { color:  "#c2d6d6"} );
+            const material = new THREE.MeshBasicMaterial( { color: new THREE.Color(1.000, 0.766, 0.336), transparent: true, blending: THREE.AdditiveBlending 
+            } );
+            const material2 = new THREE.MeshBasicMaterial( {color: new THREE.Color(1.000, 0.766, 0.336),
+            roughness: 0.3,
+            metalness: 1} );
+            const floorgeo = new THREE.ExtrudeGeometry( plafond, extrudeSettings)
+            floorgeo.computeVertexNormals ()
+            floorgeo.normalizeNormals () 
 
-        const mesh =new THREE.Mesh( new THREE.ExtrudeGeometry( plafond, extrudeSettings ),  this.el.components.material.material);
+        const mesh =new THREE.Mesh( floorgeo ,   this.el.components.material.material);
                     mesh.rotation.x = THREE.Math.degToRad(( -90))
                     mesh.rotation.z = THREE.Math.degToRad(( -90))
                     floor.add( mesh );
