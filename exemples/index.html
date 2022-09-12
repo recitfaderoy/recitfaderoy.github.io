@@ -29,12 +29,12 @@
 
  <!-- Custom CSS -->
 <style>
- /*.a-enter-ar-button, .a-enter-vr-button {
- // left:40px;
+ .a-enter-ar-button, .a-enter-vr-button {
+  left:40px;
    top:150px; 
    
    padding:12px;
- }*/
+ }
 </style>
 
 
@@ -53,8 +53,12 @@
 </script>
 </head>
 <body> 
+  <div id="aframe">
 <a-scene 
-         >
+physics="workerUrl:./js/cannonWorker.min.js; gravity:0 -10 0; debug: true;"
+shadow="enabled:true; type: pcfsoft; autoUpdate: true;"
+renderer="colorManagement: false; physicallyCorrectLights: false; precision: mediump; antialias: false; alpha: true; logarithmicDepthBuffer: false; "
+>
 <a-assets timeout="100000">
   <a-asset-item id="b100" preload="true" response-type="arraybuffer" src="./assets/bank/laboratoire/Becher100.gltf"></a-asset-item>
   <a-asset-item id="eprou1" preload="true" response-type="arraybuffer" src="./assets/bank/laboratoire/eprouvette/eprouvetter.gltf"></a-asset-item>
@@ -89,14 +93,15 @@
             "5": { "longueur":  5, "angle": -60, "door": "right","window": false,"material":"side:double; shader: standard; src:./assets/Sci-Fi_Wall_011_SD/Sci-Fi_Wall_011_basecolor.jpg;height:450; repeat:  12 6; ambientOcclusionMap:./assets/Sci-Fi_Wall_011_SD/Sci-Fi_Wall_011_ambientOcclusion.jpg; ambientOcclusionTextureRepeat: 12 6;normalMap:./assets/Sci-Fi_Wall_011_SD/Sci-Fi_Wall_011_normal.jpg; normalTextureRepeat: 12 6; displacementMap:./assets/Sci-Fi_Wall_011_SD/Sci-Fi_Wall_011_height.png; displacementBias:0.04; displacementScale:0.0;displacementTextureRepeat: 12 6; roughness: 0.2; metalness: 0.6"}
            }'
           >
-          
+          <a-plane start position=" 1 0 -2"  height="1" width="1"
+            rotation="-90 0 0"></a-plane>
            </a-recitroom>
-           <a-laboratory alaboratory position="5 0 1">
+           <a-laboratory alaboratory position="6 0 -0.3" rotation="0 -30 0">
  
              <a-fluorescent id="flu1" position="0.5 5.8 0" rotation="90 90 0"  intensity="1.0"></a-fluorescent>
-             <a-gltf-model id="lab1" src="#poste" position="1.3 0 -2.246" rotation="0 -120 0"></a-gltf-model>
-             <a-gltf-model src="#poste-top" scale="0.1 0.1 0.1"  mur body="type:static; " plancher position="0.50 0 -2.3770" rotation="0 150 0"  visible="true" "></a-gltf-model>
-             
+             <a-gltf-model src="#poste" position="0 0 -1" rotation="0 -90 0"></a-gltf-model>
+             <a-gltf-model src="#poste-top" scale="0.1 0.1 0.1"  mur body="type:static; " plancher position="-0.84 0 -0.6" rotation="0 0 0"  visible="true" "></a-gltf-model>
+                          
           <!--   <a-gltf-model src="#sc-cab1" mur body="type:static; " plancher position="-1 0 -0.7" rotation="0 0 .20"  visible="true" animation-mixer="clip: openleft; loop:once; clampWhenFinished:true;" toggleouverture="clip1 : open; clip2 : close;"></a-gltf-model>-->
              
                <a-image src="./assets/bank/laboratoire/chemicals/sel.jpg"  width="0.1" height="0.1" rotation="-90 0 0"  receptacle="radius:0.25; autoDrop:true;" position="1.11 0.94 -0.4" body="type:static" shape="box"></a-image>
@@ -119,14 +124,14 @@
              </a-beaker>
          
 <a-entity light="type: ambient; intensity: 0.5; color: #fff"></a-entity>
-<a-entity light="type: spot; angle: 10  intensity: 0.3 target:lab1;" position="15 2.8  5" ></a-entity>
+<a-entity light="type: spot; angle: 10  intensity: 0.3 target:#poste;" position="15 2.8  5" ></a-entity>
             
            </a-laboratory >
         
 
-         <a-player locomotion   position="5 0 -2" rotation="0 270 0" >
+         <a-player locomotion    rotation="0 90 0" >
           <a-camera capture-mouse wasd-controls 
-          raycaster=" objects: [dragndrop] , [grabbable], [gui-interactable]; 
+          raycaster=" objects: [dragndrop] , [grabbable],[button], [gui-interactable]; 
           showLine: true;" 
           cursor="rayOrigin:mouse"
           static-body="shape: sphere; sphereRadius: 0.001"
@@ -137,6 +142,121 @@
             </a-camera>
          </a-player>
 </a-scene>
+</div>
+<div  id= "pan2" class="m-3"  style="display: block ; width:10%; background-color: white; position:absolute; top:50px; right:120px; padding:12px;">
+  <h4 >Résultat : </h4><h4 id="result">0: </h4></div>
+  </div>
+<button type="input" class="btn btn-primary" style="left:30px; top:30px; padding:12px; position:absolute; ; "  id="ex20a">Info</button>
+
+<div  id= "pan1" class="m-3"  style="display: none ; width:25%; background-color: white; position:absolute; top:70px; left:20px; padding:12px;">
+  
+ <h1> Laboratoire de science</h1> <form method="post">
+  <div class="form-row">
+    <div class="col-md-6 mb-3"> 
+      <div class="form-group">
+      <label for="select_class_layout">Sélectionnez votre activité</label>
+      <select class="custom-select custom-select-lg mb-6" id="select_player_type" onchange="select_change()" >
+        <option value='normal'>Normal 1</option>
+        <option value='dyade'>Dyade</option>
+        <option value='quatuor'>Équip de 4</option>
+      </select>
+    </div>
+  </div>
+      
+  <div class="col-md-6 mb-3">
+    <h4> Description</h4>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+  </div>
+</div>
+    <h2> Laboratoire 1: nom du labo</h2> 
+  </form>
+  <form class="needs-validation" novalidate>
+    <div class="form-row">
+      <div class="col-md-6 mb-3">
+         <label for="ex42">Paramètre 1</label>
+         <input class="form-control"  id="ex42" data-slider-id="ex26Slider" type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="10"/>
+         <script>
+           var slider = new Slider('#ex42');
+slider.refresh({ useCurrentValue: true });
+         </script>
+        <div class="valid-tooltip">
+          Looks good!
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="ex43">Paramètre 2</label>
+        <input class="form-control"  id="ex43" data-slider-id="ex26Slider" type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="10"/>
+        <script>
+          var slider = new Slider('#ex43');
+slider.refresh({ useCurrentValue: true });
+        </script>
+        <div class="valid-tooltip">
+          Looks good!
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6 mb-3">
+           <label for="ex52">Paramètre 3</label>
+           <input class="form-control"  id="ex52" data-slider-id="ex26Slider" type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="10"/>
+           <script>
+             var slider = new Slider('#ex52');
+slider.refresh({ useCurrentValue: true });
+           </script>
+          <div class="valid-tooltip">
+            Looks good!
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="ex53">Paramètre 4</label>
+          <input class="form-control"  id="ex53" data-slider-id="ex26Slider" type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="10"/>
+          <script>
+            var slider = new Slider('#ex53');
+slider.refresh({ useCurrentValue: true });
+          </script>
+          <div class="valid-tooltip">
+            Looks good!
+          </div>
+        </div>
+      
+  
+    <button class="btn btn-primary" type="submit">Remmettre le labo</button>
+  </form>
+  </div>
+</div>
+  <script>
+    function select_change(){
+      var classroom = querySelector("a-classroom");
+      var ilayout = querySelectorall(".classroom").id;
+      console.log(ilayout)
+
+      var latout = document.getElementById("select_class_layout").value;
+      switch (layout){
+        case  (normal):
+        break 
+        case  (dyade):
+        break
+        case  (quatuor):
+        break
+      }
+//document.getElementById("demo").innerHTML = "You selected: " + x;
+    }
+
+
+   $( "#ex20a" ).click(function() {     
+$('#pan1').toggle("slide", { direction: "right" }, 1000);
+});
+
+var scene = document.querySelector('a-scene');
+var result = document.querySelector('#result');
+scene.eti = scene.systems.state.state.score;
+result.innerHTML = scene.eti;
+console.log(scene.eti)
+scene.addEventListener('increasescore', function () {
+scene.eti = scene.systems.state.state.score;
+result.innerHTML = scene.eti;
+console.log(scene.eti)
+});
+  </script>
 <script>
   
 </script>
