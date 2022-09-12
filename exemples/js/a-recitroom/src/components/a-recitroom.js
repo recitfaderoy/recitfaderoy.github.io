@@ -28,7 +28,7 @@
         const plafond = new THREE.Shape();
         //const  mat1 = "shader: flat; src: mat1
         plafond.moveTo(0, 0);
-        //console.log(data)
+        console.log(data)
        // console.log(Object.keys.length)
         /* *****Ajout des murs à a primitive***** */
           for (var i=0; i < Object.keys(data).length; i++) {
@@ -52,7 +52,7 @@
                                 this.el.ensure(".recitwall"+ i, "a-recitwall", {
                                   "material":data[i].material,
                                   "longueur": data[i].longueur,
-                                  "door": data[i].door,
+                                  "door": JSON.stringify(data[i].door),
                                   "window": data[i].window,
                                   'position':coord[i],
                                   "id": "wall_" +i,
@@ -63,6 +63,7 @@
                           this.el.setAttribute("body", "type", "static")
                           this.el.setAttribute("body", "restitution", "0")
                           }
+                          //console.log(data[i].door)
       /* *****Ajout d'une primitive plancher ***** */
 
                           //console.log("coord" + coord[0].x)
@@ -78,10 +79,11 @@
                         "coord":JSON.stringify(plaf),
                         "rotation" : {x:0, y: 90 - data[1].angle, z:0}   
                       })
+                      console.log(data.door)
                          return coord  //if(i < Object.keys(data).length)  
                           }
                          
-
+                          
                      
 
                     

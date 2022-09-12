@@ -738,10 +738,19 @@ class BSPNode {
                 //return this.bsp.toMesh() ;
                 
                 /* *****Mesh du mur ***** */
+this.datadoor = JSON.parse(data.door)
 
+if(this.datadoor.type){
+  this.dooranim = "clip: ferme;"
+}
+else
+{this.dooranim = "clip: ouvert;"
+}
              // }
-             
-            switch(data.door){
+             console.log("data.door")
+             console.log( JSON.parse(data.door))  
+             console.log(this.datadoor.type)
+            switch(this.datadoor.type){
           
                   case "none" :
                     if(data.window=== true){
@@ -771,6 +780,7 @@ class BSPNode {
                     break
         
         case "left" :
+                    
             if(data.window )
             {
                 this.porte4.position.z = 1.5
@@ -798,7 +808,7 @@ class BSPNode {
                                             
                                     'position':{x:0, y: 0, z: 2 },
                                     "rotation" : {x:0, y: 0, z:0},
-                                    "animation-mixer": "clip: ferme;"
+                                    "animation-mixer": this.dooranim
                                     }  )                   
                                     
                                     this.el.setAttribute("shape","cylinder")
@@ -825,7 +835,7 @@ class BSPNode {
                             
                 'position':{x:0, y: 0, z: 2 },
                 "rotation" : {x:0, y: 0, z:0},
-                "animation-mixer": "clip: ferme;"
+                "animation-mixer": this.dooranim
                  }  )                   
                 
                   this.el.setAttribute("shape","cylinder")
@@ -850,7 +860,7 @@ class BSPNode {
                             
                 'position':{x:0, y: 0, z:data.longueur  / 2 +1.5},
                 "rotation" : {x:0, y: 0, z:0},
-                "animation-mixer": "clip: ferme;"
+                "animation-mixer": this.dooranim
                  }  )                   
                 
                   this.el.setAttribute("shape","cylinder")
@@ -890,7 +900,7 @@ class BSPNode {
                             
                                     'position':{x:0, y: 0, z:(data.longueur -1.5)},
                                     "rotation" : {x:0, y: 0, z:0},
-                                    "animation-mixer": "clip: ouvert;"
+                                    "animation-mixer": this.dooranim
                                      }  )                   
                                     
                                       this.el.setAttribute("shape","cylinder")
@@ -918,7 +928,7 @@ class BSPNode {
                             
                 'position':{x:0, y: 0, z:(data.longueur -1.5)},
                 "rotation" : {x:0, y: 0, z:0},
-                "animation-mixer": "clip: ouvert;"
+                "animation-mixer": this.dooranim
                  }  )                   
                 
                   this.el.setAttribute("shape","cylinder")
