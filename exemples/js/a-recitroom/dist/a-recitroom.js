@@ -1131,7 +1131,7 @@ class BSPNode {
     
     schema: {
             'longueur':  {'type':"int", 'default' :5}, 
-           'door': {'default' : "left"}, //none,left,center,right
+           'door': {'default' : {"type":"center","open":true}}, //none,left,center,right
            'window': {'default' : false},
            'color': {'default' : '#384f5c'},
            'id': {'default':"room"}
@@ -1193,16 +1193,16 @@ class BSPNode {
                 /* *****Mesh du mur ***** */
 this.datadoor = JSON.parse(data.door)
 
-if(this.datadoor.type){
-  this.dooranim = "clip: ferme;"
+if(this.datadoor.open){
+  this.dooranim = "clip: ouvert;"
 }
 else
-{this.dooranim = "clip: ouvert;"
+{this.dooranim = "clip: ferme;"
 }
              // }
              console.log("data.door")
              console.log( JSON.parse(data.door))  
-             console.log(this.datadoor.type)
+             console.log(this.datadoor.open)
             switch(this.datadoor.type){
           
                   case "none" :
@@ -1320,7 +1320,7 @@ else
                   this.el.setAttribute("body", "type", "static")
                   this.el.setAttribute("body", "restitution", "0")
                   door.setAttribute("id", "door" + data.id)
-                
+            
                       
         break   
 
