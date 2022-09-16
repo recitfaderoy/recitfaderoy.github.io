@@ -61,7 +61,7 @@ AFRAME.registerPrimitive("a-chooseobject", {
 
         this.el.setAttribute("id","chooseobjet_" + ID)
         this.el.setAttribute("body","type:kinematic; autoshape:false;")
-        
+                  
         this.box1=this.el.ensure(".box1", "a-box", {
             
             'id': ID +  "_box1",
