@@ -135,6 +135,8 @@ AFRAME.registerPrimitive("a-chooseobject", {
         "scale": "0.5 0.5 0.5",
        // 'class':'raycastable'
         })
+        this.controllerData = document.querySelector("#controller-data").components["controller-listener"];
+		this.text = "";
         },
         update: function () {
           this.box1.addEventListener('click', (evt) => {
@@ -145,11 +147,22 @@ AFRAME.registerPrimitive("a-chooseobject", {
             else {
               this.box1.setAttribute("material","color: red; transparent:true; opacity:0.4;")
             }
+            this.box1.addEventListener('double-click', (evt) => {
+              var object = evt.detail.intersection.object;
+              console.log( "double-click")
+              this.box1.emit("drop")
+            })
             this.box2.setAttribute("material","color: green; transparent:true; opacity:0.0;")
             this.box3.setAttribute("material","color: green; transparent:true; opacity:0.0;")
             this.box4.setAttribute("material","color: green; transparent:true; opacity:0.0;")
           })
+          this.box1.addEventListener('double-click', (evt) => {
+            var object = evt.detail.intersection.object;
+            console.log( "double-click")
+            this.box1.emit("drop")
+          })
           this.box2.addEventListener('click', (evt) => {
+            
             var object = evt.detail.intersection.object;
             console.log("Objet cliqué")
             this.box1.setAttribute("material","color: green; transparent:true; opacity:0.0;")
@@ -186,5 +199,12 @@ AFRAME.registerPrimitive("a-chooseobject", {
                 this.box4.setAttribute("material","color: red; transparent:true; opacity:0.4;")
               }
           })
-        }
+        },
+  tick :function (){
+    if(this.box1.this.controllerData.rightGrip.pressing)
+    {this.box1.emit("drop")}
+            
+    
+
+  }
     })
