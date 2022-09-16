@@ -73,10 +73,10 @@ class CSG {
       );
       const normal = normals
         ? new THREE.Vector3(
-            normals.getX(index),
-            normals.getY(index),
-            normals.getZ(index)
-          )
+          normals.getX(index),
+          normals.getY(index),
+          normals.getZ(index)
+        )
         : null;
 
       const uv = uvs ? new THREE.Vector2(uvs.getX(index), uvs.getY(index)) : null;
@@ -422,10 +422,10 @@ class Polygon {
   }
 }
 
-var _vector1 = new THREE.Vector3 ();
-var _vector2 = new THREE.Vector3 ();
+var _vector1 = new THREE.Vector3();
+var _vector2 = new THREE.Vector3();
 
-class CuttingPlane extends THREE.Plane   {
+class CuttingPlane extends THREE.Plane {
   constructor(normal, constant) {
     super(normal, constant);
   }
@@ -651,313 +651,284 @@ class BSPNode {
 
 
 
-  
-  AFRAME.registerPrimitive("a-recitwall", {
-    
-    defaultComponents: {
-      
-      material:{},
-      rotation: {},
-      position:{},
-      scale:{},
-      injectrecitwall: {},
-      
-      
-    },
-    mappings: {
-      
-      material :"material",
-        longueur: "injectrecitwall.longueur",
-        door: "injectrecitwall.door",
-        window: "injectrecitwall.window",
-        id:"injectrecitwall.id"
+AFRAME.registerPrimitive("a-recitwall", {
+
+  defaultComponents: {
+
+    material: {},
+    rotation: {},
+    position: {},
+    scale: {},
+    injectrecitwall: {},
+
+
+  },
+  mappings: {
+
+    //material :"material",
+    longueur: "injectrecitwall.longueur",
+    door: "injectrecitwall.door",
+    window: "injectrecitwall.window",
+    id: "injectrecitwall.id"
+  }
+})
+AFRAME.registerComponent('injectrecitwall', {
+
+
+  schema: {
+    'longueur': { 'type': "int", 'default': 5 },
+    'door': { 'default': { "type": "center", "open": true } }, //none,left,center,right
+    'window': { 'default': false },
+    'color': { 'default': '#384f5c' },
+    'id': { 'default': "room" }
+
+  },
+  init() {
+    this.mur = new THREE.Group();     //objet 3D qui sera dans la prémitive a-recitwall  
+    const data = this.data; //attributs 
+
+
+    /* *****définition du matériel du mur ***** */
+    // const material = new THREE.MeshBasicMaterial( { color:  data.color} ); 
+    this.material1 = new THREE.MeshBasicMaterial({ color: "#c2d6d6" });
+    this.material2 = new THREE.MeshBasicMaterial({ color: "blue" });
+    this.material3 = new THREE.MeshBasicMaterial({ color: "brown" });
+    this.material4 = new THREE.MeshPhongMaterial({
+      color: new THREE.Color(1.000, 0.766, 0.336),
+          });
+    /* *****construction de murs par somment ***** */
+    /* *****sommets d'un protptype de   mur ***** */
+    /* ***** fin de Extrusion et positionnement du mur ***** */
+
+
+    /* ***** Construction du mur et porte parBoxBufferGeometry ***** */
+
+    //  const createWall = function(DoorPosiy,long){
+    const boxporte4 = new THREE.BoxBufferGeometry(1, 2, 0.6);
+
+    const boxfen4 = new THREE.BoxBufferGeometry(1, 1.75, 0.6);
+
+    this.fen4 = new THREE.Mesh(boxfen4, this.material2);
+    this.fen4.rotation.y = THREE.Math.degToRad((-90))
+    this.fen4.position.z = (data.longueur / 2 + 1)
+    this.fen4.position.y = (1.5)
+
+    this.porte4 = new THREE.Mesh(boxporte4, this.material2);
+    this.porte4.rotation.y = THREE.Math.degToRad((-90))
+
+    this.porte4.position.y = (1)
+
+    const mur4 = new THREE.BoxBufferGeometry(data.longueur, 6, 0.2, 50, 50, 1);
+    /*mur4.widthSegments = 50
+    mur4.heightSegments  =50
+    mur4.depthSegments = 50*/
+    this.meshmur4 = new THREE.Mesh(mur4, this.el.components.material.material);
+    this.meshmur4.rotation.y = THREE.Math.degToRad((90))
+    this.meshmur4.position.z = (data.longueur / 2)
+    this.meshmur4.position.y = (3)
+    //porteV.rotation.y = THREE.Math.degToRad(( -90))
+
+
+    /* ***** Soustraction de la porte, du mur  ***** */
+
+
+
+    //mur.add( porte4 );
+    //return this.bsp.toMesh() ;
+
+    /* *****Animation de la porte ***** */
+    this.datadoor = JSON.parse(data.door)
+    if (this.datadoor.open) {
+      this.dooranim = "clip: ouvert;"
     }
-  })
-  AFRAME.registerComponent('injectrecitwall', {
-    
-    
-    schema: {
-            'longueur':  {'type':"int", 'default' :5}, 
-           'door': {'default' : {"type":"center","open":true}}, //none,left,center,right
-           'window': {'default' : false},
-           'color': {'default' : '#384f5c'},
-           'id': {'default':"room"}
-            
-        }       ,
-    init() { 
-        this.mur = new THREE.Group();     //objet 3D qui sera dans la prémitive a-recitwall  
-        const data =this.data ; //attributs 
-        
+    else {
+      this.dooranim = "clip: ferme;"
+    }
+    // }
+    /*console.log("data.door")
+    console.log( JSON.parse(data.door))  
+    console.log(this.datadoor.open)*/
+    switch (this.datadoor.type) {
+      case "none":
+        if (data.window === true) {
+          this.fen4.position.z = (data.longueur / 2 + 1)
+          this.meshmur4.updateMatrix()
+          this.fen4.updateMatrix()
+          this.bsp = new CSG()
+          this.bsp1 = new CSG()
+          this.bsp1.setFromMesh(this.fen4)
+          this.bsp.setFromMesh(this.meshmur4)
+          this.bsp.subtractOperand(this.bsp1)
+          this.mur.add(this.bsp.toMesh())
 
-        /* *****définition du matériel du mur ***** */
-       // const material = new THREE.MeshBasicMaterial( { color:  data.color} ); 
-              this.material1 = new THREE.MeshBasicMaterial( { color:  "#c2d6d6"} );
-              this.material2 = new THREE.MeshBasicMaterial( { color:  "blue"} );
-              this.material3 = new THREE.MeshBasicMaterial( {color: "brown"} );
-              this.material4 = new THREE.MeshBasicMaterial( {color: new THREE.Color(1.000, 0.766, 0.336),
-                roughness: 0.3,
-                metalness: 1} );
-        /* *****construction de murs par somment ***** */
-          /* *****sommets d'un protptype de   mur ***** */
-                /* ***** fin de Extrusion et positionnement du mur ***** */    
-                
-      
-              /* ***** Construction du mur et porte parBoxBufferGeometry ***** */  
-              
-            //  const createWall = function(DoorPosiy,long){
-                const boxporte4 = new THREE.BoxBufferGeometry( 1, 2, 0.6 ); 
-             
-                const boxfen4 = new THREE.BoxBufferGeometry( 1, 1.75, 0.6 );
-                
-                this.fen4 = new THREE.Mesh( boxfen4, this.material2 );
-                this.fen4.rotation.y = THREE.Math.degToRad(( -90))
-                this.fen4.position.z = (data.longueur/2 + 1)
-                this.fen4.position.y = (1.5) 
-                
-                this.porte4 = new THREE.Mesh( boxporte4, this.material2 );
-                this.porte4.rotation.y = THREE.Math.degToRad(( -90))
-                
-                this.porte4.position.y = (1)
-      
-                const mur4 = new THREE.BoxBufferGeometry( data.longueur, 6, 0.2,50,50,1 );
-                /*mur4.widthSegments = 50
-                mur4.heightSegments  =50
-                mur4.depthSegments = 50*/
-                this.meshmur4 = new THREE.Mesh( mur4, this.el.components.material.material );
-                this.meshmur4.rotation.y = THREE.Math.degToRad(( 90))
-                this.meshmur4.position.z = (data.longueur/2)
-                this.meshmur4.position.y = (3)
-                //porteV.rotation.y = THREE.Math.degToRad(( -90))
-                
-                
-                /* ***** Soustraction de la prte, du mur  ***** */   
-                
-      
-                 
-                //mur.add( porte4 );
-                //return this.bsp.toMesh() ;
-                
-                /* *****Mesh du mur ***** */
-this.datadoor = JSON.parse(data.door)
+          this.el.ensure(".recitwindow", "a-window", {
 
-if(this.datadoor.open){
-  this.dooranim = "clip: ouvert;"
-}
-else
-{this.dooranim = "clip: ferme;"
-}
-             // }
-             console.log("data.door")
-             console.log( JSON.parse(data.door))  
-             console.log(this.datadoor.open)
-            switch(this.datadoor.type){
-          
-                  case "none" :
-                    if(data.window=== true){
-                        this.fen4.position.z = (data.longueur/2 + 1)
-                        this.meshmur4.updateMatrix()
-                            this.fen4.updateMatrix()
-                        this.bsp = new CSG()
-                        this.bsp1 = new CSG ()
-                        this.bsp1.setFromMesh( this.fen4 ) 
-                        this.bsp.setFromMesh( this.meshmur4 )
-                        this.bsp.subtractOperand(this.bsp1)
-                        this.mur.add(this.bsp.toMesh())
-
-                        this.el.ensure(".recitwindow", "a-window", {
-                                          
-                            'position':{x:0, y: 0.6, z:(data.longueur ) / 2 +0.55},
-                            "rotation" : {x:90, y: 0, z:0},
-                        "scale": "0.9 0.91 0.94" 
-                        }  ) ,
-                                             
-                            
-                              this.el.setAttribute("shape","cylinder")
-                              this.el.setAttribute("body", "type", "static")
-                    }
-                    else
-                    this.mur.add( this.meshmur4 ); 
-                    break
-        
-        case "left" :
-                    
-            if(data.window )
-            {
-                this.porte4.position.z = 1.5
-                            this.fen4.position.z = (data.longueur -2)
-                            this.meshmur4.updateMatrix()
-                                this.porte4.updateMatrix()
-                                this.fen4.updateMatrix()
-                            this.bsp = new CSG()
-                            this.bsp1 = new CSG ()
-                            this.bsp2 = new CSG ()
-                            this.bsp1.setFromMesh( this.porte4 )
-                            this.bsp2.setFromMesh( this.fen4 ) 
-                            this.bsp.setFromMesh( this.meshmur4 )
-                            this.bsp.subtractOperand(this.bsp1)
-                            this.bsp.subtractOperand(this.bsp2)
-                            this.mur.add(this.bsp.toMesh())
-
-                                this.el.ensure(".recitwindow", "a-window", {
-                                                
-                                    'position':{x:0, y: 0.6, z:(data.longueur ) -1.5},
-                                    "rotation" : {x:90, y: 0, z:0},
-                                "scale": "0.9 0.91 0.94" 
-                                }  ) 
-                                var door =this.el.ensure(".recitdoor", "a-door", {
-                                            
-                                    'position':{x:0, y: 0, z: 2 },
-                                    "rotation" : {x:0, y: 0, z:0},
-                                    "animation-mixer": this.dooranim
-                                    }  )                   
-                                    
-                                    this.el.setAttribute("shape","cylinder")
-                                    this.el.setAttribute("body", "type", "static")
-                                    this.el.setAttribute("body", "restitution", "0")
-                                    door.setAttribute("id", "door" + data.id)
-                                                    
-                    
-                     
-            }
-            else{
-            this.porte4.position.z = 1.5
-            this.meshmur4.updateMatrix()
-                this.porte4.updateMatrix()
-            this.bsp = new CSG()
-            this.bsp1 = new CSG ()
-            this.bsp1.setFromMesh( this.porte4 ) 
-            this.bsp.setFromMesh( this.meshmur4 )
-            this.bsp.subtractOperand(this.bsp1)
-            this.mur.add(this.bsp.toMesh())
-            
-            
-            var door = this.el.ensure(".recitdoor", "a-door", {
-                            
-                'position':{x:0, y: 0, z: 2 },
-                "rotation" : {x:0, y: 0, z:0},
-                "animation-mixer": this.dooranim
-                 }  )                   
-                
-                  this.el.setAttribute("shape","cylinder")
-                  this.el.setAttribute("body", "type", "static")
-                  this.el.setAttribute("body", "restitution", "0")
-                  door.setAttribute("id", "door" + data.id)
-                }
-         break
-        case "center" :
-            if(data.window )
-            {console.warn("Can't add a window if door center");
-            }
-            this.porte4.position.z = (data.longueur/2 + 1)
-            this.bsp = new CSG()
-            this.bsp1 = new CSG ()
-            this.bsp1.setFromMesh( this.porte4 ) 
-            this.bsp.setFromMesh( this.meshmur4 )
-            this.bsp.subtractOperand(this.bsp1)
-            this.bsp.toMesh()
-            this.mur.add(this.bsp.toMesh())
-            var door = this.el.ensure(".recitdoor", "a-door", {
-                            
-                'position':{x:0, y: 0, z:data.longueur  / 2 +1.5},
-                "rotation" : {x:0, y: 0, z:0},
-                "animation-mixer": this.dooranim
-                 }  )                   
-                
-                  this.el.setAttribute("shape","cylinder")
-                  this.el.setAttribute("body", "type", "static")
-                  this.el.setAttribute("body", "restitution", "0")
-                  door.setAttribute("id", "door" + data.id)
-            
-                      
-        break   
+            'position': { x: 0, y: 0.6, z: (data.longueur) / 2 + 0.55 },
+            "rotation": { x: 90, y: 0, z: 0 },
+            "scale": "0.9 0.91 0.94"
+          }),
 
 
-        case "right" :
-            if(data.window )
-            {
-                this.porte4.position.z = (data.longueur -2)
-                            this.fen4.position.z = (2)
-                            this.meshmur4.updateMatrix()
-                                this.porte4.updateMatrix()
-                                this.fen4.updateMatrix()
-                            this.bsp = new CSG()
-                            this.bsp1 = new CSG ()
-                            this.bsp2 = new CSG ()
-                            this.bsp1.setFromMesh( this.porte4 )
-                            this.bsp2.setFromMesh( this.fen4 ) 
-                            this.bsp.setFromMesh( this.meshmur4 )
-                            this.bsp.subtractOperand(this.bsp1)
-                            this.bsp.subtractOperand(this.bsp2)
-                            this.mur.add(this.bsp.toMesh())
-
-                                this.el.ensure(".recitwindow", "a-window", {
-                                                
-                                    'position':{x:0, y: 0.6, z:1.5},
-                                    "rotation" : {x:90, y: 0, z:0},
-                                "scale": "0.9 0.91 0.94" 
-                                }  ) 
-                                var door = this.el.ensure(".recitdoor", "a-door", {
-                            
-                                    'position':{x:0, y: 0, z:(data.longueur -1.5)},
-                                    "rotation" : {x:0, y: 0, z:0},
-                                    "animation-mixer": this.dooranim
-                                     }  )                   
-                                    
-                                      this.el.setAttribute("shape","cylinder")
-                                      this.el.setAttribute("body", "type", "static")
-                                      this.el.setAttribute("body", "restitution", "0")
-                                      door.setAttribute("id", "door" + data.id)
-                                    }
-                                                    
-                    
-                     
-            
-            else{
-            this.porte4.position.z = (data.longueur -2)
-            this.meshmur4.updateMatrix()
-                this.porte4.updateMatrix()
-            this.bsp = new CSG()
-            this.bsp1 = new CSG ()
-            this.bsp1.setFromMesh( this.porte4 ) 
-            this.bsp.setFromMesh( this.meshmur4 )
-            this.bsp.subtractOperand(this.bsp1)
-            this.mur.add(this.bsp.toMesh())
-            
-            
-            var door = this.el.ensure(".recitdoor", "a-door", {
-                            
-                'position':{x:0, y: 0, z:(data.longueur -1.5)},
-                "rotation" : {x:0, y: 0, z:0},
-                "animation-mixer": this.dooranim
-                 }  )                   
-                
-                  this.el.setAttribute("shape","cylinder")
-                  this.el.setAttribute("body", "type", "static")
-                  this.el.setAttribute("body", "restitution", "0")
-                  door.setAttribute("id", "door" + data.id)
-                }
-                          
-            break
-            default:
-              this.mur.add( this.meshmur4 ); 
-              break
-
+            this.el.setAttribute("shape", "cylinder")
+          this.el.setAttribute("body", "type", "static")
         }
-          /* *****Fin forme a estruder pour le mur avwc porte au centre***** */
+        else
+          this.mur.add(this.meshmur4);
+        break
+      case "left":
+        if (data.window) {
+          this.porte4.position.z = 1.5
+          this.fen4.position.z = (data.longueur - 2)
+          this.meshmur4.updateMatrix()
+          this.porte4.updateMatrix()
+          this.fen4.updateMatrix()
+          this.bsp = new CSG()
+          this.bsp1 = new CSG()
+          this.bsp2 = new CSG()
+          this.bsp1.setFromMesh(this.porte4)
+          this.bsp2.setFromMesh(this.fen4)
+          this.bsp.setFromMesh(this.meshmur4)
+          this.bsp.subtractOperand(this.bsp1)
+          this.bsp.subtractOperand(this.bsp2)
+          this.mur.add(this.bsp.toMesh())
+          this.el.ensure(".recitwindow", "a-window", {
+            'position': { x: 0, y: 0.6, z: (data.longueur) - 1.5 },
+            "rotation": { x: 90, y: 0, z: 0 },
+            "scale": "0.9 0.91 0.94"
+          })
+          var door = this.el.ensure(".recitdoor", "a-door", {
+            'position': { x: 0, y: 0, z: 2 },
+            "rotation": { x: 0, y: 0, z: 0 },
+            "animation-mixer": this.dooranim
+          })
+          this.el.setAttribute("shape", "cylinder")
+          this.el.setAttribute("body", "type", "static")
+          this.el.setAttribute("body", "restitution", "0")
+          door.setAttribute("id", "door" + data.id)
+        }
+        else {
+          this.porte4.position.z = 1.5
+          this.meshmur4.updateMatrix()
+          this.porte4.updateMatrix()
+          this.bsp = new CSG()
+          this.bsp1 = new CSG()
+          this.bsp1.setFromMesh(this.porte4)
+          this.bsp.setFromMesh(this.meshmur4)
+          this.bsp.subtractOperand(this.bsp1)
+          this.mur.add(this.bsp.toMesh())
 
-                            
-                              this.el.setAttribute("shape","cylinder")
-                              this.el.setAttribute("body", "type", "static")
-                              this.el.setAttribute("body", "restitution", "0")
-           
 
-          /* *****Ajout de Mesh du mur à a primitive***** */
-          
-        this.el.setObject3D('group',this.mur)
-        this.el.setAttribute("wall","")
-        this.el.setAttribute("id",data.id)
-        }, 
-        /* *****Fin jout de Mesh du mur à a primitive***** */
-  })
+          var door = this.el.ensure(".recitdoor", "a-door", {
 
-  
+            'position': { x: 0, y: 0, z: 2 },
+            "rotation": { x: 0, y: 0, z: 0 },
+            "animation-mixer": this.dooranim
+          })
+
+          this.el.setAttribute("shape", "cylinder")
+          this.el.setAttribute("body", "type", "static")
+          this.el.setAttribute("body", "restitution", "0")
+          door.setAttribute("id", "door" + data.id)
+        }
+        break
+      case "center":
+        if (data.window) {
+          console.warn("Can't add a window if door center");
+        }
+        this.porte4.position.z = (data.longueur / 2 + 1)
+        this.bsp = new CSG()
+        this.bsp1 = new CSG()
+        this.bsp1.setFromMesh(this.porte4)
+        this.bsp.setFromMesh(this.meshmur4)
+        this.bsp.subtractOperand(this.bsp1)
+        this.bsp.toMesh()
+        this.mur.add(this.bsp.toMesh())
+        var door = this.el.ensure(".recitdoor", "a-door", {
+          'position': { x: 0, y: 0, z: data.longueur / 2 + 1.5 },
+          "rotation": { x: 0, y: 0, z: 0 },
+          "animation-mixer": this.dooranim
+        })
+        this.el.setAttribute("shape", "cylinder")
+        this.el.setAttribute("body", "type", "static")
+        this.el.setAttribute("body", "restitution", "0")
+        door.setAttribute("id", "door" + data.id)
+        break
+      case "right":
+        if (data.window) {
+          this.porte4.position.z = (data.longueur - 2)
+          this.fen4.position.z = (2)
+          this.meshmur4.updateMatrix()
+          this.porte4.updateMatrix()
+          this.fen4.updateMatrix()
+          this.bsp = new CSG()
+          this.bsp1 = new CSG()
+          this.bsp2 = new CSG()
+          this.bsp1.setFromMesh(this.porte4)
+          this.bsp2.setFromMesh(this.fen4)
+          this.bsp.setFromMesh(this.meshmur4)
+          this.bsp.subtractOperand(this.bsp1)
+          this.bsp.subtractOperand(this.bsp2)
+          this.mur.add(this.bsp.toMesh())
+
+          this.el.ensure(".recitwindow", "a-window", {
+
+            'position': { x: 0, y: 0.6, z: 1.5 },
+            "rotation": { x: 90, y: 0, z: 0 },
+            "scale": "0.9 0.91 0.94"
+          })
+          var door = this.el.ensure(".recitdoor", "a-door", {
+
+            'position': { x: 0, y: 0, z: (data.longueur - 1.5) },
+            "rotation": { x: 0, y: 0, z: 0 },
+            "animation-mixer": this.dooranim
+          })
+
+          this.el.setAttribute("shape", "cylinder")
+          this.el.setAttribute("body", "type", "static")
+          this.el.setAttribute("body", "restitution", "0")
+          door.setAttribute("id", "door" + data.id)
+        }
+        else {
+          this.porte4.position.z = (data.longueur - 2)
+          this.meshmur4.updateMatrix()
+          this.porte4.updateMatrix()
+          this.bsp = new CSG()
+          this.bsp1 = new CSG()
+          this.bsp1.setFromMesh(this.porte4)
+          this.bsp.setFromMesh(this.meshmur4)
+          this.bsp.subtractOperand(this.bsp1)
+          this.mur.add(this.bsp.toMesh())
+          var door = this.el.ensure(".recitdoor", "a-door", {
+            'position': { x: 0, y: 0, z: (data.longueur - 1.5) },
+            "rotation": { x: 0, y: 0, z: 0 },
+            "animation-mixer": this.dooranim
+          })
+          this.el.setAttribute("shape", "cylinder")
+          this.el.setAttribute("body", "type", "static")
+          this.el.setAttribute("body", "restitution", "0")
+          door.setAttribute("id", "door" + data.id)
+        }
+
+        break
+      default:
+        this.mur.add(this.meshmur4);
+        break
+
+    }
+    /* *****Fin forme a estruder pour le mur avwc porte au centre***** */
+
+
+    this.el.setAttribute("shape", "cylinder")
+    this.el.setAttribute("body", "type", "static")
+    this.el.setAttribute("body", "restitution", "0")
+
+
+    /* *****Ajout de Mesh du mur à a primitive***** */
+
+    this.el.setObject3D('group', this.mur)
+    this.el.setAttribute("wall", "")
+    this.el.setAttribute("id", data.id)
+  },
+  /* *****Fin jout de Mesh du mur à a primitive***** */
+})
+

@@ -315,11 +315,12 @@ AFRAME.registerComponent('mouse-manipulation', {
     releaseEl() {
         const contactPoint = this.grabbedEl.object3D.parent
         this.grabbedEl.setAttribute('object-parent', 'parent', `#${this.originalParentEl.id}`)
+       // this.grabbedEl.emit("drop")
+        console.log(this.grabbedEl)
         this.grabbedEl = null
-        this.originalParentEl = null
+        this.originalParentEl = null        
         
         this.el.object3D.add(this.hints.object3D)
-
         if (this.hoverEl) {
             const pos = this.hints.object3D.position
             this.hoverEl.object3D.getWorldPosition(pos)

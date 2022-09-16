@@ -74,7 +74,7 @@
                     mesh.rotation.z = THREE.Math.degToRad(( -90))
                     floor.add( mesh );
                     this.el.setObject3D('group',mesh)
-                    this.el.setAttribute("floor1","")
+                    this.el.setAttribute("floor","")
                     //this.el.setAttribute("start","")
                     this.el.setAttribute("shape","box")
                           this.el.setAttribute("body", "type", "static")
