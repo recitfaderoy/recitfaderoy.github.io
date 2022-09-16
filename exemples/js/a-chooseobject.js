@@ -71,7 +71,8 @@ AFRAME.registerPrimitive("a-chooseobject", {
             'material':"color: red; transparent:true; opacity:0.0;",
             'position': { x: 0, y: 0.6, z: 0},
             "rotation": { x: 0, y: 0, z: 0 },
-            "scale": "1 1 1"
+            "scale": "1 1 1",
+            'class':'raycastable'
           })
           this.box2=this.el.ensure(".box2", "a-box", {
             'id': ID +  "_box2",
@@ -81,7 +82,8 @@ AFRAME.registerPrimitive("a-chooseobject", {
             'material':"color: red; transparent:true; opacity:0.0;",
             'position': { x: 0, y: 0.6, z: 1},
             "rotation": { x: 0, y: 0, z: 0 },
-            "scale": "1 1 1"
+            "scale": "1 1 1",
+            'class':'raycastable'
           })
           this.box3=this.el.ensure(".box3", "a-box", {
             'id': ID +  "_box3",
@@ -91,7 +93,8 @@ AFRAME.registerPrimitive("a-chooseobject", {
             'material':"color: red; transparent:true; opacity:0.0;",
             'position': { x: 0, y: 0.6, z: 2},
             "rotation": { x: 0, y: 0, z: 0 },
-            "scale": "1 1 1"
+            "scale": "1 1 1",
+            'class':'raycastable'
           })
           this.box4=this.el.ensure(".box4", "a-box", {
             'id': ID +  "_box4",
@@ -101,39 +104,40 @@ AFRAME.registerPrimitive("a-chooseobject", {
             'material':"color: red; transparent:true; opacity:0.0;",
             'position': '0 0.6 3',
             "rotation": { x: 0, y: 0, z: 0 },
-            "scale": "1 1 1"
-          })
-          this.objet1 =  this.el.ensure(".model1", "a-gltf-model", {
-            'src': this.data.object1,
-            'position': '0 0 0',
-            "rotation": { x: 0, y: 0, z: 0 },
-            "scale": "0.5 0.5 0.5",
+            "scale": "1 1 1",
             'class':'raycastable'
           })
-          this.objet2 = this.el.ensure(".model2", "a-gltf-model", {
+          this.objet1 =  this.box1.ensure(".model1", "a-gltf-model", {
+            'src': this.data.object1,
+            'position': '0 -0.6 0',
+            "rotation": { x: 0, y: 0, z: 0 },
+            "scale": "0.5 0.5 0.5",
+            //'class':'raycastable'
+          })
+          this.objet2 = this.box2.ensure(".model2", "a-gltf-model", {
         'src': this.data.object2,
-        'position': { x: 0, y: 0, z: 1},
+        'position': { x: 0, y: -0.6, z: 0},
         "rotation": { x: 0, y: 0, z: 0 },
         "scale": "0.5 0.5 0.5",
-        'class':'raycastable'
+       // 'class':'raycastable'
         })
-        this.objet3 = this.el.ensure(".model3", "a-gltf-model", {
+        this.objet3 = this.box3.ensure(".model3", "a-gltf-model", {
         'src': this.data.object3,
-        'position': { x: 0, y: 0, z: 2},
+        'position': { x: 0, y: -0.6, z: 0},
         "rotation": { x: 0, y: 0, z: 0 },
         "scale": "0.5 0.5 0.5",
-        'class':'raycastable'
+        //'class':'raycastable'
         })
-        this.objet4 = this.el.ensure(".model4", "a-gltf-model", {
+        this.objet4 = this.box4.ensure(".model4", "a-gltf-model", {
         'src': this.data.object4,
-        'position': { x: 0, y: 0, z: 3},
+        'position': { x: 0, y: -0.6, z: 0},
         "rotation": { x: 0, y: 0, z: 0 },
         "scale": "0.5 0.5 0.5",
-        'class':'raycastable'
+       // 'class':'raycastable'
         })
         },
         update: function () {
-          this.objet1.addEventListener('click', (evt) => {
+          this.box1.addEventListener('click', (evt) => {
             var object = evt.detail.intersection.object;
             console.log("Objet cliqué")
             if (this.data.good === "1"){
@@ -145,7 +149,7 @@ AFRAME.registerPrimitive("a-chooseobject", {
             this.box3.setAttribute("material","color: green; transparent:true; opacity:0.0;")
             this.box4.setAttribute("material","color: green; transparent:true; opacity:0.0;")
           })
-          this.objet2.addEventListener('click', (evt) => {
+          this.box2.addEventListener('click', (evt) => {
             var object = evt.detail.intersection.object;
             console.log("Objet cliqué")
             this.box1.setAttribute("material","color: green; transparent:true; opacity:0.0;")
@@ -158,7 +162,7 @@ AFRAME.registerPrimitive("a-chooseobject", {
             this.box3.setAttribute("material","color: green; transparent:true; opacity:0.0;")
             this.box4.setAttribute("material","color: green; transparent:true; opacity:0.0;")
           })
-          this.objet3.addEventListener('click', (evt) => {
+          this.box3.addEventListener('click', (evt) => {
             var object = evt.detail.intersection.object;
             console.log("Objet cliqué")
             this.box1.setAttribute("material","color: green; transparent:true; opacity:0.0;")
@@ -170,7 +174,7 @@ AFRAME.registerPrimitive("a-chooseobject", {
               }
             this.box4.setAttribute("material","color: green; transparent:true; opacity:0.0;")
           })
-          this.objet4.addEventListener('click', (evt) => {
+          this.box4.addEventListener('click', (evt) => {
             var object = evt.detail.intersection.object;
             console.log("Objet cliqué")
             this.box1.setAttribute("material","color: green; transparent:true; opacity:0.0;")
