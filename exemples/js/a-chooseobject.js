@@ -62,7 +62,7 @@ AFRAME.registerPrimitive("a-chooseobject", {
         this.el.setAttribute("id","chooseobjet_" + ID)
         this.el.setAttribute("body","type:kinematic; autoshape:false;")
         
-        this.el.ensure(".box1", "a-box", {
+        this.box1=this.el.ensure(".box1", "a-box", {
             
             'id': ID +  "_box1",
             'height':1.2,
@@ -73,7 +73,7 @@ AFRAME.registerPrimitive("a-chooseobject", {
             "rotation": { x: 0, y: 0, z: 0 },
             "scale": "1 1 1"
           })
-          this.el.ensure(".box2", "a-box", {
+          this.box2=this.el.ensure(".box2", "a-box", {
             'id': ID +  "_box2",
             'height':1.2,
             'width': 0.8,
@@ -83,7 +83,7 @@ AFRAME.registerPrimitive("a-chooseobject", {
             "rotation": { x: 0, y: 0, z: 0 },
             "scale": "1 1 1"
           })
-          this.el.ensure(".box3", "a-box", {
+          this.box3=this.el.ensure(".box3", "a-box", {
             'id': ID +  "_box3",
             'height':1.2,
             'width': 0.8,
@@ -93,7 +93,7 @@ AFRAME.registerPrimitive("a-chooseobject", {
             "rotation": { x: 0, y: 0, z: 0 },
             "scale": "1 1 1"
           })
-          this.el.ensure(".box4", "a-box", {
+          this.box4=this.el.ensure(".box4", "a-box", {
             'id': ID +  "_box4",
             'height':1.2,
             'width': 0.8,
@@ -107,25 +107,80 @@ AFRAME.registerPrimitive("a-chooseobject", {
             'src': this.data.object1,
             'position': '0 0 0',
             "rotation": { x: 0, y: 0, z: 0 },
-            "scale": "0.5 0.5 0.5"
+            "scale": "0.5 0.5 0.5",
+            'class':'raycastable'
           })
           this.objet2 = this.el.ensure(".model2", "a-gltf-model", {
         'src': this.data.object2,
         'position': { x: 0, y: 0, z: 1},
         "rotation": { x: 0, y: 0, z: 0 },
-        "scale": "0.5 0.5 0.5"
+        "scale": "0.5 0.5 0.5",
+        'class':'raycastable'
         })
         this.objet3 = this.el.ensure(".model3", "a-gltf-model", {
         'src': this.data.object3,
         'position': { x: 0, y: 0, z: 2},
         "rotation": { x: 0, y: 0, z: 0 },
-        "scale": "0.5 0.5 0.5"
+        "scale": "0.5 0.5 0.5",
+        'class':'raycastable'
         })
         this.objet4 = this.el.ensure(".model4", "a-gltf-model", {
         'src': this.data.object4,
         'position': { x: 0, y: 0, z: 3},
         "rotation": { x: 0, y: 0, z: 0 },
-        "scale": "0.5 0.5 0.5"
+        "scale": "0.5 0.5 0.5",
+        'class':'raycastable'
         })
         },
+        update: function () {
+          this.objet1.addEventListener('click', (evt) => {
+            var object = evt.detail.intersection.object;
+            console.log("Objet cliqué")
+            if (this.data.good === "1"){
+            this.box1.setAttribute("material","color: green; transparent:true; opacity:0.4;")}
+            else {
+              this.box1.setAttribute("material","color: red; transparent:true; opacity:0.4;")
+            }
+            this.box2.setAttribute("material","color: green; transparent:true; opacity:0.0;")
+            this.box3.setAttribute("material","color: green; transparent:true; opacity:0.0;")
+            this.box4.setAttribute("material","color: green; transparent:true; opacity:0.0;")
+          })
+          this.objet2.addEventListener('click', (evt) => {
+            var object = evt.detail.intersection.object;
+            console.log("Objet cliqué")
+            this.box1.setAttribute("material","color: green; transparent:true; opacity:0.0;")
+            if (this.data.good === "2"){
+              this.box2.setAttribute("material","color: green; transparent:true; opacity:0.4;")}
+              else {
+                this.box2.setAttribute("material","color: red; transparent:true; opacity:0.4;")
+              }
+           
+            this.box3.setAttribute("material","color: green; transparent:true; opacity:0.0;")
+            this.box4.setAttribute("material","color: green; transparent:true; opacity:0.0;")
+          })
+          this.objet3.addEventListener('click', (evt) => {
+            var object = evt.detail.intersection.object;
+            console.log("Objet cliqué")
+            this.box1.setAttribute("material","color: green; transparent:true; opacity:0.0;")
+            this.box2.setAttribute("material","color: green; transparent:true; opacity:0.0;")
+            if (this.data.good === "3"){
+              this.box3.setAttribute("material","color: green; transparent:true; opacity:0.4;")}
+              else {
+                this.box3.setAttribute("material","color: red; transparent:true; opacity:0.4;")
+              }
+            this.box4.setAttribute("material","color: green; transparent:true; opacity:0.0;")
+          })
+          this.objet4.addEventListener('click', (evt) => {
+            var object = evt.detail.intersection.object;
+            console.log("Objet cliqué")
+            this.box1.setAttribute("material","color: green; transparent:true; opacity:0.0;")
+            this.box2.setAttribute("material","color: green; transparent:true; opacity:0.0;")
+            this.box3.setAttribute("material","color: green; transparent:true; opacity:0.0;")
+            if (this.data.good === "4"){
+              this.box4.setAttribute("material","color: green; transparent:true; opacity:0.4;")}
+              else {
+                this.box4.setAttribute("material","color: red; transparent:true; opacity:0.4;")
+              }
+          })
+        }
     })
