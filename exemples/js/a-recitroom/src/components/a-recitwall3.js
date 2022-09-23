@@ -686,6 +686,7 @@ AFRAME.registerComponent('injectrecitwall', {
   init() {
     this.mur = new THREE.Group();     //objet 3D qui sera dans la prémitive a-recitwall  
     const data = this.data; //attributs 
+    console.log("états",this.el.states)
 
 
     /* *****définition du matériel du mur ***** */
@@ -739,10 +740,12 @@ AFRAME.registerComponent('injectrecitwall', {
     /* *****Animation de la porte ***** */
     this.datadoor = JSON.parse(data.door)
     if (this.datadoor.open) {
-      this.dooranim = "clip: ouvert;"
+      this.dooranim = "er"
+      this.dooranim1 = "ouvert"
     }
     else {
-      this.dooranim = "clip: ferme;"
+      this.dooranim = "ot"
+      this.dooranim1 = "ferme"
     }
     // }
     /*console.log("data.door")
@@ -796,15 +799,16 @@ AFRAME.registerComponent('injectrecitwall', {
             "rotation": { x: 90, y: 0, z: 0 },
             "scale": "0.9 0.91 0.94"
           })
-          var door = this.el.ensure(".recitdoor", "a-door", {
+          this.door = this.el.ensure(".recitdoor", "a-door", {
             'position': { x: 0, y: 0, z: 2 },
             "rotation": { x: 0, y: 0, z: 0 },
-            "animation-mixer": this.dooranim
+           "mixin": this.dooranim
           })
           this.el.setAttribute("shape", "cylinder")
           this.el.setAttribute("body", "type", "static")
           this.el.setAttribute("body", "restitution", "0")
-          door.setAttribute("id", "door" + data.id)
+          this.door.setAttribute("id", "door" + data.id)
+         //  this.door.addState(this.dooranim1);
         }
         else {
           this.porte4.position.z = 1.5
@@ -818,17 +822,19 @@ AFRAME.registerComponent('injectrecitwall', {
           this.mur.add(this.bsp.toMesh())
 
 
-          var door = this.el.ensure(".recitdoor", "a-door", {
+          this.door = this.el.ensure(".recitdoor", "a-door", {
 
             'position': { x: 0, y: 0, z: 2 },
             "rotation": { x: 0, y: 0, z: 0 },
-            "animation-mixer": this.dooranim
+            "mixin": this.dooranim
           })
 
           this.el.setAttribute("shape", "cylinder")
           this.el.setAttribute("body", "type", "static")
           this.el.setAttribute("body", "restitution", "0")
-          door.setAttribute("id", "door" + data.id)
+          this.door.setAttribute("id", "door" + data.id)
+        //  this.door.addState(this.dooranim1);
+          
         }
         break
       case "center":
@@ -843,15 +849,16 @@ AFRAME.registerComponent('injectrecitwall', {
         this.bsp.subtractOperand(this.bsp1)
         this.bsp.toMesh()
         this.mur.add(this.bsp.toMesh())
-        var door = this.el.ensure(".recitdoor", "a-door", {
+        this.door = this.el.ensure(".recitdoor", "a-door", {
           'position': { x: 0, y: 0, z: data.longueur / 2 + 1.5 },
           "rotation": { x: 0, y: 0, z: 0 },
-          "animation-mixer": this.dooranim
+         "mixin": this.dooranim
         })
         this.el.setAttribute("shape", "cylinder")
         this.el.setAttribute("body", "type", "static")
         this.el.setAttribute("body", "restitution", "0")
-        door.setAttribute("id", "door" + data.id)
+        this.door.setAttribute("id", "door" + data.id)
+        //this.door.addState(this.dooranim1);
         break
       case "right":
         if (data.window) {
@@ -876,17 +883,18 @@ AFRAME.registerComponent('injectrecitwall', {
             "rotation": { x: 90, y: 0, z: 0 },
             "scale": "0.9 0.91 0.94"
           })
-          var door = this.el.ensure(".recitdoor", "a-door", {
+          this.door = this.el.ensure(".recitdoor", "a-door", {
 
             'position': { x: 0, y: 0, z: (data.longueur - 1.5) },
             "rotation": { x: 0, y: 0, z: 0 },
-            "animation-mixer": this.dooranim
+            "mixin": this.dooranim
           })
 
           this.el.setAttribute("shape", "cylinder")
           this.el.setAttribute("body", "type", "static")
           this.el.setAttribute("body", "restitution", "0")
-          door.setAttribute("id", "door" + data.id)
+          this.door.setAttribute("id", "door" + data.id)
+         // this.door.addState(this.dooranim1);
         }
         else {
           this.porte4.position.z = (data.longueur - 2)
@@ -898,15 +906,17 @@ AFRAME.registerComponent('injectrecitwall', {
           this.bsp.setFromMesh(this.meshmur4)
           this.bsp.subtractOperand(this.bsp1)
           this.mur.add(this.bsp.toMesh())
-          var door = this.el.ensure(".recitdoor", "a-door", {
+          this.door = this.el.ensure(".recitdoor", "a-door", {
             'position': { x: 0, y: 0, z: (data.longueur - 1.5) },
             "rotation": { x: 0, y: 0, z: 0 },
-            "animation-mixer": this.dooranim
+           "mixin": this.dooranim
           })
           this.el.setAttribute("shape", "cylinder")
           this.el.setAttribute("body", "type", "static")
           this.el.setAttribute("body", "restitution", "0")
-          door.setAttribute("id", "door" + data.id)
+          this.door.setAttribute("id", "door" + data.id)
+          //this.door.addState(this.dooranim1);
+          
         }
 
         break
@@ -922,13 +932,19 @@ AFRAME.registerComponent('injectrecitwall', {
     this.el.setAttribute("body", "type", "static")
     this.el.setAttribute("body", "restitution", "0")
 
-
+    console.log("états2",this.el.states)
     /* *****Ajout de Mesh du mur à a primitive***** */
 
     this.el.setObject3D('group', this.mur)
     this.el.setAttribute("wall", "")
     this.el.setAttribute("id", data.id)
+        
   },
+  
+ /* tick: function(time, delta) {
+  
+  console.log("états",this.el.states)
+  }*/
   /* *****Fin jout de Mesh du mur à a primitive***** */
 })
 
