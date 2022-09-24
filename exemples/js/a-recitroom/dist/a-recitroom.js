@@ -440,7 +440,7 @@ AFRAME.registerComponent('injectdoor', {
         }},
     } ,
     init() { 
-      document.querySelector('a-scene').systems["recitbreackoutgame"].registerRoom(this.el);
+      //document.querySelector('a-scene').systems["recitbreackoutgame"].registerRoom(this.el);
         const coord= new Object()
         const plaf =[]
         const data =this.data.para ;
@@ -1298,7 +1298,7 @@ AFRAME.registerComponent('injectrecitwall', {
     /*mur4.widthSegments = 50
     mur4.heightSegments  =50
     mur4.depthSegments = 50*/
-    this.meshmur4 = new THREE.Mesh(mur4, this.el.components.material.material);
+    this.meshmur4 = new THREE.Mesh(mur4, this.material3);
     this.meshmur4.rotation.y = THREE.Math.degToRad((90))
     this.meshmur4.position.z = (data.longueur / 2)
     this.meshmur4.position.y = (3)

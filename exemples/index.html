@@ -119,7 +119,7 @@ init: function() {
     /*this.actionner = this.entities.querySelectorAll(".breakout_Key_actionner")
     this.lock = this.entities.querySelectorAll(".breakout_Key_lock")*/
 
-    console.log("Syseme informations", this.entities, this.actionner, this.lock)
+    console.log("Syseme informations", this.entities, this.actionner, this.lock  )
    setTimeout(() => {
     this.box0 = this.actionner[0].childNodes[0]
     this.box1 = this.actionner[0].childNodes[1]
@@ -150,7 +150,7 @@ init: function() {
             }
           })
           this.box2.addEventListener('click', (evt) => {
-            var object = evt.detail.intersection.object;
+            var object = evt.detail.intersection.object;    
             console.log("Objet 1 cliqué")
             if (this.actionner[0].attributes.good === 'good="3"'){
             this.lock0.removeState("ferme")
@@ -569,4 +569,4 @@ console.log(scene.eti)
   
 </script>
 </body>
-</html>
+</html>éé
