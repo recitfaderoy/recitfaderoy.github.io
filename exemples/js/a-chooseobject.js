@@ -51,7 +51,7 @@ AFRAME.registerPrimitive("a-chooseobject", {
        },
 
     init() { 
-      document.querySelector('a-scene').systems["recitbreackoutgame"].registerMe(this.el);
+   
       document.querySelector('a-scene').systems["recitbreackoutgame"].registerAction(this.el);
         ID =""
         if (!this.data.id)

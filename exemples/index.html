@@ -31,6 +31,8 @@
   <script  src="./js/joystick.js"></script>
   <script  src="./js/camera-cube-env.js"></script>
   <script  src="./js/a-chooseobject.js"></script>
+    <script  src="./js/injectregisterLock.js"></script>
+    <script  src="./js/recitbreackoutgame.js">  </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/bootstrap-slider.min.js" integrity="sha512-f0VlzJbcEB6KiW8ZVtL+5HWPDyW1+nJEjguZ5IVnSQkvZbwBt2RfCBY0CBO1PsMAqxxrG4Di6TfsCPP3ZRwKpA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- CSS only -->
@@ -99,105 +101,10 @@ AFRAME.registerComponent('person-events-component', {
         this.el.setAttribute('animation-mixer', 'clip:none;')
     }
 });
-/*this.el.sceneEl.addEventListener("loaded", () => {
-          console.log ("loaded");
-          this.el.sceneEl.emit("scenloade")
-        });*/
+
  </script>
  <script>
-  AFRAME.registerSystem('recitbreackoutgame', {
-
-schema: {
-
-},
-init: function() {
-    this.entities = [];
-    this.actionner = [];
-    this.lock = [];
-    this.room = [];
-    
-    /*this.actionner = this.entities.querySelectorAll(".breakout_Key_actionner")
-    this.lock = this.entities.querySelectorAll(".breakout_Key_lock")*/
-
-    console.log("Syseme informations", this.entities, this.actionner, this.lock  )
-   setTimeout(() => {
-    this.box0 = this.actionner[0].childNodes[0]
-    this.box1 = this.actionner[0].childNodes[1]
-    this.box2 = this.actionner[0].childNodes[2]
-    this.box3 = this.actionner[0].childNodes[3]
-    this.lock0= this.lock[0]
-    console.log(this.actionner[0].attributes.good.nodeValue)
-    this.box0.addEventListener('click', (evt) => {
-            var object = evt.detail.intersection.object;
-            console.log("Objet 1 cliqué")
-            if (this.actionner[0].attributes.good === 'good="1"'){
-            this.lock0.removeState("ferme")
-            this.lock0.addState("ouvert")}
-            else {
-                        this.lock0.addState("ferme")
-                        this.lock0.removeState("ouvert")
-            }
-          })
-          this.box1.addEventListener('click', (evt) => {
-            var object = evt.detail.intersection.object;
-            console.log("Objet 1 cliqué")
-            if (this.actionner[0].attributes.good.nodeValue === "2"){
-            this.lock0.removeState("ferme")
-            this.lock0.addState("ouvert")}
-            else {
-                        this.lock0.addState("ferme")
-                        this.lock0.removeState("ouvert")
-            }
-          })
-          this.box2.addEventListener('click', (evt) => {
-            var object = evt.detail.intersection.object;    
-            console.log("Objet 1 cliqué")
-            if (this.actionner[0].attributes.good === 'good="3"'){
-            this.lock0.removeState("ferme")
-            this.lock0.addState("ouvert")}
-            else {
-                        this.lock0.addState("ferme")
-                        this.lock0.removeState("ouvert")
-            }
-          })
-          this.box3.addEventListener('click', (evt) => {
-            var object = evt.detail.intersection.object;
-            console.log("Objet 1 cliqué")
-            if (this.actionner[0].attributes.good === 'good="4"'){
-            this.lock0.removeState("ferme")
-            this.lock0.addState("ouvert")}
-            else {
-                        this.lock0.addState("ferme")
-                        this.lock0.removeState("ouvert")
-            }
-          })
-    console.log("actionner",this.box0,this.box1,this.box2,this.box3,this.lock0,this.room[0])
-  },500)
-},
-//[0].attributes
-registerMe: function (el) {
-    this.entities.push(el);
-},
-registerLock: function (el) {
-    this.lock.push(el);
-},
-registerAction: function (el) {
-    this.actionner.push(el);
-},
-registerRoom: function (el) {
-    this.room.push(el);
-},
-        update: function () {
-          setTimeout(() => {
-             console.log("actionner",this.lock0.states)    
-         
-          },500)},
-tick: function(time, delta) {
-
-}
-})
-// ... 
-;
+  
  </script>
 
 </head>
@@ -213,9 +120,7 @@ tick: function(time, delta) {
   <div id="aframe">
 <a-scene 
 animation-timeline__1="timeline: #depart; loop: false; startEvents:"
-camera-position cursor="rayOrigin: mouse"
-        raycaster="far: 100; objects: .raycastable;" loading-screen="enabled: false;"
-environment="preset: moon; playArea:25; groundColor: black; grid: 1x1"
+
 physics="workerUrl:./js/cannonWorkeroriginal.js; gravity:0 -10 0; debug: true;"
 shadow="enabled:true; type: pcfsoft; autoUpdate: true;"
 renderer="colorManagement: false; physicallyCorrectLights: false; precision: mediump; antialias: false; alpha: true; logarithmicDepthBuffer: false; "
@@ -227,41 +132,7 @@ renderer="colorManagement: false; physicallyCorrectLights: false; precision: med
           <a-timeline-animation select="#text1" name="fadeout"></a-timeline-animation>
           <a-timeline-animation select="#text1" name="togglevisibleoff"></a-timeline-animation>
     
-          <a-timeline-group>
-            <a-timeline-animation select="a-entity[mixin~=box]" name="fadein"></a-timeline-animation>
-            <a-timeline-animation select="a-entity[mixin~=box]" name="scale"></a-timeline-animation>
-            <a-timeline-animation select="a-entity[mixin~=box]" name="color"></a-timeline-animation>
-          </a-timeline-group>
-    
-          <a-timeline-group>
-            <a-timeline-animation select="#text2" name="togglevisible"></a-timeline-animation>
-            <a-timeline-animation select="#text2" name="fadein"></a-timeline-animation>
-            <a-timeline-animation select="#text2" name="textcolor"></a-timeline-animation>
-          </a-timeline-group>
-    
-          <a-timeline-animation select="#text2" name="fadeout"></a-timeline-animation>
-          <a-timeline-animation select="#text2" name="togglevisibleoff"></a-timeline-animation>
-    
-          <a-timeline-animation select="#text3" name="togglevisible"></a-timeline-animation>
-          <a-timeline-group>
-            <a-timeline-animation select="a-entity[mixin~=box]" name="color"></a-timeline-animation>
-            <a-timeline-animation select="a-entity[mixin~=box]" name="rotate"></a-timeline-animation>
-            <a-timeline-animation select="a-entity[mixin~=box]" name="position"></a-timeline-animation>
-            <a-timeline-animation select="#text3" name="fadein"></a-timeline-animation>
-            <a-timeline-animation select="#text3" name="positionin"></a-timeline-animation>
-          </a-timeline-group>
-    
-          <a-timeline-animation select="#text3" name="positionout"></a-timeline-animation>
-          <a-timeline-animation select="#text3" name="togglevisibleoff"></a-timeline-animation>
-    
-          <a-timeline-animation select="#text4" name="togglevisible"></a-timeline-animation>
-    
-          <a-timeline-group>
-            <a-timeline-animation select="#sky" name="color"></a-timeline-animation>
-            <a-timeline-animation select="#text4" name="fadein"></a-timeline-animation>
-          </a-timeline-group>
-    
-          <a-timeline-animation select="#text4" name="fadeout" offset="500"></a-timeline-animation>
+         
         </a-timeline>
         <a-mixin id="box"
         geometry="primitive: box"
@@ -309,6 +180,8 @@ renderer="colorManagement: false; physicallyCorrectLights: false; precision: med
     <a-asset-item id="chem4" preload="true" response-type="arraybuffer" src="./assets/bank/laboratoire/chemicals/p1.gltf"></a-asset-item>
     <a-asset-item id="chem5" preload="true" response-type="arraybuffer" src="./assets/bank/laboratoire/chemicals/p2.gltf"></a-asset-item>
     <a-asset-item id="CaCO_3" preload="true" response-type="arraybuffer" src="./assets/bank/laboratoire/chemicals/CaCO_3.gltf"></a-asset-item>
+    <a-asset-item id="valiseAa" preload="true" response-type="arraybuffer" src="./assets/bank/valise1Aa.gltf"></a-asset-item>
+    <a-asset-item id="medicaltoolbox" preload="true" response-type="arraybuffer" src="./assets/bank/toolboxA.gltf"></a-asset-item>
 
     <a-asset-item id="baril1" preload="true" response-type="arraybuffer" src="./assets/bank/baril1.min.gltf"></a-asset-item>
     <a-asset-item id="baril2" preload="true" response-type="arraybuffer" src="./assets/bank/baril2.min.gltf"></a-asset-item>
@@ -347,7 +220,8 @@ renderer="colorManagement: false; physicallyCorrectLights: false; precision: med
    <a-mixin id="ot" animation-mixer= 'clip:fermer; loop:once; clampWhenFinished:true;'  ></a-mixin>
   </a-assets>
       <a-player shape locomotion grabbling id="rig" position="-1 0.3 0" data-aabb-collider-dynamic rotation="0 250 0" >
-      <a-entity camera="active: true" look-controls wasd-controls  position="0 1 0">
+      <a-entity camera="active: true" look-controls wasd-controls  position="0 1 0" camera-position cursor="rayOrigin: mouse"
+      raycaster="far: 100; objects: .raycastable;" loading-screen="enabled: false;">
         <a-entity id="lhand"
         position="-0.4 1.4 -0.5"
         oculus-touch-controls="hand: left"
@@ -382,12 +256,12 @@ renderer="colorManagement: false; physicallyCorrectLights: false; precision: med
 
         <a-plane floor material=" color:black; repeat: 700 700; transparent: true;" height="100" width="100"
             rotation="-90 0 0"></a-plane>
-        <a-sky color="#00000f"></a-sky>
+        <a-sky color="#fff"></a-sky>
         <a-chooseobject id="chooseobject" position="8 0 1.05"  object1="./assets/bank/baril1.min.gltf" object2="./assets/bank/baril1r.min.gltf"
         object3="./assets/bank/baril2.min.gltf" object4="./assets/bank/baril3.min.gltf" good = "2" lockid="doorwall_5"></a-chooseobject>
                
         <a-entity include="./scenes/alaboratory.html"></a-entity>
-        <a-recitroom id="room1" para = '{
+        <a-recitroom id="room1" position="0 0 0" para = '{
           "0": {"longueur":  5, "angle": 0, "door": "none","window": false, "material":"side:double; shader: standard; src:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_basecolor.jpg;height:450; repeat: 9 3; ambientOcclusionMap:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_ambientOcclusion.jpg; ambientOcclusionTextureRepeat:9 3;normalMap:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_normal.jpg; normalTextureRepeat: 9 3; displacementMap:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_height.png; displacementBias:0.0190; displacementScale:0.21;displacementTextureRepeat:9 3; roughness: 0.4; metalness: 0.4"},
           "1": { "longueur":  5, "angle": 60, "door": "left","window": false,"material":"side:double; shader: standard; src:./assets/Concrete_Wall_012_SD/Concrete_Wall_012_basecolor.jpg; height:1024; repeat: 15 5; ambientOcclusionMap:./assets/Concrete_Wall_012_SD/Concrete_Wall_012_ambientOcclusion.jpg; ambientOcclusionTextureRepeat:9 3;normalMap:./assets/Concrete_Wall_012_SD/Concrete_Wall_012_normal.jpg; normalTextureRepeat: 9 3; normalTextureOffset: 9 3;displacementMap:./assets/Concrete_Wall_012_SD/Concrete_Wall_012_height.png; displacementBias:0.01; displacementScale:0.01;displacementTextureRepeat:9 3; roughness: 0.8; metalness: 0.1"},
           "2": { "longueur":  5, "angle": 120, "door": {"type":"center","open":false},"window": false,"material":"side:double; shader: standard; src:./assets/Wall_Stone_021_SD/Substance_graph_BaseColor.jpg;height:2048; repeat: 6 2; ambientOcclusionMap:./assets/Wall_Stone_021_SD/Substance_graph_AmbientOcclusion.jpg; ambientOcclusionTextureRepeat:6 2;normalMap:./assets/Wall_Stone_021_SD/Substance_graph_Normal.jpg; normalTextureRepeat: 6 2; displacementMap:./assets/Wall_Stone_021_SD/Substance_graph_Height.png; displacementBias:0.005; displacementScale:0.15;displacementTextureRepeat:6 2; roughness: 0.8; metalness: 0.5"},
@@ -397,9 +271,17 @@ renderer="colorManagement: false; physicallyCorrectLights: false; precision: med
          }'
         >
         </a-recitroom>
-        <a-entity include="./scenes/sphere-path.html"></a-entity>
+        <a-recitroom id="room2" position="6.5 0 -6.8" rotation="0 -30 0" para = '{
+          "0": {"longueur":  5, "angle": 0, "door":  {"type":"none","open":true},"window": false, "material":"side:double; shader: standard; src:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_basecolor.jpg;height:450; repeat: 9 3; ambientOcclusionMap:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_ambientOcclusion.jpg; ambientOcclusionTextureRepeat:9 3;normalMap:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_normal.jpg; normalTextureRepeat: 9 3; displacementMap:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_height.png; displacementBias:0.0190; displacementScale:0.21;displacementTextureRepeat:9 3; roughness: 0.4; metalness: 0.4"},
+          "1": { "longueur":  5, "angle": 90, "door": {"type":"center","open":true},"window": false,"material":"side:double; shader: standard; src:./assets/Concrete_Wall_012_SD/Concrete_Wall_012_basecolor.jpg; height:1024; repeat: 15 5; ambientOcclusionMap:./assets/Concrete_Wall_012_SD/Concrete_Wall_012_ambientOcclusion.jpg; ambientOcclusionTextureRepeat:9 3;normalMap:./assets/Concrete_Wall_012_SD/Concrete_Wall_012_normal.jpg; normalTextureRepeat: 9 3; normalTextureOffset: 9 3;displacementMap:./assets/Concrete_Wall_012_SD/Concrete_Wall_012_height.png; displacementBias:0.01; displacementScale:0.01;displacementTextureRepeat:9 3; roughness: 0.8; metalness: 0.1"},
+          "2": { "longueur":  5, "angle": 180, "door": {"type":"none","open":false},"window": false,"material":"side:double; shader: standard; src:./assets/Wall_Stone_021_SD/Substance_graph_BaseColor.jpg;height:2048; repeat: 6 2; ambientOcclusionMap:./assets/Wall_Stone_021_SD/Substance_graph_AmbientOcclusion.jpg; ambientOcclusionTextureRepeat:6 2;normalMap:./assets/Wall_Stone_021_SD/Substance_graph_Normal.jpg; normalTextureRepeat: 6 2; displacementMap:./assets/Wall_Stone_021_SD/Substance_graph_Height.png; displacementBias:0.005; displacementScale:0.15;displacementTextureRepeat:6 2; roughness: 0.8; metalness: 0.5"},
+          "3": { "longueur":  5, "angle": 270, "door": "none","window": false,"material":"side:double; shader: standard; src:./assets/Metal_ArtDeco_Tiles_001_SD/Metal_ArtDeco_Tiles_001_basecolor.jpg;height:450; repeat: 6 2; ambientOcclusionMap:./assets/Metal_ArtDeco_Tiles_001_SD/Metal_ArtDeco_Tiles_001_ambientOcclusion.jpg; ambientOcclusionTextureRepeat:6 2;normalMap:./assets/Metal_ArtDeco_Tiles_001_SD/Metal_ArtDeco_Tiles_001_normal.jpg; normalTextureRepeat: 6 2; displacementMap:./assets/Metal_ArtDeco_Tiles_001_SD/Metal_ArtDeco_Tiles_001_height.png; displacementBias:0.0; displacementScale:0.1;displacementTextureRepeat:6 2; roughness: 0.3; metalness: 0.9"}
+          }'
+        >
+        </a-recitroom>
+      <!--   <a-entity include="./scenes/sphere-path.html"></a-entity>
           
-       <!--   <a-entity mixin="area" position="0.384 0 -3.13">
+         <a-entity mixin="area" position="0.384 0 -3.13">
              <a-sound mixin="area_sound" src="./assets/audio/miseencontexte.mp3"></a-sound>
             <a-text mixin="area_text" value="contexte"></a-text>
           </a-entity>
@@ -409,7 +291,8 @@ renderer="colorManagement: false; physicallyCorrectLights: false; precision: med
             <a-text mixin="area_text" value="first area"></a-text>
         </a-entity>-->
           
-        
+        <a-gltf-model src="#valiseAa" injectregisterLock position="5 0.2 4" animation-mixer="clip: ferme;"></a-gltf-model>
+        <a-gltf-model src="#medicaltoolbox" injectregisterLock position="5 0.2 4.5" animation-mixer="clip: ferme;"></a-gltf-model>
            <a-entity id="cursor"
            cursor="rayOrigin: mouse"
            raycaster="objects: [raycast-target]; far: Infinity"
@@ -566,7 +449,9 @@ console.log(scene.eti)
    
     </script><
 <script>
-  
+  /*camera-position cursor="rayOrigin: mouse"
+        raycaster="far: 100; objects: .raycastable;" loading-screen="enabled: false;"
+environment="preset: moon; playArea:25; groundColor: black; grid: 1x1"*/
 </script>
 </body>
 </html>éé

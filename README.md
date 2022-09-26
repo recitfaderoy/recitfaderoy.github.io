@@ -14,5 +14,5 @@ Référentiel d'exemples de composants réutilisables pouvant potentiellement ê
 - https://github.com/arenaxr/arena-web-core/blob/master/src/components/click-listener.js
 - https://docs.arenaxr.org/
 - https://stemkoski.github.io/A-Frame-Examples/-https://github.com/poeticAndroid/a-game
---Systèmes de primititives et composants pour concevoir un jeu.
+- - Systèmes de primititives et composants pour concevoir un jeu.
 

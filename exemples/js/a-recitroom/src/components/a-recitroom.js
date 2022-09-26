@@ -21,7 +21,7 @@
         }},
     } ,
     init() { 
-      //document.querySelector('a-scene').systems["recitbreackoutgame"].registerRoom(this.el);
+      
         const coord= new Object()
         const plaf =[]
         const data =this.data.para ;

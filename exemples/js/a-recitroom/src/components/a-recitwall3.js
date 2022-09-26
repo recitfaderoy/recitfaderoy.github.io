@@ -706,36 +706,22 @@ AFRAME.registerComponent('injectrecitwall', {
 
     //  const createWall = function(DoorPosiy,long){
     const boxporte4 = new THREE.BoxBufferGeometry(1, 2, 0.6);
-
     const boxfen4 = new THREE.BoxBufferGeometry(1, 1.75, 0.6);
-
     this.fen4 = new THREE.Mesh(boxfen4, this.material2);
     this.fen4.rotation.y = THREE.Math.degToRad((-90))
     this.fen4.position.z = (data.longueur / 2 + 1)
     this.fen4.position.y = (1.5)
-
     this.porte4 = new THREE.Mesh(boxporte4, this.material2);
     this.porte4.rotation.y = THREE.Math.degToRad((-90))
-
     this.porte4.position.y = (1)
-
-    const mur4 = new THREE.BoxBufferGeometry(data.longueur, 6, 0.2, 50, 50, 1);
-    /*mur4.widthSegments = 50
-    mur4.heightSegments  =50
-    mur4.depthSegments = 50*/
+    const mur4 = new THREE.BoxBufferGeometry(data.longueur + 0.1, 6, 0.2, 50, 50, 1);
+  
     this.meshmur4 = new THREE.Mesh(mur4, this.el.components.material.material);
+    this.meshmur4.translate.y = 0.1
     this.meshmur4.rotation.y = THREE.Math.degToRad((90))
     this.meshmur4.position.z = (data.longueur / 2)
     this.meshmur4.position.y = (3)
-    //porteV.rotation.y = THREE.Math.degToRad(( -90))
-
-
-    /* ***** Soustraction de la porte, du mur  ***** */
-
-
-
-    //mur.add( porte4 );
-    //return this.bsp.toMesh() ;
+    
 
     /* *****Animation de la porte ***** */
     this.datadoor = JSON.parse(data.door)
@@ -747,10 +733,8 @@ AFRAME.registerComponent('injectrecitwall', {
       this.dooranim = "ot"
       this.dooranim1 = "ferme"
     }
-    // }
-    /*console.log("data.door")
-    console.log( JSON.parse(data.door))  
-    console.log(this.datadoor.open)*/
+ 
+    
     switch (this.datadoor.type) {
       case "none":
         if (data.window === true) {
@@ -841,7 +825,7 @@ AFRAME.registerComponent('injectrecitwall', {
         if (data.window) {
           console.warn("Can't add a window if door center");
         }
-        this.porte4.position.z = (data.longueur / 2 + 1)
+        this.porte4.position.z = (data.longueur / 2)
         this.bsp = new CSG()
         this.bsp1 = new CSG()
         this.bsp1.setFromMesh(this.porte4)
@@ -850,7 +834,7 @@ AFRAME.registerComponent('injectrecitwall', {
         this.bsp.toMesh()
         this.mur.add(this.bsp.toMesh())
         this.door = this.el.ensure(".recitdoor", "a-door", {
-          'position': { x: 0, y: 0, z: data.longueur / 2 + 1.5 },
+          'position': { x: 0, y: 0, z: data.longueur / 2 + 0.5 },
           "rotation": { x: 0, y: 0, z: 0 },
          "mixin": this.dooranim
         })
