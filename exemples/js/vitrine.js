@@ -397,8 +397,9 @@ if (dataset === null) {
     document.getElementById('tutorial').style.display = 'block';
     document.getElementById('loading-content').style.display = 'none';
 }
+//assets\bank
 else {
-    if (dataset === 'test') dataset = 'models/modelsToLoad.json';
+    if (dataset === 'test') dataset = './assets/bank/default.json';
     const render = renderData(dataset);
     window.onload = () => {
         render.then(() => {
