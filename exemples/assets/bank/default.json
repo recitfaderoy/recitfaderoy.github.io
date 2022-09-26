@@ -2,11 +2,36 @@
     "title" : "Collection d'objet RÉCITFAD",
     "collection" : [
         [
-            "Baril",
+            "Baril turquoise neuf",
             "Modifé par RÉCITFAD",
-            "assets/imgs/default/ ",
+            "assets/bank/baril1/ima",
             "assets/bank/baril1.min.gltf",
             "Baril bleau neuf"
+        ],
+        [
+            "Baril turquoise rouiilé",
+            "Modifé par RÉCITFAD",
+            "assets/bank/baril1r/ima",
+            "assets/bank/baril1r.min.gltf",
+            "Baril bleau neuf"
+        ],[
+            "Baril rouge neuf",
+            "Modifé par RÉCITFAD",
+            "assets/bank/baril2/ima",
+            "assets/bank/baril2.min.gltf",
+            "Baril bleau neuf"
+        ],[
+            "Baril jaune neuf",
+            "Modifé par RÉCITFAD",
+            "assets/bank/baril3/ima",
+            "assets/bank/baril3.min.gltf",
+            "Baril bleau neuf"
+        ],[
+            "Coffre à outls médical",
+            "Modifé par RÉCITFAD",
+            "assets/bank/toolboxA/ima",
+            "assets/bank/toolboxA.gltf",
+            "Coffre à outls médical"
         ]
        
     ]
