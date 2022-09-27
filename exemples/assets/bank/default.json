@@ -7,8 +7,7 @@
             "assets/bank/baril1/ima",
             "assets/bank/baril1.min.gltf",
             "Baril bleau neuf"
-        ],
-        [
+        ],[        
             "Baril turquoise rouiilé",
             "Modifé par RÉCITFAD",
             "assets/bank/baril1r/ima",
@@ -25,14 +24,76 @@
             "Modifé par RÉCITFAD",
             "assets/bank/baril3/ima",
             "assets/bank/baril3.min.gltf",
-            "Baril bleau neuf"
+            "Baril bleu neuf"
         ],[
             "Coffre à outls médical",
             "Modifé par RÉCITFAD",
-            "assets/bank/toolboxA/ima",
+            "assets/bank/toolbox/ima",
             "assets/bank/toolboxA.gltf",
             "Coffre à outls médical"
+        ],[
+            "Valise mystère",
+            "Modifé par RÉCITFAD",
+            "assets/bank/valise/ima",
+            "assets/bank/valise1Aa.gltf",
+            "Valise"
+        ],[
+            "Contenant 1",
+            "Modifé par RÉCITFAD",
+            "assets/bank/laboratoire/chemicals/b1/ima",
+            "assets/bank/laboratoire/chemicals/b1.gltf",
+            "Valise"
+        ],[
+            "Contenant 2",
+            "Modifé par RÉCITFAD",
+            "assets/bank/laboratoire/chemicals/b2/ima",
+            "assets/bank/laboratoire/chemicals/b2.gltf",
+            "Valise"
+        ],[
+            "Contenant 3",
+            "Modifé par RÉCITFAD",
+            "assets/bank/laboratoire/chemicals/b3/ima",
+            "assets/bank/laboratoire/chemicals/b3.gltf",
+            "Valise"
+        ],[
+            "Contenant 4",
+            "Modifé par RÉCITFAD",
+            "assets/bank/laboratoire/chemicals/p1/ima",
+            "assets/bank/laboratoire/chemicals/p1.gltf",
+            "Valise"
+       ],[
+            "Contenant 5",
+            "Modifé par RÉCITFAD",
+            "assets/bank/laboratoire/chemicals/b1/ima",
+            "assets/bank/laboratoire/chemicals/b1.gltf",
+            "Valise"
+        ],[
+            "Valise mystère",
+            "Modifé par RÉCITFAD",
+            "assets/bank/valise/ima",
+            "assets/bank/valise1Aa.gltf",
+            "Valise"
+        ],[
+            "Valise mystère",
+            "Modifé par RÉCITFAD",
+            "assets/bank/valise/ima",
+            "assets/bank/valise1Aa.gltf",
+            "Valise"
+        ],[
+            "Valise mystère",
+            "Modifé par RÉCITFAD",
+            "assets/bank/valise/ima",
+            "assets/bank/valise1Aa.gltf",
+            "Valise"
+        ],[
+            "Valise mystère",
+            "Modifé par RÉCITFAD",
+            "assets/bank/valise/ima",
+            "assets/bank/valise1Aa.gltf",
+            "Valise"
         ]
+
+       
        
     ]
 }
