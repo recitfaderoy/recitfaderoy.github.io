@@ -1,18 +1,18 @@
-AFRAME.registerSystem('recitbreackoutgame', {
+    AFRAME.registerSystem('recitbreackoutgame', {
 
-    schema: {
+        schema: {
 
-    },
-    init: function() {
-        this.entities = [];
-    },
-    registerMe: function (el) {
-        this.entities.push(el);
-    },
-    tick: function(time, delta) {
-  
-    }
-  })
-    // ... 
-;
- 
+        },
+        init: function() {
+            this.entities = [];
+        },
+        registerMe: function (el) {
+            this.entities.push(el);
+        },
+        tick: function(time, delta) {
+    
+        }
+    })
+        // ... 
+    ;
+    

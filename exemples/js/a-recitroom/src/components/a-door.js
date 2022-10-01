@@ -43,66 +43,14 @@ AFRAME.registerComponent('injectdoor', {
       "src": door,
      
     })
-    console.log(this.el.is('ouvert'), this.el.is('ferme'),this.el.is('ouvrir'), this.el.is('fermer'))
-    console.log(this.door.is('ouvert'), this.door.is('ferme'),this.door.is('ouvrir'), this.door.is('fermer'))
-    console.log("salut", this.door,this.door.is)
-    
-    console.log(this.id +'open')
+   
           
         this.el.setAttribute("shape","cylinder")
         this.el.setAttribute("body", "type", "static")
         this.el.setAttribute("body", "restitution", "0")
-        
-        this.el.addEventListener('stateadded', function (evt,) {
-          var E=  this.children[0]
-          console.log("oooooooddd" , this.children[0])
-          console.log(E)
-          console.log(evt.detail)
-    
-          switch(evt.detail){
-            case'ouvert':
-            E.removeAttribute('animation-mixer')
-           E.setAttribute('mixin', 'er')
-           console.log(E)
-           console.log('Entity now selected!');
-            console.log(E.getAttribute("mixin"))
-            break
-            case'ferme':
-            E.removeAttribute('animation-mixer')
-           E.setAttribute('mixin', 'et')
-            console.log('Entity now selected!');
-            console.log(E.getAttribute("mixin"))
-            break
-            case'ouvrir':
-            E.removeAttribute('animation-mixer')
-            E.setAttribute('mixin', 'or')
-             console.log('Entity now selected!');
-             console.log(E.getAttribute("mixin"))
-             break
-             case'fermer':
-            E.removeAttribute('animation-mixer')
-            E.setAttribute('mixin', 'ot')
-             console.log('Entity now selected!');
-             console.log(E.getAttribute("mixin"))
-             break
-            default:
-              E.removeAttribute('animation-mixer')
-           E.setAttribute('mixin', 'et')
-            console.log('Entity now selected!');
-            console.log(E.getAttribute("mixin"))
-            break
-          }
-           
-    
-           
-           
-           
-         
-          
-            
-            //E.setAttribute('animation-mixer', 'clip:ouvert;loop:once; clampWhenFinished:true;')
-          
-        })
+        E= this.el.children[0]
+
+        this.el.ecouteouvre(E,this.el)
         
       //},500)
         
@@ -113,56 +61,9 @@ AFRAME.registerComponent('injectdoor', {
    
      update (time, timeDelta) {
       setTimeout(() => {
-         console.log(this.id +'open')
-    this.el.addEventListener('stateadded', function (evt,) {
-      var E= this.querySelector("a-gltf-model")
-      console.log(E)
-      console.log(evt.detail)
+        E= this.el.children[0]
 
-      switch(evt.detail){
-        case'ouvert':
-        E.removeAttribute('mixin', 'er')
-       E.setAttribute('animation-mixer')
-       console.log(E)
-       console.log('Entity now selected!');
-        console.log(E.getAttribute("mixin"))
-        break
-        case'ferme':
-        E.removeAttribute('animation-mixer')
-       E.setAttribute('mixin', 'et')
-        console.log('Entity now selected!');
-        console.log(E.getAttribute("mixin"))
-        break
-        case'ouvrir':
-        E.removeAttribute('animation-mixer')
-        E.setAttribute('mixin', 'or')
-         console.log('Entity now selected!');
-         console.log(E.getAttribute("mixin"))
-         break
-         case'fermer':
-        E.removeAttribute('animation-mixer')
-        E.setAttribute('mixin', 'ot')
-         console.log('Entity now selected!');
-         console.log(E.getAttribute("mixin"))
-         break
-        default:
-          E.removeAttribute('animation-mixer')
-       E.setAttribute('mixin', 'et')
-        console.log('Entity now selected!');
-        console.log(E.getAttribute("mixin"))
-        break
-      }
-       
-
-       
-       
-       
-     
-      
-        
-        //E.setAttribute('animation-mixer', 'clip:ouvert;loop:once; clampWhenFinished:true;')
-      
-    })
+        this.el.ecouteouvre(E,this.el)
     
   },500)
   }
@@ -171,6 +72,12 @@ AFRAME.registerComponent('injectdoor', {
 
 
   
+  
+  
+  
+
+
+
   
   
   

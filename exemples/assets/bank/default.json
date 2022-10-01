@@ -65,7 +65,7 @@
             "Contenant 5",
             "Modifé par RÉCITFAD",
             "assets/bank/laboratoire/chemicals/b1/ima",
-            "assets/bank/laboratoire/chemicals/b1.gltf",
+            "assets/bank/laboratoire/chemicals/p2.gltf",
             "Valise"
         ],[
             "Valise mystère",
@@ -74,22 +74,22 @@
             "assets/bank/valise1Aa.gltf",
             "Valise"
         ],[
-            "Valise mystère",
+            "national  geografic",
             "Modifé par RÉCITFAD",
             "assets/bank/valise/ima",
-            "assets/bank/valise1Aa.gltf",
+            "assets/bank/nationalgeo1.gltf",
+            "national  geografic"
+        ],[
+            "Becher 1000 ml",
+            "Modifé par RÉCITFAD",
+            "assets/bank/valise/ima",
+            "assets/bank/laboratoire/Becher100.gltf",
             "Valise"
         ],[
-            "Valise mystère",
+            "Bécher 500 ml ",
             "Modifé par RÉCITFAD",
             "assets/bank/valise/ima",
-            "assets/bank/valise1Aa.gltf",
-            "Valise"
-        ],[
-            "Valise mystère",
-            "Modifé par RÉCITFAD",
-            "assets/bank/valise/ima",
-            "assets/bank/valise1Aa.gltf",
+            "assets/bank/laboratoire/Becher500.gltf",
             "Valise"
         ]
 

@@ -187,6 +187,7 @@ AFRAME.registerPrimitive("a-chooseobject", {
             this.box1.setAttribute("material","color: green; transparent:true; opacity:0.0;")
             this.box2.setAttribute("material","color: green; transparent:true; opacity:0.0;")
             if (this.data.good === "3"){
+              
               this.box3.setAttribute("material","color: green; transparent:true; opacity:0.4;")
              // this.lock.addState("ouvert")
               //this.lock.setAttribute('animation-mixer', 'clip:  open ;loop:once; clampWhenFinished:true;')

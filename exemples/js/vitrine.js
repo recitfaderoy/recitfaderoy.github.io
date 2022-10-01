@@ -97,7 +97,7 @@ const renderJSON = json => {
                                 `<span></span><span></span><span></span><span></span>` +
                                 `</div></div>` +
                                 `<model-viewer src="${models[id][3]}"` +
-                                `ar auto-rotate camera-controls shadow-intensity="0"></model-viewer>`;
+                                `ar autoplay animation-name="ouvrir" auto-rotate camera-controls shadow-intensity="0"></model-viewer>`;
         document.getElementsByTagName('model-viewer')[0]
                 .addEventListener('load', e => document.getElementById('model-viewer-loader').style.display = 'none');
     }

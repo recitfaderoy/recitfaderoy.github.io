@@ -42,17 +42,20 @@ AFRAME.registerPrimitive("a-chooseobject", {
     
     
     schema: {
-        object1:{  default: {}},
-        object2:{  default: {}},
-        object3:{  default: {}},
-        object4:{  default: {}},
-        good:{  default: {}},
-        lockid:{  default: {}}
+        object1:{  default: ""},
+        object2:{  default: ""},
+        object3:{  default:""},
+        object4:{  default:""},
+        good:{  default: ""},
+        lockid:{  default: ""}
        },
 
     init() { 
    
       document.querySelector('a-scene').systems["recitbreackoutgame"].registerAction(this.el);
+      document.querySelector('a-scene').systems["recitbreackoutgame"].registerLockid(this.data.lockid);
+      this.lock = document.querySelector("#doorwall_5")
+      this.lock1 = document.querySelector("#this.data.lockid")
         var ID =""
         if (!this.data.id)
         {
@@ -71,20 +74,18 @@ AFRAME.registerPrimitive("a-chooseobject", {
           this.objet2 = new this.objetToChoose(this.el,ID, { x: 0, y: 0.6, z: 1}, "box2", "objet2",  this.data.object2,"classo",this.data.good)
           this.objet3 = new this.objetToChoose(this.el,ID, { x: 0, y: 0.6, z: 2}, "box3", "objet3",  this.data.object3,"classo",this.data.good)
           this.objet4 = new this.objetToChoose(this.el,ID, { x: 0, y: 0.6, z: 3}, "box4", "objet4",  this.data.object4,"classo",this.data.good)
-          this.objet5 = new this.objetToChoose(this.el,ID, { x: 0, y: 0.6, z: 4}, "box5", "objet5",  this.data.object4,"classo", this.data.good)
+     //     this.objet5 = new this.objetToChoose(this.el,ID, { x: 0, y: 0.6, z: 4}, "box5", "objet5",  this.data.object4,"classo", this.data.good)
   
         },
         update: function () {
           
-            this.lock = document.querySelector("#doorwall_5")
-            this.lock1 = document.querySelector("#doorwall_5door")
+           
 
 
 
         },
   objetToChoose : function(el,id, position, boxname, objname, src, classo, good)
             {
-              console.log("new objetToChoose")
             this.EL = el;
             this.EL.ID= id;
             this.EL.position=position;
@@ -95,7 +96,7 @@ AFRAME.registerPrimitive("a-chooseobject", {
             this.EL.type = "box"
             this.EL.goood = good
 
-            this.EL.box =  this.EL.ensure("." + this.EL.boxname, "a-box", {
+            var box =  this.EL.ensure("." + this.EL.boxname, "a-box", {
                 'id': this.EL.ID +  "_"+ this.EL.boxname,
                 'height':1.2,
                 'width': 0.8,
@@ -106,46 +107,36 @@ AFRAME.registerPrimitive("a-chooseobject", {
                 "scale": "1 1 1",
                 'class':'raycastable'
               })
-              this.EL.model = this.EL.box.ensure("." + this.EL.objname, "a-gltf-model", {
+              this.EL.model = box.ensure("." + this.EL.objname, "a-gltf-model", {
                 'src': this.EL.src ,
                 'position': { x: 0, y: -0.6, z: 0},
                 "rotation": { x: 0, y: 0, z: 0 },
                 "scale": "0.5 0.5 0.5",
                
                 })
-                this.EL.box.addEventListener('click', (evt) => {
+                box.addEventListener('click', (evt) => {
                            var ee = []
                            ee = this.EL.children
-                           
-                          
-          console.log("EE", ee)
- var object = evt.detail.intersection.object;
-                  console.log("Objet 1 cliqué")
-                  Array.prototype.forEach.call(ee, element => {
-                    console.log("element",element,"this.EL.box",this.EL.box,element === this.EL.box)
-                    if (element === this.EL.box){
-                      element.setAttribute("material","color: red; transparent:true; opacity:0.4;")
-                    }
-                            else {
-                           element.setAttribute("material","color: green; transparent:true; opacity:0.0;")
-                                      }
-                                    
-                            })
-                  if (this.EL.good === "1"){
-                  this.box.setAttribute("material","color: green; transparent:true; opacity:0.4;");
-          //        this.lock1.addState("ouvert")
-        }         /* forEach((element, index) => {
-if (element == this.EL.box){
-  element.setAttribute("material","color: red; transparent:true; opacity:0.4;")
-}
-        else {
-       element.setAttribute("material","color: green; transparent:true; opacity:0.0;")
-                  }
-                
-        })*/
-                  
+                          var object = evt.detail.intersection.object;
+                    Array.prototype.forEach.call(ee, (element, index) => {
+                          if (element === box){
+                            if (this.EL.goood == index)
+                            {
+                                element.setAttribute("material","color: green; transparent:true; opacity:0.4;")
+                              // this.lock.addState("ouvert")
+                              //this.lock.setAttribute('animation-mixer', 'clip:  open ;loop:once; clampWhenFinished:true;')
+                              }
+                             else {
+                                element.setAttribute("material","color: red; transparent:true; opacity:0.4;")
+                              }
+                          }
+                          else {
+                                element.setAttribute("material","color: red; transparent:true; opacity:0.0;")
+                                            }
                 })
-            console.log(this.EL.children)
-        }
+                 
+        })
         
-    })
+    
+  }
+})
