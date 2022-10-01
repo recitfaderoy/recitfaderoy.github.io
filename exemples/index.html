@@ -30,7 +30,7 @@
     <script src="./js/raycast-target.js"></script>
     <script src="./js/label.js"></script>
     <script src="./js/mouse-manipulation.js"></script>
-    <script src="./js/laser-manipulation.js"></script>
+    <!--<script src="./js/laser-manipulation.js"></script>-->
     <script src="./js/webxr.js"></script>
     <script src="./js/joystick.js"></script>
     <script src="./js/camera-cube-env.js"></script>
@@ -62,6 +62,50 @@
         top: 40px;
         padding: 12px;
       }
+      .preloader {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: var(--z-interface);
+    transition: all 1s
+}
+
+.preloader:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.95) 38%, rgba(239, 243, 252, 0.95) 93%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff", endColorstr="#eff3fc", GradientType=1)
+}
+
+.preloader .content {
+    z-index: var(--z-top);
+    max-width: 80%
+}
+
+.preloader .content .loader img {
+    max-width: 100%
+}
+
+.preloader[hidden] {
+    visibility: hidden;
+    opacity: 0
+}
+.a-modal {
+    display: none !important
+}
     </style>
 
 
@@ -74,15 +118,7 @@
 
 
     <!-- Custom CSS -->
-    <style>
-      .a-enter-ar-button,
-      .a-enter-vr-button {
-        left: 40px;
-        top: 150px;
-        width: 80px;
-        padding: 12px;
-      }
-    </style>
+  
 
 
     <!-- Bootstrap Dependencies -->
@@ -95,7 +131,7 @@
 ========================= -->
     <script>
       document.addEventListener('DOMContentLoaded', () => {
-        document.querySelector('a-scene').addEventListener('loaded', () => {
+        document.querySelector('a-main').addEventListener('loaded', () => {
           document.querySelector('.preloader').setAttribute('hidden', true)
         })
       })
@@ -125,15 +161,16 @@
   </head>
 
   <body>
-    <div id="preloader" class="preloader preloader-entry">
-      <div class="content">
-        <div class="loader">
-          <img src="https://recitfad.ca/wp-content/themes/ubeo-theme-v3-child/images/logo.png" alt="logo">
-          <div>loading application</div>
-        </div>
-      </div>
-    </div>
+   
     <div id="aframe">
+      <div id="preloader" class="preloader preloader-entry">
+        <div class="content">
+            <div class="loader">
+                <img src="https://inplayo.com/wp-content/themes/inplayo/assets/images/logo/inplayo.svg" alt="logo">
+                <div>loading application</div>
+            </div>
+        </div>
+    </div>
       <a-scene animation-timeline__1="timeline: #depart; loop: false; startEvents:loaded"
         physics="workerUrl:./js/cannonWorkeroriginal.js; gravity:0 -10 0; debug: true;"
         shadow="enabled:true; type: pcfsoft; autoUpdate: true;"
@@ -224,6 +261,8 @@
           </a-asset-item>
           <a-asset-item id="bookrow1a" preload="true" response-type="arraybuffer" src="./assets/bank/bookrow1a.gltf">
           </a-asset-item>
+          <a-asset-item id="bookrow3a" preload="true" response-type="arraybuffer" src="./assets/bank/bookrow3a.gltf">
+          </a-asset-item>
           <img id="floor" src="./assets/floor.png">
 
           <a-mixin id="area" material="color: blue; opacity: 0.1; shader: phong; side: double;"
@@ -265,6 +304,7 @@
             <a-sphere id="down-marker" position="0 -10 0">
             </a-sphere>
         </a-player>
+        <a-main>
         <a-entity id="text1" mixin="text" text="value: Inspectez la pièce,"></a-entity>
         <a-entity id="text2" mixin="text" text="value: trouvez des indices; opacity: 0"
           animation__textcolor="property: text.color; from: #0069bf; to: #faa22a; dur: 2500; autoplay: false">
@@ -301,22 +341,27 @@
           "4": { "longueur":  5, "angle": -120, "door": "none","window": false,"material":"side:double; shader: standard; src:./assets/Sci-Fi_Wall_011_SD/Sci-Fi_Wall_011_basecolor.jpg;height:450; repeat:  12 6; ambientOcclusionMap:./assets/Sci-Fi_Wall_011_SD/Sci-Fi_Wall_011_ambientOcclusion.jpg; ambientOcclusionTextureRepeat: 12 6;normalMap:./assets/Sci-Fi_Wall_011_SD/Sci-Fi_Wall_011_normal.jpg; normalTextureRepeat: 12 6; displacementMap:./assets/Sci-Fi_Wall_011_SD/Sci-Fi_Wall_011_height.png; displacementBias:0.04; displacementScale:0.0;displacementTextureRepeat: 12 6; roughness: 0.2; metalness: 0.6"},
           "5": { "longueur":  5, "angle": -60, "door": {"type":"center","open":false, "doorpannel": true},"window": false,"material":"side:double; shader: standard; src:./assets/Sci-Fi_Wall_011_SD/Sci-Fi_Wall_011_basecolor.jpg;height:450; repeat:  12 6; ambientOcclusionMap:./assets/Sci-Fi_Wall_011_SD/Sci-Fi_Wall_011_ambientOcclusion.jpg; ambientOcclusionTextureRepeat: 12 6;normalMap:./assets/Sci-Fi_Wall_011_SD/Sci-Fi_Wall_011_normal.jpg; normalTextureRepeat: 12 6; displacementMap:./assets/Sci-Fi_Wall_011_SD/Sci-Fi_Wall_011_height.png; displacementBias:0.04; displacementScale:0.0;displacementTextureRepeat: 12 6; roughness: 0.2; metalness: 0.6"}
          }'>
-         <a-gltf-model src="#biblioa"  position="1 0.0 4.5" rotation="0 90 0">
-          <a-gltf-model src="#bookrow1a" position="0.05 0.7 0" scale="0.9 0.9 0.9"></a-gltf-model>
-        </a-gltf-model>
-        <a-gltf-model src="#biblioa"  position="2 0.0 4.5" rotation="0 90 0">
-          <a-gltf-model src="#bookrow1a" position="0.05 0.7 0" scale="0.9 0.9 0.9"></a-gltf-model>
-        </a-gltf-model>
-        <a-gltf-model src="#biblioa"  position="3 0.0 4.5" rotation="0 90 0">
-          <a-gltf-model src="#bookrow1a" position="0.05 0.7 0" scale="0.9 0.9 0.9"></a-gltf-model>
+         <a-gltf-model wall src="#biblioa"  position="1 0.0 4.5" rotation="0 90 0">
+          <a-gltf-model src="#bookrow1a" position="0.05 0.7 -0.05" scale="0.9 0.9 0.9"></a-gltf-model>
+          <a-gltf-model src="#bookrow3a" position="0.55 1.1 -0.02" scale="0.8 0.8 0.8"></a-gltf-model>
 
         </a-gltf-model>
-        <a-gltf-model src="#biblioa"  position="4 0.0 4.5" rotation="0 90 0">
-          <a-gltf-model src="#bookrow1a" position="0.05 0.7 0" scale="0.9 0.9 0.9"></a-gltf-model>
+        <a-gltf-model wall src="#biblioa"  position="2 0.0 4.5" rotation="0 90 0">
+          <a-gltf-model src="#bookrow1a" position="0.05 0.7 -0.02" scale="0.9 0.9 0.9"></a-gltf-model>
+          <a-gltf-model src="#bookrow3a" position="0.55 1.1 -0.02" scale="0.8 0.8 0.8"></a-gltf-model>
+        </a-gltf-model>
+        <a-gltf-model src="#biblioa"  position="3 0.0 4.5" rotation="0 90 0">
+          <a-gltf-model src="#bookrow1a" position="0.05 0.7 -0.05" scale="0.9 0.9 0.9"></a-gltf-model>
+          <a-gltf-model src="#bookrow3a" position="0.55 1.1 -0.02" scale="0.8 0.8 0.8"></a-gltf-model>
+
+        </a-gltf-model>
+        <a-gltf-model wall src="#biblioa"  position="4 0.0 4.5" rotation="0 90 0">
+          <a-gltf-model src="#bookrow1a" position="0.05 0.7 -0.05" scale="0.9 0.9 0.9"></a-gltf-model>
+          <a-gltf-model src="#bookrow3a" position="0.55 1.1 -0.02" scale="0.8 0.8 0.8"></a-gltf-model>
         </a-gltf-model>
 
         </a-recitroom>
-        <a-recitroom id="room2" position="11.19 0 9.412" rotation="0 -150 0" para='{
+        <a-recitroom wall id="room2" position="11.19 0 9.412" rotation="0 -150 0" para='{
           "0": {"longueur":  5, "angle": 0, "door":  {"type":"none","open":true},"window": false, "material":"side:double; shader: standard; src:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_basecolor.jpg;height:450; repeat: 9 3; ambientOcclusionMap:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_ambientOcclusion.jpg; ambientOcclusionTextureRepeat:9 3;normalMap:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_normal.jpg; normalTextureRepeat: 9 3; displacementMap:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_height.png; displacementBias:0.0190; displacementScale:0.21;displacementTextureRepeat:9 3; roughness: 0.4; metalness: 0.4"},
           "1": { "longueur":  5, "angle": 90, "door": {"type":"center","open":true, "doorpannel": false},"window": false,"material":"side:double; shader: standard; src:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_basecolor.jpg;height:450; repeat: 9 3; ambientOcclusionMap:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_ambientOcclusion.jpg; ambientOcclusionTextureRepeat:9 3;normalMap:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_normal.jpg; normalTextureRepeat: 9 3; displacementMap:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_height.png; displacementBias:0.0190; displacementScale:0.21;displacementTextureRepeat:9 3; roughness: 0.4; metalness: 0.4"},
           "2": { "longueur":  5, "angle": 180, "door": {"type":"none","open":false},"window": false,"material":"side:double; shader: standard; src:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_basecolor.jpg;height:450; repeat: 9 3; ambientOcclusionMap:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_ambientOcclusion.jpg; ambientOcclusionTextureRepeat:9 3;normalMap:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_normal.jpg; normalTextureRepeat: 9 3; displacementMap:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_height.png; displacementBias:0.0190; displacementScale:0.21;displacementTextureRepeat:9 3; roughness: 0.4; metalness: 0.4"},
@@ -357,7 +402,7 @@
 
         <a-entity light="type: ambient; intensity: 1; color: #fff"></a-entity>
 
-
+</a-main>
       </a-scene>
     </div>
     <div id="pan2" class="m-3"
