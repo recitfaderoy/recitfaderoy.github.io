@@ -103,7 +103,7 @@ init: function() {
             }
           })
     //console.log("actionner",this.box0,this.box1,this.box2,this.box3,this.lock0)
-  },1000)
+  },2000)
   
 },
 

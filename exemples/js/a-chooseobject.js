@@ -112,6 +112,7 @@ AFRAME.registerPrimitive("a-chooseobject", {
                 'position': { x: 0, y: -0.6, z: 0},
                 "rotation": { x: 0, y: 0, z: 0 },
                 "scale": "0.5 0.5 0.5",
+               "raycaster-target":""
                
                 })
                 box.addEventListener('click', (evt) => {
