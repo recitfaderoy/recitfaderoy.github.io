@@ -135,7 +135,27 @@ AFRAME.registerPrimitive("a-chooseobject", {
                                 element.setAttribute("material","color: red; transparent:true; opacity:0.0;")
                                             }
                 })
-                 
+              })
+                box.addEventListener('raycaster-intersected', (evt) => {
+                  var ee = []
+                  ee = this.EL.children
+                 var object = evt.detail.intersection.object;
+           Array.prototype.forEach.call(ee, (element, index) => {
+                 if (element === box){
+                   if (this.EL.goood == index)
+                   {
+                       element.setAttribute("material","color: green; transparent:true; opacity:0.4;")
+                     // this.lock.addState("ouvert")
+                     //this.lock.setAttribute('animation-mixer', 'clip:  open ;loop:once; clampWhenFinished:true;')
+                     }
+                    else {
+                       element.setAttribute("material","color: red; transparent:true; opacity:0.4;")
+                     }
+                 }
+                 else {
+                       element.setAttribute("material","color: red; transparent:true; opacity:0.0;")
+                                   }
+       })
         })
         
     
