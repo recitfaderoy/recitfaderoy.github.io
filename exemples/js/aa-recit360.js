@@ -53,10 +53,6 @@ addEventListener('DOMContentLoaded', e => {
 
 
 require("./components/htmlembed")
-require("./components/htmlcanvas")
-require("./components/positionspherical")
-require("./components/recitvideoplayer")
-//require("./components/toggle")
 require("./components/helper")
 require("./components/hotspot")
 require("./components/panorama")
@@ -67,12 +63,12 @@ require("./components/recitpreloader1")
 require("./primitives/a-hotspot")
 require("./primitives/a-panorama")
 require("./primitives/a-tour")
-require("./primitives/a-html")
+
 
 const pkg = require("../package")
 console.log(`${pkg.title} Version ${pkg.version} by ${pkg.author}\n(${pkg.homepage})`)
 
-},{"../package":1,"./components/helper":3,"./components/hotspot":4,"./components/htmlcanvas":5,"./components/htmlembed":6,"./components/panorama":7,"./components/positionspherical":8,"./components/recitpreloader1":9,"./components/recitvideoplayer":10,"./components/tour":11,"./libs/betterRaycaster":12,"./libs/copyWorldPosRot":13,"./libs/ensureElement":14,"./libs/pools":15,"./libs/touchGestures":16,"./primitives/a-hotspot":17,"./primitives/a-html":18,"./primitives/a-panorama":19,"./primitives/a-tour":20}],3:[function(require,module,exports){
+},{"../package":1,"./components/helper":3,"./components/hotspot":4,"./components/htmlembed":6,"./components/panorama":7,"./components/recitpreloader1":8,"./components/tour":9,"./libs/betterRaycaster":10,"./libs/copyWorldPosRot":11,"./libs/ensureElement":12,"./libs/pools":13,"./libs/touchGestures":14,"./primitives/a-hotspot":15,"./primitives/a-panorama":16,"./primitives/a-tour":17}],3:[function(require,module,exports){
 /* global AFRAME, THREE */
 
 AFRAME.registerComponent('hotspot-helper', {
@@ -328,223 +324,20 @@ AFRAME.registerComponent('hotspot', {
     schema: {
       for: { type: 'string' },
       to: { type: 'string' },
-      type:{type: "string",  default: "navigation" },
-      html:{type : "string",  default: " "},
-      hotname: { type: 'string', default: "text" },
-      positioning: { type: 'boolean', default: false },
-      src: {type: "string",  default: "#image1" },
-      mediaheight:  {type: "int",default: 2   },
-      mediawidth:  {type: "int" ,default: 1  }
+      positioning: { type: 'boolean', default: false }
     },
   
     init: function () {
-      var text = this.data.hotname
-      console.log(this.data.type)
-      switch(this.data.type) {
-      case "navigation":
-        this.el.ensure("a-gui-flex-container", "a-gui-flex-container", {
-          'class:': 'a-gui-flex-container',
-          'flex-direction':"row" ,
-          'justify-content':"center" ,
-          'align-items':"normal" ,
-          'component-padding':"0.1",
-          'opacity':"0.7" ,
-          'width':"1" ,
-          'height':"0.7"
-       })
-       var container = this.el.querySelector('a-gui-flex-container')
-        container.ensure("a-gui-button", "a-gui-button", {
-          'class:': 'a-gui-button',
-          'base-depth':"0.025",
-          'depth':"0.1",
-          'gap':"0.1",
-          'onclick':"",
-          'key-code':"32",
-          'value':this.data.hotname,
-          'font-family':"assets/fonts/PermanentMarker-Regular.ttf",
-          'font-size':"0.25",
-          'margin':"0 0 0.05 0" ,
-          'font-color':"black" ,
-          'active-color':"red",
-          'hover-color':"yellow",
-          'border-color':"white",
-          'focus-color':"black",
-          'background-color':"orange",
-          'bevel':"true"  ,
-          'width':"2.5" ,
-          'height':"0.7"
-      }),
-          this.tour = document.querySelector('a-tour');
-          this.el.addEventListener('click', this.handleClick.bind(this));
-      break;
-      case "image":
-        this.el.ensure("a-image", "a-image", {
-          'class:': 'a-image',
-          'visible': false,
-          'src': this.data.src,
-          'position':"0 -1.5 0",
-          'height':this.data.mediaheight ,
-          'width':this.data.mediawidth
-       })
-       this.el.ensure("a-gui-flex-container", "a-gui-flex-container", {
-          'class:': 'a-gui-flex-container',
-          'flex-direction':"row" ,
-          'justify-content':"center" ,
-          'align-items':"normal" ,
-          'component-padding':"0.1",
-          'opacity':"0.7" ,
-          'width':"2" ,
-          'height':"1"
-       })
-       var container = this.el.querySelector('a-gui-flex-container')
-       container.ensure(".a-gui-flex-container", "a-gui-button", {
-        'class:': 'a-gui-button',
-        'base-depth':"0.1",
-        'depth':"0.3",
-        'gap':"0.1",
-        'onclick':"",
-        'key-code':"32",
-        'value':"I",
-        'font-family':"assets/fonts/PermanentMarker-Regular.ttf",
-        'font-size':"0.4",
-        'margin':"0 0 0.05 0" ,
-        'font-color':"white" ,
-        'active-color':"dodgerblue",
-        'hover-color':"#00008B",
-        'border-color':"white",
-        'focus-color':"black",
-        'background-color':"#5f9ea0",
-        'bevel':"true"  ,
-        'width':"0.75" ,
-        'height':"0.75"
-      }),
-   
-         this.media =  this.el.querySelector('a-image');
-          this.el.addEventListener('click', this.mediaClick.bind(this));
-      break;
-      case "video":
-       this.el.ensure("a-gui-flex-container", "a-gui-flex-container", {
-          'class:': 'a-gui-flex-container',
-          'flex-direction':"row" ,
-          'justify-content':"center" ,
-          'align-items':"normal" ,
-          'component-padding':"0.1",
-          'opacity':"0.7" ,
-          'width':"2" ,
-          'height':"1"
-       })
-       var container = this.el.querySelector('a-gui-flex-container')
-       container.ensure(".a-gui-flex-container", "a-gui-button", {
-          'class:': 'a-gui-button',
-          'base-depth':"0.1",
-          'depth':"0.3",
-          'gap':"0.1",
-          'onclick':"",
-          'key-code':"32",
-          'value':"V",
-          'font-family':"assets/fonts/PermanentMarker-Regular.ttf",
-          'font-size':"0.4",
-          'margin':"0 0 0.05 0" ,
-          'font-color':"white" ,
-          'active-color':"dodgerblue",
-          'hover-color':"#00008B",
-          'border-color':"white",
-          'focus-color':"black",
-          'background-color':"blue",
-          'bevel':"true"  ,
-          'width':"0.75" ,
-          'height':"0.75"
-      }),
-      this.el.ensure("a-video", "a-video", {
-        'class:': 'recitvideo',
-        'src':"row" ,
-        'justify-content':"center" ,
-        'align-items':"normal" ,
-        'component-padding':"0.1",
-        'opacity':"0.7" ,
-        'width':"2" ,
-        'height':"1"
-     })
-         this.media = this.el.querySelector('a-video');
-          this.el.addEventListener('click', this.mediaClick.bind(this));
-      break;
-      case "html":
-       this.el.ensure("a-gui-flex-container", "a-gui-flex-container", {
-          'class:': 'a-gui-flex-container',
-          'flex-direction':"row" ,
-          'justify-content':"center" ,
-          'align-items':"normal" ,
-          'component-padding':"0.1",
-          'opacity':"0.7" ,
-          'width':"2" ,
-          'height':"1"
-       })
-       var container = this.el.querySelector('a-gui-flex-container')
-       container.ensure(".a-gui-flex-container", "a-gui-button", {
-          'class:': 'a-gui-button',
-          'base-depth':"0.025",
-          'depth':"0.1",
-          'gap':"0.1",
-          'onclick':"",
-          'key-code':"32",
-          'value':"Info",
-          'font-family':"assets/fonts/PermanentMarker-Regular.ttf",
-          'font-size':"0.25",
-          'margin':"0 0 0.05 0" ,
-          'font-color':"black" ,
-          'active-color':"red",
-          'hover-color':"yellow",
-          'border-color':"white",
-          'focus-color':"black",
-          'background-color':"blue",
-          'bevel':"true"  ,
-          'width':"1.5" ,
-          'height':"0.7"
-      }),
-      this.el.ensure("htmlembedsph", "htmlembedsph", {
-        'class:': 'a-gui-flex-container',
-        'flex-direction':"row" ,
-        'justify-content':"center" ,
-        'align-items':"normal" ,
-        'component-padding':"0.1",
-        'opacity':"0.7" ,
-        'width':"2" ,
-        'height':"1"
-     })
-          this.media = document.querySelector('a-htmlembedsph');
-          this.el.addEventListener('click', this.handleClick.bind(this));
-      break;
-      }
-      
-     
-    
+      this.tour = document.querySelector('a-tour');
+      this.el.addEventListener('click', this.handleClick.bind(this));
     },
   
     handleClick: function () {
-      console.log("handle is click")
       if (this.data.positioning) return;
       var tour = this.tour.components['tour'];
-      tour.loadSceneId(this.data.to,this.data.for);
-    },
-    videoClick: function () {
-    console.log("video is click")
-  
-  },
-  mediaClick: function () {
-    
-  
-    var visi = this.media.getAttribute('visible')
-    console.log(visi)
-    if (visi == false){this.media.setAttribute('visible', true)
-  }
-  else
-  {this.media.setAttribute('visible', false)}
-    console.log("image is click")
-  
-  }
+      tour.loadSceneId(this.data.to);
+    }
   });
-  
-
 },{}],5:[function(require,module,exports){
 (function() {
   // We need to set some default styles on form elements for consistency when rendering to canvas
@@ -1494,12 +1287,11 @@ const HTMLCanvas = require('./htmlcanvas.js');
 AFRAME.registerComponent('htmlembed', {
   schema: {
     ppu: {
-      type: 'int',
+      type: 'number',
       default: 256
     }
   },
   init: function() {
-    console.log(this.data.ppu)
     var htmlcanvas = new HTMLCanvas(this.el, () => {
       if (texture) texture.needsUpdate = true;
     }, (event, data) => {
@@ -1600,119 +1392,11 @@ AFRAME.registerComponent('htmlembed', {
 },{"./htmlcanvas.js":5}],7:[function(require,module,exports){
 AFRAME.registerComponent('panorama', {
     schema: {
-      type:{type: 'string', default: 'image'},
-      rotation: { type: 'vec3', default:'0 0 0' },
+      rotation: { type: 'vec3' },
       src: { type: 'string' }
-    },
-    init: function () {
-      switch (this.data.type) {
-        case 'image':
-       this.sky = document.createElement('a-sky');
-       this.sky.setAttribute('src', this.data.src);
-      this.sky.setAttribute('rotation', this.data.rotation);
-      this.el.appendChild(this.sky);
-    
-       break;
-      case 'video':
-        this.sky = document.createElement('a-videosphere');
-        this.sky.setAttribute('src', this.data.src);
-       this.sky.setAttribute('rotation', this.data.rotation);
-       this.el.appendChild(this.sky);
-        break;
-        default:
-          this.sky = document.createElement('a-sky');
-          this.sky.setAttribute('src', this.data.src);
-         this.sky.setAttribute('rotation', this.data.rotation);
-         this.el.appendChild(this.sky);
-          break;
-         
-      }
-      this.onClick = this.onClick.bind(this);
-     // this.el.innerHTML = `<a-sky src="`+this.data.src+`"></a-sky>    `
-
-    },
-    play: function () {
-      switch (this.data.type) {
-        case 'image':
-     
-       break;
-      case 'video':
-       window.addEventListener('click', this.onClick);
-        break;
-        default:
-       
-          break;
-         
-      }
-     
-    },
-    pause: function () {
-      switch (this.data.type) {
-        case 'image':
-     
-       break;
-      case 'video':
-        window.removeEventListener('click', this.onClick);
-        break;
-        default:
-       
-          break;
-         
-      }
-      
-    },
-    onClick: function (evt) {
-
-      var video = this.el.querySelector('a-videosphere');
-      
-      if (!video) { return; }
-      video = video.components.material.material.map.image;
-      video.play();
     }
   });
 },{}],8:[function(require,module,exports){
-if (typeof AFRAME === 'undefined') {
-    throw new Error('Component attempted to register before AFRAME was available.');
-  }
-  
-  AFRAME.registerComponent('positionspherical', {
-    schema: {
-        radius: { type: 'int', default: 20 },
-        phi: { type: "int", default: 0 },
-        theta: { type: 'int', default: 0 }
-    },
-    init : function() {
-        
-      /*  console.log("spherical loaded");
-        console.log("data" +this.data.radius );
-        console.log("data" +this.data.phi);
-        console.log("data" +this.data.theta);*/
-               this.setPosition();
-    },
-  
-    update: function() {
-      this.setPosition();
-    },
-  
-    setPosition: function() {
-    //  console.log("datacoordinate" +this.data.radius + this.data.phi + this.data.theta);
-      this.el.setAttribute("rotation", {y : (this.data.theta - 180) , x : (90 -this.data.phi  )})
-      var spherical = new THREE.Spherical(
-          
-        this.data.radius,
-        THREE.Math.degToRad(this.data.phi),
-        THREE.Math.degToRad(this.data.theta)
-      );
-      var vector = new THREE.Vector3();
-  
-      vector.setFromSpherical(spherical);
-      //console.log ("vector"+ vector.setFromSpherical(spherical))
-      var oposition ='"'+ vector.x + vector.y + vector.z+ '"'
-        console.log ("vecteur«" +oposition);
-      this.el.setAttribute("position",{x: vector.x, y: vector.y, z: vector.z});
-    },
-  });
-},{}],9:[function(require,module,exports){
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 // This file is part of Moodle - http://moodle.org/
 //
@@ -2084,133 +1768,42 @@ if (typeof AFRAME === 'undefined') {
 
 },{}]},{},[1]);
 
-},{}],10:[function(require,module,exports){
-AFRAME.registerComponent('recitvideoplayer', {
-    schema: {
-      
-    },
-    init() {
-        this.togglePlayback = this.togglePlayback.bind(this)
-        
-        this.video = document.querySelector(this.el.getAttribute('src'))
-        this.video.load()
-        //console.log("log recitvideoplayer 2 "+this.video);
-       
-    
-        this.el.ensure("a-gui-flex-container", "a-gui-flex-container", {
-            'class:': 'a-gui-flex-container',
-            'flex-direction':"row" ,
-            'justify-content':"center" ,
-           'align-items':"normal" ,
-            'component-padding':"0.1",
-            'position': '0 -2',
-			'opacity':"0.7" ,
-            'width':"2" ,
-            'height':"1"
-        },
-        `	<a-gui-icon-button
-        width="0.75" height="0.75"
-        onclick=""
-        icon="f04b"
-        icon-font-size="0.3"
-        icon-font="assets/fonts/fa-solid-900.ttf"
-    >
-    </a-gui-icon-button>
-   
-    `)
-      }    ,
-     
-    play() {
-      this.el.addEventListener('click',this.togglePlayback);
-    },
-    pause () {
-        this.el.removeEventListener('click', this.togglePlayback);
-    },
-    togglePlayback (video) {
-//console.log("log recitvideoplayer 3 "+  this.video);
-     var video = this.video;
-     // console.log('play/pause movie');
-        if(!video.paused){
-            video.pause();
-        }
-        else {
-            video.play();
-        }
-    },
-
-
-  
-  });
-},{}],11:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 AFRAME.registerComponent('tour', {
     init: function () {
-      var panorama = Array.prototype.slice.call(this.el.querySelectorAll('a-panorama'));
-      /*this.sky = document.createElement('a-sky');
+      this.sky = document.createElement('a-sky');
       this.el.appendChild(this.sky);
-      
+      var images = Array.prototype.slice.call(this.el.querySelectorAll('a-panorama'));
       if (images.length === 0) {
         console.error('You need to specify at least 1 image!');
         return;
-      }*/
-      var panoramaid=[];
-      var panoramaidt =panorama.forEach(function (element,index) {
-        //console.log(element.getAttribute("id"))
-        element.setAttribute('visible', 'false');
-        element.setAttribute('position', '0 1000 0');
-        panoramaid[element.getAttribute("id")] = element.getAttribute("id");
- //console.table( "panorama"  + panoramaid[element.getAttribute("id")]);
-      })
-    // console.log("id paneau 1=" +panoramaid["pano1"])
-      var start = panorama[0];
-      this.loadSceneId(start.getAttribute('id'),null);
+      }
+      var start = images[0];
+      this.loadSceneId(start.getAttribute('id'));
     },
   
-    loadSceneId: function(to, for1) {
-     // console.log("loaodsscence" +this.el.querySelector('a-panorama#' + to).getAttribute("visible"))
-      this.loadImage(this.el.querySelector('a-panorama#' + to),this.el.querySelector('a-panorama#' + for1));
-     
+    loadSceneId: function(id) {
+      this.loadImage(this.el.querySelector('a-panorama#' + id));
+      this.setHotspots(id);
     },
   
-    loadImage: function (to,for1) {
-      
-     // console.log(to)
-   //   console.log(for1)
-      to.setAttribute('visible', 'true');
-      to.setAttribute('position', '0 0 0');
-      if( for1 == undefined ) {return}
-      else  {for1.setAttribute('visible', 'false');
-      for1.setAttribute('position', '0 1000 0');
-      var camera = document.querySelector('a-camera');
-      camera.setAttribute('rotation', to.getAttribute('rotation'));
-    }
-  console.log(to.getAttribute("visible"))},
+    loadImage: function (image) {
+      var sky = this.sky;
+      sky.setAttribute('src', image.getAttribute('src'));
+      var camera = this.el.sceneEl.camera.el;
+      camera.setAttribute('rotation', image.getAttribute('rotation'));
+    },
   
-    /*setHotspots: function(id) {
+    setHotspots: function(id) {
       var hotspots = Array.prototype.slice.call(this.el.querySelectorAll('a-hotspot'));
       hotspots.forEach(function (spot) {
         var visible = spot.getAttribute('for') == id ? true : false;
         spot.setAttribute('visible', visible);
       })
-    },*/
-    update: function (oldData) {
-    },
-   /*  setScene2: function() {
-      // console.log('kkk')
-      document.getElementById('scene1').setAttribute('visible', 'false')
-      document.getElementById('scene2').setAttribute('visible', 'true')
-      // document.querySelector('#ambient2').emit('aaa');
-      // document.querySelector('#fading-cube').emit('fade');
-    },
-    setScene1 : function () {
-      // console.log('kkk')
-      document.getElementById('scene2').setAttribute('visible', 'false')
-      document.getElementById('scene1').setAttribute('visible', 'true')
-      // document.querySelector('#ambient1').emit('aaa');
-      // document.querySelector('#fading-cube').emit('fade');
-    }*/
+    }
   });
   
-},{}],12:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 /* global AFRAME, THREE */
 
 const _update = AFRAME.components.raycaster.Component.prototype.update
@@ -2243,7 +1836,7 @@ function deepMatch(selector) {
   let deep = (selector + ", ").replaceAll(",", " *,")
   return deep + selector
 }
-},{}],13:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 /* global AFRAME, THREE */
 
 AFRAME.AEntity.prototype.copyWorldPosRot = function (srcEl) {
@@ -2262,7 +1855,7 @@ AFRAME.AEntity.prototype.copyWorldPosRot = function (srcEl) {
   dest.quaternion.multiply(quat.normalize())
   dest.updateWorldMatrix(true, true)
 }
-},{}],14:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 Element.prototype.ensure = function (selector, name = selector, attrs = {}, innerHTML = "") {
   let _childEl, attr, val
   _childEl = this.querySelector(selector)
@@ -2277,7 +1870,7 @@ Element.prototype.ensure = function (selector, name = selector, attrs = {}, inne
   }
   return _childEl
 }
-},{}],15:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 /* global AFRAME, THREE */
 
 function makePool(Class) {
@@ -2303,7 +1896,7 @@ makePool(THREE.Quaternion)
 makePool(THREE.Matrix3)
 makePool(THREE.Matrix4)
 
-},{}],16:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 let _addEventListener = Element.prototype.addEventListener
 let _removeEventListener = Element.prototype.removeEventListener
 let init = el => {
@@ -2397,64 +1990,27 @@ Element.prototype.removeEventListener = function (eventtype, handler) {
   }
 }
 
-},{}],17:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 AFRAME.registerPrimitive('a-hotspot', {
   defaultComponents: {
-    hotspot: {},
-    'positionspherical': {}
+    hotspot: {}
   },
   mappings: {
     for: 'hotspot.for',
-    to: 'hotspot.to',
-    type: 'hotspot.type',
-    html:'hotspot.html',
-    hotname: 'hotspot.hotname',
-    src:'hotspot.src',
-    mediaheight:'hotspot.mediaheight',
-    mediawidth:'hotspot.mediawidth',
-    radius : 'positionspherical.radius',
-    phi: 'positionspherical.phi',
-    theta : 'positionspherical.theta'
+    to: 'hotspot.to'
   }
-
 });
 
 
-},{}],18:[function(require,module,exports){
-AFRAME.registerPrimitive('a-htmlembedsph', {
-  defaultComponents: {
-    htmlembed: {},
-    'positionspherical': {},
-  scale:{},
-  },
-  
-  mappings: {
-    ppu : 'htmlembed.ppu',
-    
-    radius : 'positionspherical.radius',
-    phi: 'positionspherical.phi',
-    theta : 'positionspherical.theta'
-    
-  }
-  });
-},{}],19:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 AFRAME.registerPrimitive('a-panorama', {
   defaultComponents: {
-    panorama: {},
-    position:{},
-    rotation:{},
-    visibble:{}
-  },
-  mappings: {
-    type:'panorama.type',
-    src: 'panorama.src',
-    rotation: 'panorama.rotation'
-  
+    panorama: {}
   }
 });
 
 
-},{}],20:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 AFRAME.registerPrimitive('a-tour', {
   defaultComponents: {
     tour: {}

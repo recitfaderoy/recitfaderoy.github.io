@@ -8,7 +8,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src="./js/aframe-v1.3.0.min.js"></script>
+        <script src="./js/aframe-v1.2.0.min.js"></script>
     <!--    <script src="https://unpkg.com/super-hands/dist/super-hands.min.js"></script>-->
     <script src="./js/aframe-gui.js"></script>
         <script src="./js/a-recit360.js"></script>
@@ -38,7 +38,21 @@
        <script src=" ./bootstrap/popper.min.js"></script>
         <script src="./bootstrap/bootstrap.min.js"></script>
         <link rel="stylesheet" href="./assets/css/style.css" />
+        <script>
+        AFRAME.registerComponent('listen-toggle-events', {
+            init: function () {
+              this.el.addEventListener('singleOn', evt => console.log('singleOn'));
+              this.el.addEventListener('singleOff', evt => console.log('singleOff'));
+              this.el.addEventListener('doubleOn', evt => console.log('doubleOn'));
+              this.el.addEventListener('doubleOff', evt => console.log('doubleOff'));
       
+              this.el.addEventListener('keyOn', evt => console.log('keyOn', evt));
+              this.el.addEventListener('keyOff', evt => console.log('keyOff', evt));
+              this.el.addEventListener('buttonOn', evt => console.log('buttonOn'));
+              this.el.addEventListener('buttonOff', evt => console.log('buttonOff'));
+            }
+          })
+        </script>
         
         
       
@@ -46,16 +60,18 @@
       
       <body>
       
-        <div id="aframe">
+      
         <a-scene >
             <a-entity id="rig" position="0 1 0">
-                <a-camera position ="0 0 0" camera 
-                look-controls="pointerLockEnabled: false; touchEnabled: false"
+                <a-camera position ="0 0 0"  
+                look-controls
                 wasd-controls=" enabled: false ;""
-                raycaster="objects: .raycastable,[raycast-target]; far: Infinity; lineColor: red; lineOpacity: 0.5" cursor="rayOrigin:mouse"></a-camera>
-                <a-entity id="camera" position="0 0 0"></a-entity>
+                raycaster="objects: [websurface],[recitclickable],.links,[gui-interactable],[grabbable]"  
+                cursor="rayOrigin:mouse">
+               </a-camera>
+                
                 <a-entity laser-controls="hand: right"
-                raycaster="objects: .raycastable,[raycast-target]; far: Infinity; lineColor: red; lineOpacity: 0.5"></a-entity>
+                raycaster="objects: [websurface],[recitclickable],.links,[gui-interactable],[grabbable]; far: Infinity; lineColor: red; lineOpacity: 0.5"></a-entity>
             </a-entity>
         
           <a-assets>
@@ -65,16 +81,23 @@
             <video id="minority" autoplay loop muted crossorigin="anonymous" src="./assets/minority.mp4"
               webkit-playsinline playsinline></video>
           </a-assets>
-           <a-sphere material="opacity: 0.9; transparent: true;" class="clickable" radius=".5" color = "red" id="sphere"> </a-sphere>
       
           <a-tour>  
-           
             <a-panorama id="pano1" src="./assets/images/arriveatelier.jpg" rotation="0 0 0">
-              <a-entity id="text1" position="0 0 -5"  text="value: Inspectez la pièce,; align: center; color: #000; width: 9; opacity: 1; negate:false;    font:./fontfr/viga.regular-msdf.json; font-image:./fontfr/vigaregular.png;"></a-entity>
+          
+                <a-hotspot button type="navigation" id="1-2" for="pano1" to="pano2" hotname="vers image2" radius=10 phi=90 theta=90> </a-hotspot>
+                </a-hotspot>
+                
+                  </a-panorama>
+                  <a-panorama id="pano2" src="./assets/images/dansatelier1.jpg" rotation="0 120 0">
 
-              <a-hotspot  type="image" id="info1" ></a-hotspot>
-              <a-hotspot type="navigation" id="g12" for="pano1" to="pano2" hotname="vers image2" >
-              </a-hotspot>
+                    <a-hotspot   type="navigation" id="2-3" for="pano2" to="pano3" hotname="vers image 3" radius=10 phi=90 theta=90>
+                    </a-hotspot>
+                    <a-hotspot  type="navigation" id="2-1" for="pano2" to="pano1" hotname="vers image 1" radius=10 phi=90 theta=180>
+                    </a-hotspot>
+            
+                  </a-panorama>
+
              
             
 
@@ -84,11 +107,7 @@
           
       
         </a-scene>
-      </div>
-      <div  id= "pan2" class="m-3"  style="display: block ; width:25%; background-color: white; position:absolute; top:50px; right:120px; padding:12px;">
-        <h4 >Résultat : </h4><h4 id="result">0: </h4><h4 id="resulta">0: </h4>
-        <p>Move your mouse to see its position.</p>
-        <p id="screen-log"></p></div>
+    
         
 
      
@@ -96,108 +115,12 @@
         
           
         <script>
-          AFRAME.registerComponent('cursor-listener', {
-  init: function () {
-                      this.scene = document.querySelector('a-scene');
-                    this.eti =  this.scene.querySelector('#g12');
-                    this.sphere = AFRAME.utils.bind(this.sphere, this); 
-                    this.down = AFRAME.utils.bind(this.down, this);
-                    this.up = AFRAME.utils.bind(this.up, this); 
-                    this.wheel = AFRAME.utils.bind(this.wheel, this); 
-                    this.wheel;   
-    this.el.addEventListener('mousedown',this.down )
-    this.el.addEventListener('keydown',this.up )
-    this.el.addEventListener('mouseup',this.up )
-    
-   // this.el.addEventListener('mousedown',this.wheel )
- 
-    
-    
-  },
-  down: function (evt) {
-        console.log("mousedown");
-       document.addEventListener('mousewheel',this.wheel )
-        document.addEventListener('mousemove',this.sphere );
-        
-      },
-  up: function (evt) {
-      console.log("mouseup");
-      if(!event.key === "Escape")
-      {
-		  }
-  else{
-      document.removeEventListener('mousemove',this.sphere );
-      document.removeEventListener('onwheel', this.wheel);
-  }
-    },
-  sphere : function  (e) {
           
-          this.eti.setAttribute("phi",event.movementY * 0.07 + Number(this.eti.getAttribute("phi")));
-          this.eti.setAttribute("theta",event.movementX*(-0.1) + Number(this.eti.getAttribute("theta")));
-          // eti.setAttribute("radius",10);
-  },
-  wheel: function (e) {
-    var syntheticEvent = new WheelEvent("syntheticWheel", {"deltaY": 4, "deltaMode": 0});
-    console.log(syntheticEvent.deltaY);
-    var e = window.event;
-    console.log("mouseenter" + e.wheelDelta )
-  //  e.preventDefault();
-    this.radius = Number(this.eti.getAttribute("radius"))
-    if (e.deltaY < 0) {
-       //if(this.radius < 20)  {
-        this.radius++;
-      // }
-   }
-
-   // Scrolling down
-   if(e.deltaY > 0)  {
-      //if(this.radius > 1)  {
-        this.radius--;
-     // }
-   }
-          console.log("Wheel event is on  " + this.radius);
-          this.eti.setAttribute("radius", this.radius);
-          
-        }
-      })
-      ;
-
 
         </script>
       
       <script>
-         AFRAME.registerComponent('setpositionsq', {
-  init: function () {
-    console.log("number1 "+this.el);
-    this.cursor = document.querySelector('[cursor]');
-    this.sphere =document.getElementById('sphere')
-    this.jeremy = AFRAME.utils.bind(this.jeremy, this);
-       this.sphere.addEventListener('click',this.jeremy)
-        },
-  jeremy: function(event){
-if (!event.detail || !event.detail.intersection){ return;}
-let point = event.detail.intersection.point;
-//let rot = document.getElementById('acamera').getAttribute('rotation');
-this.spherical = new THREE.Spherical();
-
-this.romeo = this.spherical.setFromCartesianCoords(point.x, point.y, point.z);
-console.log("Coordoner spherique" + this.romeo.radius + this.romeo.phi + this.romeo.theta);
-
-this.vector = new THREE.Vector3();
-//let radius ="" ;
-let theta = THREE.Math.radToDeg(this.romeo.theta);
-let phi = THREE.Math.radToDeg(this.romeo.phi);
-console.log(theta)
-//let theta_deg = (theta * 180) / Math.PI;
-//let phi = Math.atan(point.z/point.x);
-//let phi_deg = (phi * 180) / Math.PI;
-console.log(event.detail);
-let rot = {y: theta, x: 90 + phi};
-console.log("number1 "+this.el)
-this.el.setAttribute('position', point);
-this.el.setAttribute('rotation',  {y: theta, x: -90 + phi});
-}
-        })
+      
       </script>
       
       
