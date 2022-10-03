@@ -48,7 +48,15 @@
       
         <div id="aframe">
         <a-scene >
-          <a-camera position ="10 0 0"  raycaster cursor="rayOrigin:mouse"></a-camera>
+            <a-entity id="rig" position="0 1 0">
+                <a-camera position ="0 0 0" camera 
+                look-controls="pointerLockEnabled: false; touchEnabled: false"
+                wasd-controls=" enabled: false ;""
+                raycaster cursor="rayOrigin:mouse"></a-camera>
+                <a-entity id="camera" position="0 0 0"></a-entity>
+                <a-entity laser-controls="hand: right"></a-entity>
+            </a-entity>
+        
           <a-assets>
             <img id="image1" src="./assets/images/porte.jpg">
          <!--   <video id="egypte360" autoplay loop muted crossorigin="anonymous" src="./assets/egypte360.mp4"
@@ -63,7 +71,7 @@
             <a-panorama id="pano1" src="./assets/images/arriveatelier.jpg" rotation="0 0 0">
               <a-entity id="text1" position="0 0 -5"  text="value: Inspectez la pièce,; align: center; color: #000; width: 9; opacity: 1; negate:false;    font:./fontfr/viga.regular-msdf.json; font-image:./fontfr/vigaregular.png;"></a-entity>
 
-              <a-hotspot  type="image" id="info1" setpositionsq></a-hotspot>
+              <a-hotspot  type="image" id="info1" ></a-hotspot>
               <a-hotspot type="navigation" id="g12" for="pano1" to="pano2" hotname="vers image2" >
               </a-hotspot>
              
