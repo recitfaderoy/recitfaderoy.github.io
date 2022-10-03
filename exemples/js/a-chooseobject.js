@@ -139,7 +139,7 @@ AFRAME.registerPrimitive("a-chooseobject", {
                 box.addEventListener('raycaster-intersected', (evt) => {
                   var ee = []
                   ee = this.EL.children
-                 var object = evt.detail.intersection.object;
+             //    var object = evt.detail.intersection.object;
            Array.prototype.forEach.call(ee, (element, index) => {
                  if (element === box){
                    if (this.EL.goood == index)

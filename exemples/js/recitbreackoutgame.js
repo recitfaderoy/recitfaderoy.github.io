@@ -25,8 +25,8 @@ init: function() {
 })*/
 
 
-    console.log("Syseme informations", this.actionner, this.lock  )
-   setTimeout(() => {
+   
+   setTimeout(() => { console.log("Syseme informations", this.actionner, this.lock  )
     //this.lockid =this.actionner[0].attributes[7].id
     this.box0 = this.actionner[0].childNodes[0]
     this.box1 = this.actionner[0].childNodes[1]

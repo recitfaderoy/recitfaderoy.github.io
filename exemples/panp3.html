@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="fr">
+    
+    <head>
+        <title>Laboratoire de science</title>
+        <link rel="icon" type="image/png" href="favicon.ico"/>
+        <meta name="description" content="3D Application">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./js/aframe-v1.3.0.min.js"></script>
+    <!--    <script src="https://unpkg.com/super-hands/dist/super-hands.min.js"></script>-->
+    <script src="./js/aframe-gui.js"></script>
+        <script src="./js/a-recit360.js"></script>
+     
+        <script type="text/javascript" src="./js/webxr.js"></script>
+        <script type="text/javascript" src="./js/joystick.js"></script>
+        <script type="text/javascript" src="./js/camera-cube-env.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/bootstrap-slider.min.js" integrity="sha512-f0VlzJbcEB6KiW8ZVtL+5HWPDyW1+nJEjguZ5IVnSQkvZbwBt2RfCBY0CBO1PsMAqxxrG4Di6TfsCPP3ZRwKpA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <!-- CSS only -->
+        <link rel="stylesheet" type="text/css" href="./style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+          integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+          integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/css/bootstrap-slider.css" integrity="sha512-SZgE3m1he0aEF3tIxxnz/3mXu/u/wlMNxQSnE0Cni9j/O8Gs+TjM9tm1NX34nRQ7GiLwUEzwuE3Wv2FLz2667w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <!-- Custom CSS -->
+      <style>
+        .a-enter-ar-button, .a-enter-vr-button {right:40px; top:40px;  padding:12px; } </style>
+      
+      
+        <!-- Bootstrap Dependencies -->
+        <link rel="stylesheet" href="./bootstrap/bootstrap4.min.css">
+        <script src="./bootstrap/jquery-3.2.1.slim.min.js" "></script>
+       <script src=" ./bootstrap/popper.min.js"></script>
+        <script src="./bootstrap/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="./assets/css/style.css" />
+      
+        
+        
+      
+      </head>
+      
+      <body>
+      
+        <div id="aframe">
+        <a-scene >
+          <a-camera position ="10 0 0"  raycaster cursor="rayOrigin:mouse"></a-camera>
+          <a-assets>
+            <img id="image1" src="./assets/images/porte.jpg">
+         <!--   <video id="egypte360" autoplay loop muted crossorigin="anonymous" src="./assets/egypte360.mp4"
+              webkit-playsinline playsinline></video>-->
+            <video id="minority" autoplay loop muted crossorigin="anonymous" src="./assets/minority.mp4"
+              webkit-playsinline playsinline></video>
+          </a-assets>
+           <a-sphere material="opacity: 0.9; transparent: true;" class="clickable" radius=".5" color = "red" id="sphere"> </a-sphere>
+      
+          <a-tour>  
+           
+            <a-panorama id="pano1" src="./assets/images/arriveatelier.jpg" rotation="0 0 0">
+              <a-entity id="text1" position="0 0 -5"  text="value: Inspectez la pièce,; align: center; color: #000; width: 9; opacity: 1; negate:false;    font:./fontfr/viga.regular-msdf.json; font-image:./fontfr/vigaregular.png;"></a-entity>
+
+              <a-hotspot  type="image" id="info1" setpositionsq></a-hotspot>
+              <a-hotspot type="navigation" id="g12" for="pano1" to="pano2" hotname="vers image2" >
+              </a-hotspot>
+             
+            
+
+         
+          </a-tour>
+          
+          
+      
+        </a-scene>
+      </div>
+      <div  id= "pan2" class="m-3"  style="display: block ; width:25%; background-color: white; position:absolute; top:50px; right:120px; padding:12px;">
+        <h4 >Résultat : </h4><h4 id="result">0: </h4><h4 id="resulta">0: </h4>
+        <p>Move your mouse to see its position.</p>
+        <p id="screen-log"></p></div>
+        
+
+     
+            
+        
+          
+        <script>
+          AFRAME.registerComponent('cursor-listener', {
+  init: function () {
+                      this.scene = document.querySelector('a-scene');
+                    this.eti =  this.scene.querySelector('#g12');
+                    this.sphere = AFRAME.utils.bind(this.sphere, this); 
+                    this.down = AFRAME.utils.bind(this.down, this);
+                    this.up = AFRAME.utils.bind(this.up, this); 
+                    this.wheel = AFRAME.utils.bind(this.wheel, this); 
+                    this.wheel;   
+    this.el.addEventListener('mousedown',this.down )
+    this.el.addEventListener('keydown',this.up )
+    this.el.addEventListener('mouseup',this.up )
+    
+   // this.el.addEventListener('mousedown',this.wheel )
+ 
+    
+    
+  },
+  down: function (evt) {
+        console.log("mousedown");
+       document.addEventListener('mousewheel',this.wheel )
+        document.addEventListener('mousemove',this.sphere );
+        
+      },
+  up: function (evt) {
+      console.log("mouseup");
+      if(!event.key === "Escape")
+      {
+		  }
+  else{
+      document.removeEventListener('mousemove',this.sphere );
+      document.removeEventListener('onwheel', this.wheel);
+  }
+    },
+  sphere : function  (e) {
+          
+          this.eti.setAttribute("phi",event.movementY * 0.07 + Number(this.eti.getAttribute("phi")));
+          this.eti.setAttribute("theta",event.movementX*(-0.1) + Number(this.eti.getAttribute("theta")));
+          // eti.setAttribute("radius",10);
+  },
+  wheel: function (e) {
+    var syntheticEvent = new WheelEvent("syntheticWheel", {"deltaY": 4, "deltaMode": 0});
+    console.log(syntheticEvent.deltaY);
+    var e = window.event;
+    console.log("mouseenter" + e.wheelDelta )
+  //  e.preventDefault();
+    this.radius = Number(this.eti.getAttribute("radius"))
+    if (e.deltaY < 0) {
+       //if(this.radius < 20)  {
+        this.radius++;
+      // }
+   }
+
+   // Scrolling down
+   if(e.deltaY > 0)  {
+      //if(this.radius > 1)  {
+        this.radius--;
+     // }
+   }
+          console.log("Wheel event is on  " + this.radius);
+          this.eti.setAttribute("radius", this.radius);
+          
+        }
+      })
+      ;
+
+
+        </script>
+      
+      <script>
+         AFRAME.registerComponent('setpositionsq', {
+  init: function () {
+    console.log("number1 "+this.el);
+    this.cursor = document.querySelector('[cursor]');
+    this.sphere =document.getElementById('sphere')
+    this.jeremy = AFRAME.utils.bind(this.jeremy, this);
+       this.sphere.addEventListener('click',this.jeremy)
+        },
+  jeremy: function(event){
+if (!event.detail || !event.detail.intersection){ return;}
+let point = event.detail.intersection.point;
+//let rot = document.getElementById('acamera').getAttribute('rotation');
+this.spherical = new THREE.Spherical();
+
+this.romeo = this.spherical.setFromCartesianCoords(point.x, point.y, point.z);
+console.log("Coordoner spherique" + this.romeo.radius + this.romeo.phi + this.romeo.theta);
+
+this.vector = new THREE.Vector3();
+//let radius ="" ;
+let theta = THREE.Math.radToDeg(this.romeo.theta);
+let phi = THREE.Math.radToDeg(this.romeo.phi);
+console.log(theta)
+//let theta_deg = (theta * 180) / Math.PI;
+//let phi = Math.atan(point.z/point.x);
+//let phi_deg = (phi * 180) / Math.PI;
+console.log(event.detail);
+let rot = {y: theta, x: 90 + phi};
+console.log("number1 "+this.el)
+this.el.setAttribute('position', point);
+this.el.setAttribute('rotation',  {y: theta, x: -90 + phi});
+}
+        })
+      </script>
+      
+      
+      </body>
+      
+      </html>
