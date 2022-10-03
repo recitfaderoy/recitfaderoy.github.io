@@ -52,9 +52,10 @@
                 <a-camera position ="0 0 0" camera 
                 look-controls="pointerLockEnabled: false; touchEnabled: false"
                 wasd-controls=" enabled: false ;""
-                raycaster cursor="rayOrigin:mouse"></a-camera>
+                raycaster="objects: .raycastable,[raycast-target]; far: Infinity; lineColor: red; lineOpacity: 0.5" cursor="rayOrigin:mouse"></a-camera>
                 <a-entity id="camera" position="0 0 0"></a-entity>
-                <a-entity laser-controls="hand: right"></a-entity>
+                <a-entity laser-controls="hand: right"
+                raycaster="objects: .raycastable,[raycast-target]; far: Infinity; lineColor: red; lineOpacity: 0.5"></a-entity>
             </a-entity>
         
           <a-assets>
