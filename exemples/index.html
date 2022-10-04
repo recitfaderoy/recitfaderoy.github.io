@@ -168,8 +168,8 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #fff;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.95) 38%, rgba(239, 243, 252, 0.95) 93%);
+    background: #000;
+    background: radial-gradient(circle, rgba(7, 7, 7, 0.95) 38%, rgba(10, 13, 22, 0.95) 93%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff", endColorstr="#eff3fc", GradientType=1)
 }
 
@@ -239,7 +239,7 @@ document.querySelector('a-scene').addEventListener('loaded', async () => {
     <div id="preloader" class="preloader preloader-entry">
       <div class="content">
           <div class="loader">
-              <img src="https://inplayo.com/wp-content/themes/inplayo/assets/images/logo/inplayo.svg" alt="logo">
+              <img src="./img/Recit_sn_jedi_54.png" alt="logo">
               <div>loading application</div>
           </div>
       </div>
@@ -346,7 +346,7 @@ document.querySelector('a-scene').addEventListener('loaded', async () => {
             proxy-event__areaEnter="event: hitstart; to: CHILDREN; as: areaEnter;"
             proxy-event__areaLeave="event: hitend; to: CHILDREN; as: areaLeave;"></a-mixin>
 
-          <a-mixin id="area_text" position="0 1.5 0" look-at="[camera]" scale="2 2 2"
+          <a-mixin id="area_text" position="0.1 1.5 0" look-at="[camera]" scale="2 2 2"
             event-set__areaEnter="_event: areaEnter; position: -4 1.5 -4; text.color:yellow;"
             event-set__areaLeave="_event: areaLeave; text.color: white;"></a-mixin>
 
@@ -359,7 +359,7 @@ document.querySelector('a-scene').addEventListener('loaded', async () => {
           <a-mixin id="or" animation-mixer='clip:ouvrir; loop:once; clampWhenFinished:true;'></a-mixin>
           <a-mixin id="ot" animation-mixer='clip:fermer; loop:once; clampWhenFinished:true;'></a-mixin>
         </a-assets>
-        <a-player shape locomotion grabbling id="rig" position="-1 0.3 0" data-aabb-collider-dynamic rotation="0 250 0">
+        <a-player  locomotion grabbling id="rig" position="3 0.3 0" data-aabb-collider-dynamic rotation="0 250 0">
           <a-entity camera="active: true" look-controls wasd-controls position="0 1 0" camera-position
             cursor="rayOrigin: mouse" raycaster="far: 100; objects: .raycastable;" loading-screen="enabled: false;">
             <a-entity id="lhand" position="-0.4 1.4 -0.5" oculus-touch-controls="hand: left" desktop-vr-controller>
@@ -378,7 +378,7 @@ document.querySelector('a-scene').addEventListener('loaded', async () => {
             <a-sphere id="down-marker" position="0 -10 0">
             </a-sphere>
         </a-player>
-        <a-main>
+      
         <a-entity id="text1" mixin="text" text="value: Inspectez la pièce,"></a-entity>
         <a-entity id="text2" mixin="text" text="value: trouvez des indices; opacity: 0"
           animation__textcolor="property: text.color; from: #0069bf; to: #faa22a; dur: 2500; autoplay: false">
@@ -420,16 +420,16 @@ document.querySelector('a-scene').addEventListener('loaded', async () => {
           <a-gltf-model src="#bookrow3a" position="0.55 1.1 -0.02" scale="0.8 0.8 0.8"></a-gltf-model>
 
         </a-gltf-model>
-        <a-gltf-model wall src="#biblioa"  position="2 0.0 4.5" rotation="0 90 0">
+        <a-gltf-model wall src="#biblioa"  position="2.5 0.0 4.5" rotation="0 90 0">
           <a-gltf-model src="#bookrow1a" position="0.05 0.7 -0.02" scale="0.9 0.9 0.9"></a-gltf-model>
           <a-gltf-model src="#bookrow3a" position="0.55 1.1 -0.02" scale="0.8 0.8 0.8"></a-gltf-model>
         </a-gltf-model>
-        <a-gltf-model src="#biblioa"  position="3 0.0 4.5" rotation="0 90 0">
+        <a-gltf-model src="#biblioa"  position="4 0.0 4.5" rotation="0 90 0">
           <a-gltf-model src="#bookrow1a" position="0.05 0.7 -0.05" scale="0.9 0.9 0.9"></a-gltf-model>
           <a-gltf-model src="#bookrow3a" position="0.55 1.1 -0.02" scale="0.8 0.8 0.8"></a-gltf-model>
 
         </a-gltf-model>
-        <a-gltf-model wall src="#biblioa"  position="4 0.0 4.5" rotation="0 90 0">
+        <a-gltf-model wall src="#biblioa"  position="5.5 0.0 4.5" rotation="0 90 0">
           <a-gltf-model src="#bookrow1a" position="0.05 0.7 -0.05" scale="0.9 0.9 0.9"></a-gltf-model>
           <a-gltf-model src="#bookrow3a" position="0.55 1.1 -0.02" scale="0.8 0.8 0.8"></a-gltf-model>
         </a-gltf-model>
@@ -476,7 +476,6 @@ document.querySelector('a-scene').addEventListener('loaded', async () => {
 
         <a-entity light="type: ambient; intensity: 1; color: #fff"></a-entity>
 
-</a-main>
       </a-scene>
      
     </div>
