@@ -337,6 +337,8 @@ document.querySelector('a-scene').addEventListener('loaded', async () => {
           </a-asset-item>
           <a-asset-item id="bookrow3a" preload="true" response-type="arraybuffer" src="./assets/bank/bookrow3a.gltf">
           </a-asset-item>
+          <a-asset-item id="presentoire" preload="true" response-type="arraybuffer" src="./assets/bank/presentoire.gltf">
+          </a-asset-item>
           <img id="floor" src="./assets/floor.png">
 
           <a-mixin id="area" material="color: blue; opacity: 0.1; shader: phong; side: double;"
@@ -359,24 +361,20 @@ document.querySelector('a-scene').addEventListener('loaded', async () => {
           <a-mixin id="or" animation-mixer='clip:ouvrir; loop:once; clampWhenFinished:true;'></a-mixin>
           <a-mixin id="ot" animation-mixer='clip:fermer; loop:once; clampWhenFinished:true;'></a-mixin>
         </a-assets>
-        <a-player  locomotion grabbling id="rig" position="3 0.3 0" data-aabb-collider-dynamic rotation="0 250 0">
+        <a-player  locomotion grabbling id="rig" position=" -5 0.3 -3.8" data-aabb-collider-dynamic rotation="0 210 0">
           <a-entity camera="active: true" look-controls wasd-controls position="0 1 0" camera-position
             cursor="rayOrigin: mouse" raycaster="far: 100; objects: .raycastable;" loading-screen="enabled: false;">
-            <a-entity id="lhand" position="-0.4 1.4 -0.5" oculus-touch-controls="hand: left" desktop-vr-controller>
+            <a-entity id="lhand" position="-0.4 1.4 -0.5" oculus-touch-controls="hand: left" >
             </a-entity>
 
             <a-entity id="rhand" position="0.4 1.4 -0.5" laser-controls="hand: right"
-              raycaster="objects: .raycastable,[raycast-target]; far: Infinity; lineColor: red; lineOpacity: 0.5"
-              laser-manipulation thumbstick-states__right="controller:#rhand;
-                                  tBindings:moving-in,moving-out,rotating-y-plus,rotating-y-minus;
-                                  tgBindings:rotating-x-plus,rotating-x-minus,rotating-y-plus,rotating-y-minus"
-              oculus-touch-controls="hand: right" desktop-vr-controller>
+          raycaster="objects: .raycastable,[raycast-target], [link]; far: Infinity; lineColor: red; lineOpacity: 0.5">
             </a-entity>
 
-            <a-sphere id="up-marker" position="0 10 0">
+            <!--<a-sphere id="up-marker" position="0 10 0">
             </a-sphere>
             <a-sphere id="down-marker" position="0 -10 0">
-            </a-sphere>
+            </a-sphere>-->
         </a-player>
       
         <a-entity id="text1" mixin="text" text="value: Inspectez la pièce,"></a-entity>
@@ -418,7 +416,6 @@ document.querySelector('a-scene').addEventListener('loaded', async () => {
          <a-gltf-model wall src="#biblioa"  position="1 0.0 4.5" rotation="0 90 0">
           <a-gltf-model src="#bookrow1a" position="0.05 0.7 -0.05" scale="0.9 0.9 0.9"></a-gltf-model>
           <a-gltf-model src="#bookrow3a" position="0.55 1.1 -0.02" scale="0.8 0.8 0.8"></a-gltf-model>
-
         </a-gltf-model>
         <a-gltf-model wall src="#biblioa"  position="2.5 0.0 4.5" rotation="0 90 0">
           <a-gltf-model src="#bookrow1a" position="0.05 0.7 -0.02" scale="0.9 0.9 0.9"></a-gltf-model>
@@ -433,6 +430,10 @@ document.querySelector('a-scene').addEventListener('loaded', async () => {
           <a-gltf-model src="#bookrow1a" position="0.05 0.7 -0.05" scale="0.9 0.9 0.9"></a-gltf-model>
           <a-gltf-model src="#bookrow3a" position="0.55 1.1 -0.02" scale="0.8 0.8 0.8"></a-gltf-model>
         </a-gltf-model>
+        <a-fluorescent position="2.5 4.0 0.5" rotation="90 0 0" intensity="1.0"></a-fluorescent>
+        <a-gltf-model wall src="#presentoire"  position="2.5 0.0 0.5" rotation="0 90 0">
+        </a-gltf-model>
+        <a-entity link="href: https://recitfad.qc.ca; title: My Homepage; image: #homeThumbnail" rotation="0 90 0" position="2.5 1.0 0.5"></a-entity>
 
         </a-recitroom>
         <a-recitroom wall id="room2" position="11.19 0 9.412" rotation="0 -150 0" para='{

@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+  <title>WAll animation</title>
+  <link rel="icon" type="image/png" href="favicon.ico" />
+  <meta name="description" content="3D Application">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="./js/aframe-v1.3.0.js"></script>
+  
+-->
+
+<script src="./js/src/components/grabbing.js"></script>
+<script src="./js/src/components/include.js"></script>
+<script src="./js/src/components/arealight.js"></script>
+<script src="./js/src/components/injectfluo.js"></script>
+<script src="./js/src/components/injectglove.js"></script>
+<script src="./js/src/components/injectplayer.js"></script>
+
+
+
+<script src="./js/src/components/locomotion.js"></script>
+<script src="./js/src/components/onevent.js"></script>
+<script src="./js/src/components/onstate.js"></script>
+
+<script src="./js/src/components/a-recitphy.js"></script>
+<script src="./js/src/components/script.js"></script>
+<script src="./js/src/components/trigger.js"></script>
+
+<script src="./js/src/primitives/a-classroom.js"></script>
+<
+<script src="./js/src/primitives/a-glove.js"></script>
+<script src="./js/src/primitives/a-hand.js"></script>
+<script src="./js/src/primitives/a-main.js"></script>
+<script src="./js/src/primitives/a-player.js"></script>
+
+ 
+
+  <script src="./js/label.js"></script>
+ 
+  <script src="./js/webxr.js"></script>
+  <script src="./js/joystick.js"></script>
+  <script src="./js/camera-cube-env.js"></script>
+  <script src="./js/hiddenunder.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/bootstrap-slider.min.js"
+    integrity="sha512-f0VlzJbcEB6KiW8ZVtL+5HWPDyW1+nJEjguZ5IVnSQkvZbwBt2RfCBY0CBO1PsMAqxxrG4Di6TfsCPP3ZRwKpA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- CSS only -->
+  <link rel="stylesheet" type="text/css" href="./style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/css/bootstrap-slider.css"
+    integrity="sha512-SZgE3m1he0aEF3tIxxnz/3mXu/u/wlMNxQSnE0Cni9j/O8Gs+TjM9tm1NX34nRQ7GiLwUEzwuE3Wv2FLz2667w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Custom CSS -->
+  <style>
+    /*.aa-enter-ar-button
+    .aa-enter-vr-button {
+      right: 40px;
+      top: 40px;
+      padding: 12px;
+    }*/
+    body,
+html {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  --color-black: #274156;
+  --color-blue: #c5d4f4;
+  --color-light-blue: #c5d4f4e7;
+  --color-yellow: #FFE66D;
+  --z-top: 9;
+  --z-interface: 2;
+  --z-lowest: 1
+}
+
+* {
+  box-sizing: border-box;
+  color: var(--color-black);
+  font-family: 'Montserrat', sans-serif
+}
+
+.preloader {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: var(--z-interface);
+  transition: all 1s
+}
+
+.preloader:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  background: radial-gradient(circle, rgba(7, 7, 7, 0.95) 38%, rgba(10, 13, 22, 0.95) 93%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff", endColorstr="#eff3fc", GradientType=1)
+}
+
+.preloader .content {
+  z-index: var(--z-top);
+  max-width: 80%
+}
+
+.preloader .content .loader img {
+  max-width: 100%
+}
+
+.preloader[hidden] {
+  visibility: hidden;
+  opacity: 0
+}
+
+.a-modal {
+  display: none !important
+}
+  </style>
+
+
+  <!-- Bootstrap Dependencies -->
+  <link rel="stylesheet" type="text/css" href="./bootstrap/bootstrap4.min.css">
+  <script src="./bootstrap/jquery-3.2.1.slim.min.js" "></script>
+     <script src=" ./bootstrap/popper.min.js"> </script> <script src="./bootstrap/bootstrap.min.js"></script>
+  <!--<link rel="stylesheet" type="text/css"  href="./assets/css/style.css" />-->
+
+
+
+  <!-- Custom CSS -->
+
+
+
+  <!-- Bootstrap Dependencies -->
+
+
+
+
+  <!-- ==================== 
+REGISTER OUR COMPONENT
+========================= -->
+  <script>
+  
+</script>
+
+</head>
+
+<body>
+       <a-scene 
+      physics="workerUrl:./js/cannonWorkeroriginal.js; gravity:0 -10 0; debug: true;"
+      >
+      <a-assets timeout="10000">
+        <a-asset-item id="dinningdecoA" preload="true" response-type="arraybuffer"
+        src="./assets/bank/dinningdecoA.gltf"></a-asset-item>
+        <a-asset-item id="dinningchair" preload="true" response-type="arraybuffer"
+        src="./assets/bank/dinningchairA.gltf"></a-asset-item>
+        <a-asset-item id="buffett" preload="true" response-type="arraybuffer"
+        src="./assets/bank/buffett.gltf"></a-asset-item>
+    </a-assets>
+    <a-plane start position=" 4 0 -12" height="1" width="1" rotation="-90 0 0"></a-plane>
+        <a-plane floor material=" color:black; repeat: 700 700; transparent: true;" height="100" width="100"
+          rotation="-90 0 0"></a-plane>
+        <a-sky color="#fff"></a-sky>
+        <a-player  locomotion grabbling id="rig" position="1 0.5 2" data-aabb-collider-dynamic rotation="0 0 0">
+            <a-entity camera="active: true" look-controls wasd-controls position="0 1 0" camera-position
+              cursor="rayOrigin: mouse" raycaster="far: 100; objects:[button], .raycastable;" loading-screen="enabled: false;">
+              <a-entity id="lhand" position="-0.4 1.4 -0.5" oculus-touch-controls="hand: left" >
+              </a-entity>
+  
+              <a-entity id="rhand" 
+                        position="0.4 1.4 -0.5" 
+                        laser-controls="hand: right"
+                        raycaster="objects: .raycastable,[raycast-target], [link]; far: Infinity; lineColor: red; lineOpacity: 0.5">
+              </a-entity>
+  
+              <!--<a-sphere id="up-marker" position="0 10 0">
+              </a-sphere>
+              <a-sphere id="down-marker" position="0 -10 0">
+              </a-sphere>-->
+          </a-player>
+
+       <!-- <a-recitroom wall id="room2" position="0 0 0" rotation="0 0 0" para='{
+            "0": {"longueur":  8, "angle": 0, "door":  {"type":"none","open":true},"window": false, "material":"side:double; shader: standard; src:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_basecolor.jpg;height:450; repeat: 9 3; ambientOcclusionMap:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_ambientOcclusion.jpg; ambientOcclusionTextureRepeat:9 3;normalMap:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_normal.jpg; normalTextureRepeat: 9 3; displacementMap:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_height.png; displacementBias:0.0190; displacementScale:0.21;displacementTextureRepeat:9 3; roughness: 0.4; metalness: 0.4"},
+            "1": { "longueur":  8, "angle": 90, "door": {"type":"center","open":true, "doorpannel": false},"window": false,"material":"side:double; shader: standard; src:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_basecolor.jpg;height:450; repeat: 9 3; ambientOcclusionMap:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_ambientOcclusion.jpg; ambientOcclusionTextureRepeat:9 3;normalMap:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_normal.jpg; normalTextureRepeat: 9 3; displacementMap:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_height.png; displacementBias:0.0190; displacementScale:0.21;displacementTextureRepeat:9 3; roughness: 0.4; metalness: 0.4"},
+            "2": { "longueur":  8, "angle": 180, "door": {"type":"none","open":false},"window": false,"material":"side:double; shader: standard; src:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_basecolor.jpg;height:450; repeat: 9 3; ambientOcclusionMap:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_ambientOcclusion.jpg; ambientOcclusionTextureRepeat:9 3;normalMap:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_normal.jpg; normalTextureRepeat: 9 3; displacementMap:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_height.png; displacementBias:0.0190; displacementScale:0.21;displacementTextureRepeat:9 3; roughness: 0.4; metalness: 0.4"},
+            "3": { "longueur":  8, "angle": 270, "door": {"type":"left","open":false, "doorpannel": true},"window": false,"material":"side:double; shader: standard; src:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_basecolor.jpg;height:450; repeat: 9 3; ambientOcclusionMap:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_ambientOcclusion.jpg; ambientOcclusionTextureRepeat:9 3;normalMap:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_normal.jpg; normalTextureRepeat: 9 3; displacementMap:./assets/Sci-Fi_Wall_014_SD/Sci-Fi_Wall_014_height.png; displacementBias:0.0190; displacementScale:0.21;displacementTextureRepeat:9 3; roughness: 0.4; metalness: 0.4"}
+            }'> 
+          
+        </a-recitroom>-->
+        <a-entity light="type: ambient; intensity: 1; color: #fff"></a-entity>
+
+            <a-fluorescent position="1.6 0.5 2.6" rotation="90 0 0" intensity="1.0"></a-fluorescent>
+            <a-entity light="type: spot; angle:7;  intensity: 0.01; target:#target2;" position="2.7 5.8  4.7"></a-entity>
+          <a-entity light="type: spot; angle: 10;  intensity: 0.01; target:#target3;" position="2.7 5.8  4.7"></a-entity>
+          <a-entity id="container" position = "0 0 0" mouse-object-control>
+                <a-gltf-model src="#dinningdecoA" position="7 0 4"  rotation="0 90 0"></a-gltf-model>
+                <a-gltf-model src="#buffett" position="7 0 4"  rotation="0 -90 0"></a-gltf-model>
+                <a-hiddenunder src="#dinningchair"   position="5.5 0.5 4"  rotation="0 90 0" ></a-hiddenunder>
+          </a-entity>
+       
+        <a-entity id="cursor" cursor="rayOrigin: mouse" raycaster="objects: [raycast-target]; far: Infinity"
+        mouse-manipulation>
+      </a-entity>
+
+      <a-entity light="type: ambient; intensity: 1; color: #fff"></a-entity>
+    </a-scene>
+</script>
+</body>
+
+</html>

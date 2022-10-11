@@ -103,8 +103,8 @@ init: function() {
             }
           })
     //console.log("actionner",this.box0,this.box1,this.box2,this.box3,this.lock0)
-  },500)
-  
+  },1000)
+  console.log("filelaoder",document.querySelector('a-assets').fileLoader);
 },
 
 

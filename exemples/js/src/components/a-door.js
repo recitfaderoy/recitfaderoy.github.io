@@ -42,7 +42,8 @@ AFRAME.registerComponent('injectdoor', {
       "id":this.id,
       "src": door,
      
-    })
+    },
+    '<a-entity link="href: index.html; title: My Homepage; image: #homeThumbnail"></a-entity>')
    
           
         this.el.setAttribute("shape","cylinder")
