@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Escape Room - Prototype</title>
+        <script src="./libs/aframe/aframe.min.js"></script>
+        <!-- for animations from your glTF mode we need the animation-mixer component from aframe-extras -->
+        <script src="./libs/aframe/aframe-extra.min.js"></script>
+        <script src="./libs/csg/csg.js"></script>
+        <script src="./libs/utils.js" ></script>
+        <script src="./escaperoom.js" ></script>
+      </head>
+      
+      <body>
+        
+        <a-scene cursor="rayOrigin: mouse" raycaster="far: 100; objects: .clickable;">
+            <!--
+            <a-assets>
+                <a-asset-item id="baril1" preload="true" response-type="arraybuffer" src="./assets/baril1.gltf"></a-asset-item>
+                <a-asset-item id="baril2" preload="true" response-type="arraybuffer" src="./assets/baril2.gltf"></a-asset-item>
+                <a-asset-item id="baril3" preload="true" response-type="arraybuffer" src="./assets/baril3.gltf"></a-asset-item>
+                <a-asset-item id="baril4" preload="true" response-type="arraybuffer" src="./assets/baril4.gltf"></a-asset-item>
+            </a-assets>
+            -->
+            <a-entity camera="active: true" look-controls wasd-controls avoid-overlapping-elements position="0 0 0" ></a-entity>
+
+            <a-escaperoom position="0 0 0" width="12" height="3.65" thickness=".2">
+                <a-escaperoom-wall src="#texture" color="#F00" side="back"></a-escaperoom-wall>
+                <a-escaperoom-wall color="blue" side="left" static-body></a-escaperoom-wall>
+                <a-escaperoom-wall color="green" side="right"></a-escaperoom-wall>
+                <a-escaperoom-wall color="grey" side="front" doorhole='{"position": "center", "width": 1, "height": 2}'>
+                    <a-escape-door gltf-model="url(./assets/door.gltf)" ></a-escape-door>
+                </a-escaperoom-wall>
+                <a-escaperoom-ceiling color="black"></a-escaperoom-ceiling>
+                <a-escaperoom-floor color="yellow"></a-escaperoom-floor>
+
+                
+                <a-escaperoom-element solution="true" gltf-model="url(./assets/baril2.gltf)" position="-3, -1.5, -7" ></a-escaperoom-element>
+                <!--
+                    <a-escape-room-element gltf-model="url(./assets/baril1.gltf)" position="-4, -1.5, -5" ></a-escape-room-element>
+                <a-escape-room-element gltf-model="url(./assets/baril3.gltf)" position="3, -1.5, -7" ></a-escape-room-element>
+                <a-escape-room-element gltf-model="url(./assets/baril4.gltf)" position="4, -1.5, -5" ></a-escape-room-element>
+                -->
+                
+
+                <!--
+                <a-escape-room-element gltf-model="#baril1" position="-4, -1.5, -5" ></a-escape-room-element>
+                <a-escape-room-element gltf-model="#baril2" solution="true"  position="-3, -1.5, -7" ></a-escape-room-element>
+                <a-escape-room-element gltf-model="#baril3" position="3, -1.5, -7" ></a-escape-room-element>
+                <a-escape-room-element gltf-model="#baril4" position="4, -1.5, -5" ></a-escape-room-element>
+                -->
+            </a-escaperoom>
+            <a-sky color="#FFF"></a-sky>
+        
+        </a-scene>
+      </body>
+</html>
