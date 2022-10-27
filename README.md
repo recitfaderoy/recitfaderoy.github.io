@@ -16,3 +16,5 @@ Référentiel d'exemples de composants réutilisables pouvant potentiellement ê
 - https://stemkoski.github.io/A-Frame-Examples/-https://github.com/poeticAndroid/a-game
 - - Systèmes de primititives et composants pour concevoir un jeu.
 
+Pour créer de font "msdf".
+- msdhttps://msdf-bmfont.donmccurdy.com/
