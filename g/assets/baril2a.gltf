@@ -1,0 +1,334 @@
+{
+	"accessors": [
+		{
+			"bufferView": 0,
+			"byteOffset": 0,
+			"componentType": 5123,
+			"count": 3270,
+			"max": [
+				942.0
+			],
+			"min": [
+				0.0
+			],
+			"type": "SCALAR"
+		},
+		{
+			"bufferView": 1,
+			"byteOffset": 0,
+			"componentType": 5126,
+			"count": 943,
+			"max": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"min": [
+				-1.0,
+				-1.0,
+				-1.0
+			],
+			"type": "VEC3"
+		},
+		{
+			"bufferView": 2,
+			"byteOffset": 0,
+			"componentType": 5126,
+			"count": 943,
+			"max": [
+				30.999988555908203,
+				31.0,
+				91.98396301269531
+			],
+			"min": [
+				-30.999998092651367,
+				-31.0,
+				-0.9840164184570313
+			],
+			"type": "VEC3"
+		},
+		{
+			"bufferView": 3,
+			"byteOffset": 0,
+			"componentType": 5126,
+			"count": 943,
+			"max": [
+				1.0,
+				1.0,
+				0.06183959171175957,
+				1.0
+			],
+			"min": [
+				-1.0,
+				-1.0,
+				-0.06183940917253494,
+				1.0
+			],
+			"type": "VEC4"
+		},
+		{
+			"bufferView": 4,
+			"byteOffset": 0,
+			"componentType": 5126,
+			"count": 943,
+			"max": [
+				0.9975918531417847,
+				0.993410050868988
+			],
+			"min": [
+				0.004086035769432783,
+				0.003844008781015873
+			],
+			"type": "VEC2"
+		}
+	],
+	"asset": {
+		"extras": {
+			"author": "Den1121 (https://sketchfab.com/Den1121)",
+			"created": "Tue Oct 18 00:09:41 2022",
+			"license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+			"source": "https://sketchfab.com/3d-models/low-poly-closed-barrels-8df46c47099a4b9d9bc4a69edcad1b88",
+			"title": "Low Poly | Closed Barrels"
+		},
+		"generator": "Gestaltor 2022.4.0 Pappardelle Professional",
+		"version": "2.0"
+	},
+	"bufferViews": [
+		{
+			"buffer": 0,
+			"byteLength": 6540,
+			"byteOffset": 0
+		},
+		{
+			"buffer": 0,
+			"byteLength": 11316,
+			"byteOffset": 6540
+		},
+		{
+			"buffer": 0,
+			"byteLength": 11316,
+			"byteOffset": 17856
+		},
+		{
+			"buffer": 0,
+			"byteLength": 15088,
+			"byteOffset": 29172
+		},
+		{
+			"buffer": 0,
+			"byteLength": 7544,
+			"byteOffset": 44260
+		}
+	],
+	"buffers": [
+		{
+			"byteLength": 51804,
+			"uri": "baril2a.bin"
+		}
+	],
+	"images": [
+		{
+			"mimeType": "image/png",
+			"uri": "image_1.png"
+		},
+		{
+			"mimeType": "image/png",
+			"uri": "image_2.png"
+		},
+		{
+			"mimeType": "image/png",
+			"uri": "image_3.png"
+		}
+	],
+	"materials": [
+		{
+			"doubleSided": true,
+			"name": "Barrel_Blue_04",
+			"normalTexture": {
+				"index": 2
+			},
+			"occlusionTexture": {
+				"index": 1
+			},
+			"pbrMetallicRoughness": {
+				"baseColorTexture": {
+					"index": 0
+				},
+				"metallicRoughnessTexture": {
+					"index": 1
+				}
+			}
+		}
+	],
+	"meshes": [
+		{
+			"name": "Barrel_Blue_04_Barrel_Blue_04_0",
+			"primitives": [
+				{
+					"attributes": {
+						"NORMAL": 1,
+						"POSITION": 2,
+						"TANGENT": 3,
+						"TEXCOORD_0": 4
+					},
+					"indices": 0,
+					"material": 0,
+					"mode": 4
+				}
+			]
+		}
+	],
+	"nodes": [
+		{
+			"children": [
+				1
+			],
+			"name": "Sketchfab_model",
+			"rotation": [
+				-0.7071067811865475,
+				0.0,
+				0.0,
+				0.7071067811865476
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"translation": [
+				0.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"children": [
+				2
+			],
+			"name": "d81cf08ee25841d18344bdf21ac4f731.fbx",
+			"rotation": [
+				0.7071067811865475,
+				0.0,
+				0.0,
+				0.7071067811865476
+			],
+			"scale": [
+				0.01,
+				0.01,
+				0.01
+			],
+			"translation": [
+				0.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"children": [
+				3
+			],
+			"name": "RootNode"
+		},
+		{
+			"children": [
+				4
+			],
+			"name": "Barrels",
+			"rotation": [
+				-0.7071067811865475,
+				0.0,
+				0.0,
+				0.7071067811865476
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"translation": [
+				0.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"children": [
+				5
+			],
+			"name": "Barrel_Blue_04",
+			"rotation": [
+				0.0,
+				0.0,
+				0.0,
+				1.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"translation": [
+				0.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"children": [
+				6
+			],
+			"name": "Object_41",
+			"rotation": [
+				0.0,
+				0.0,
+				0.0,
+				1.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"translation": [
+				0.0,
+				0.0,
+				0.0
+			]
+		},
+		{
+			"mesh": 0,
+			"name": "Barrel_Blue_04_Barrel_Blue_04_0"
+		}
+	],
+	"samplers": [
+		{
+			"magFilter": 9729,
+			"minFilter": 9987,
+			"wrapS": 10497,
+			"wrapT": 10497
+		}
+	],
+	"scene": 0,
+	"scenes": [
+		{
+			"name": "Sketchfab_Scene",
+			"nodes": [
+				0
+			]
+		}
+	],
+	"textures": [
+		{
+			"sampler": 0,
+			"source": 0
+		},
+		{
+			"sampler": 0,
+			"source": 1
+		},
+		{
+			"sampler": 0,
+			"source": 2
+		}
+	]
+}

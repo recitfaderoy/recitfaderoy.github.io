@@ -1,0 +1,21 @@
+{
+    "AGI_articulations": {
+        "articulations": [
+            {
+                "name": "open",
+                "modelNodes": [
+                    "Porte_droite"
+                ],
+                "stage": [
+                    {
+                        "name": "ouvrir",
+                        "type": "xTranslate",
+                        "minimumValue": 0,
+                        "initialValue": 0,
+                        "maximumValue": 60
+                    }
+                ]
+            }
+        ]
+    }
+}

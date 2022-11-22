@@ -1,4 +1,32 @@
-AFRAME.registerComponent('avoid-overlapping-elements', {
+/* global AFRAME, THREE */
+
+AFRAME.registerComponent("floor", {
+    schema: {
+      physics: { type: "boolean", default: true }
+    },
+  
+    update() {
+      this.el.setAttribute("wall", this.data)
+      if (this.data.physics && !this.el.hasAttribute("body")) this.el.setAttribute("body", "type:static")
+      if (this.data.physics && !this.el.hasAttribute("physx-body")) this.el.setAttribute("physx-body", "type:static")
+    }
+  })
+  
+  /* global AFRAME, THREE */
+
+AFRAME.registerComponent("wall", {
+    schema: {
+      physics: { type: "boolean", default: true }
+    },
+  
+    update() {
+      if (this.data.physics && !this.el.hasAttribute("body")) this.el.setAttribute("body", "type:static")
+      if (this.data.physics && !this.el.hasAttribute("physx-body")) this.el.setAttribute("physx-body", "type:static")
+
+    }
+  })
+  
+  AFRAME.registerComponent('avoid-overlapping-elements', {
     init(){
         this.data.lastPosition = {x: 0, y: 0, z: 0};
 
