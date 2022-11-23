@@ -69,8 +69,8 @@
              >     
            </a-box>  
            
-                    <a-hand side="left" color="red"></a-hand>
-                    <a-hand side="right"  color="blue"></a-hand>
+           <a-hand side="left" laser-controls="hand: left" color="red"></a-hand>
+           <a-hand side="right" oculus-touch-controls="hand: right" color="blue"></a-hand>
         </a-player>
         <a-box physx-body="type: static;" 
 
@@ -150,7 +150,7 @@
                 <a-gltf-model id="target16" src="./assets/cabinet1a.gltf" position="-3 0.5 -3" rotation="0 0 0"physx-body="type: static;"  wall toggleouverture clickable></a-gltf-model>
                 <a-beaker id="becher1a" name= "bécher A" colorliq="olive"  percent=0 volume= "100ml"     opacity="0"  rotation="0 0 0" scale=" 1 1" position="-2.7 1.0 -4.4" visible="true" physx-material="restitution: 0.8;" gltf-entities  physx-body="type: dynamic; emitCollisionEvents:true;" dragndrop grabbable onstate__grabbed=" property:colorliq; on:red; off:green;">
                 </a-beaker>
-                <a-gltf-model id="target26" src="./assets/cabinet1a.gltf" position="-3 0.2 -3" rotation="0 180 0" wall  toggleouverture clickable></a-gltf-model>
+                <a-gltf-model id="target26" src="./assets/cabinet1a.gltf" position="-3 0.5 -3" rotation="0 180 0" wall  toggleouverture clickable></a-gltf-model>
 
                 <a-gltf-model id="target36" src="./assets/cabinet1a.gltf"  physx-body="type: static;"  position="-3 0.5 -5" rotation="0 0 0" wall toggleouverture clickable></a-gltf-model>
                 <a-gltf-model id="target46" src="./assets/cabinet1a.gltf"  physx-body="type: static;" position="-3 0.5 -6" rotation="0 180 0" wall toggleouverture clickable></a-gltf-model>
