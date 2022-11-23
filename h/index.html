@@ -33,7 +33,9 @@
       <body>
         
         
-        <a-scene stats 
+        <a-scene stats vr-mode-ui='enabled: true;'
+        renderer="logarithmicDepthBuffer: true; precision: medium;"
+        embedded 
         physx="autoLoad: true; delay: 1000; wasmUrl: ./libs/physx.release.wasm; useDefaultScene: true; wrapBounds: true;"
         physx-contact-event
         >
@@ -55,17 +57,21 @@
             position=" 1 .01 -1.5"
             rotation="0 0 0"
             >          
-            <a-box cursor="rayOrigin: mouse" raycaster="far: 100; objects: .clickable;" 
+            <a-box 
+              cursor="rayOrigin: mouse" 
+              raycaster="far: 100; objects: .clickable;" 
               physx-body="type: kinematic; emitCollisionEvents:true;"
-              width="0.5" depth="0.5" height="1.5"
+              width="0.5"  
+              depth="0.5" 
+              height="1.5"
               position = "0 1 0"
               color = "#BBBBBB"
              >     
            </a-box>  
-           <a-hand side="left" laser-controls="hand: left color="red"></a-hand>
-<a-hand side="right"oculus-touch-controls="hand: right"  color="blue"></a-hand>
+           
         </a-player>
-
+                    <a-hand side="left" laser-controls="hand: left color="red"></a-hand>
+                    <a-hand side="right"oculus-touch-controls="hand: right"  color="blue"></a-hand>
         <a-box physx-body="type: static;" 
 
         class="environmentGround"
