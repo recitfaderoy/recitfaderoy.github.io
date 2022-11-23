@@ -40,7 +40,14 @@ AFRAME.registerComponent("injectplayer", {
       this.el.ensure("a-hand[side=\"right\"]", "a-hand", { side: "right" })
     }
   })
+/* global AFRAME, THREE */
 
+AFRAME.registerPrimitive("a-hand", {
+    mappings: {
+      side: "tracked-controls.hand"
+    }
+  })
+  
   /* global AFRAME, THREE */
 
 AFRAME.registerPrimitive("a-glove", {
