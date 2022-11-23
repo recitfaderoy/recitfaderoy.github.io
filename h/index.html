@@ -35,7 +35,7 @@
         
         <a-scene stats vr-mode-ui='enabled: true;'
         renderer="logarithmicDepthBuffer: true; precision: medium;"
-        embedded 
+        
         physx="autoLoad: true; delay: 1000; wasmUrl: ./libs/physx.release.wasm; useDefaultScene: true; wrapBounds: true;"
         physx-contact-event
         >
@@ -69,7 +69,7 @@
              >     
            </a-box>  
            
-                    <a-hand side="left" laser-controls="hand: left color="red"></a-hand>
+                    <a-hand side="left" laser-controls="hand: left" color="red"></a-hand>
                     <a-hand side="right"oculus-touch-controls="hand: right"  color="blue"></a-hand>
         </a-player>
         <a-box physx-body="type: static;" 
