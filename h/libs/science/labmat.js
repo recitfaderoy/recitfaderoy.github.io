@@ -67,7 +67,8 @@ AFRAME.registerComponent("injectbeaker", {
           this.el.ensure("a-gltf-model", "a-gltf-model", {
             "src": this.beackergltf,
             "class": "matlabo1",
-            "scale" : "1 1 1"
+            "scale" : "1 1 1",
+            "raycast-target":""
           })
           this.el.setAttribute("class","laboratory")  
           this.el.setAttribute("shape","cylinder")

@@ -22,10 +22,14 @@
         <script src="./libs/pools.js" ></script>
         <script src="./libs/betterRaycaster.js" ></script>
         <script src="./libs/science/labmat.js" ></script>
-        <!--<script src="./libs/cannon.js" ></script>-->
+        
+        
+
+
         <script src="./libs/touchGestures.js" ></script>
         <script src="./escaperoom.js" ></script>
-    <script type="text/javascript" src="./libs/webxr.js"></script>
+    <!--<script type="text/javascript" src="./libs/webxr.js"></script>
+    <script src="./libs/cannon.js" ></script>-->
         <script type="text/javascript" src="./libs/joystick.js"></script>
 
       </head>
@@ -53,13 +57,26 @@
             <!--<a-plane floor material=" color:#00ffee; repeat: 700 700; transparent: true;" height="100" width="100"
             rotation="-90 0 0"></a-plane> -->
             
-            <a-player locomotion grabbing 
-            position=" 1 .01 -1.5"
+            <a-player locomotion grabbbing 
+            position=" 1 .01 -4.5"
             rotation="0 0 0"
             >          
             <a-box 
               cursor="rayOrigin: mouse" 
-              raycaster="far: 100; objects: .clickable;" 
+              raycaster="far: 100; objects: .clickable;"
+              
+              physx-body="type: kinematic; emitCollisionEvents:true;"
+              width="0.5"  
+              depth="0.5" 
+              height="1.5"
+              position = "0 1 0"
+              color = "#BBBBBB"
+             >     
+           </a-box>
+           <a-box 
+              cursor="rayOrigin: mouse" 
+              raycaster="far: 100; objects:  [raycast-target];"
+              mouse-manipulation 
               physx-body="type: kinematic; emitCollisionEvents:true;"
               width="0.5"  
               depth="0.5" 
@@ -144,16 +161,19 @@
                         material="src:#ball; color:red;">
                         </a-sphere>
 
-                <a-escaperoom-element material="color: #F00" solution="true" gltf-model="url(./assets/baril1aa.gltf)" position="0 0.5 -7"  physx-material="restitution: 0.8;" gltf-entities  physx-body="type: dynamic; emitCollisionEvents:true;" 
+                <a-escaperoom-element material="color: #F00" solution="true" gltf-model="url(./assets/baril1aa.gltf)" position="0 0.5 -7" raycast-target  physx-material="restitution: 0.8;" gltf-entities  physx-body="type: dynamic; emitCollisionEvents:true;" 
                 ></a-escaperoom-element>
-                <a-gltf-model classe="clickable" id="target1" src="./assets/rangement.gltf" wall position="2 0.2  -6"></a-gltf-model>
-                <a-gltf-model id="target16" src="./assets/cabinet1a.gltf" position="-3 0.5 -3" rotation="0 0 0"physx-body="type: static;"  wall toggleouverture clickable></a-gltf-model>
-                <a-beaker id="becher1a" name= "bécher A" colorliq="olive"  percent=0 volume= "100ml"     opacity="0"  rotation="0 0 0" scale=" 1 1" position="-2.7 1.0 -4.4" visible="true" physx-material="restitution: 0.8;" gltf-entities  physx-body="type: dynamic; emitCollisionEvents:true;" dragndrop grabbable onstate__grabbed=" property:colorliq; on:red; off:green;">
-                </a-beaker>
-                <a-gltf-model id="target26" src="./assets/cabinet1a.gltf" position="-3 0.5 -3" rotation="0 180 0" wall  toggleouverture clickable></a-gltf-model>
+                <a-gltf-model id="target1" src="./assets/rangement.gltf" wall position="2 0.2  -6"></a-gltf-model>
+                <a-gltf-model id="target16" src="./assets/cabinet1a.gltf" position="-3 0.5 -2" rotation="0 0 0"physx-body="type: static;"  wall button="action:toggleouverture;"" ></a-gltf-model>
+                    <a-beaker id="becher1a" name= "bécher A" colorliq="olive"  percent=0.6 volume= "100ml"  raycast-target   opacity="0.9"  rotation="0 0 0" scale=" 1 1" position="-2.7 1.0 -4.4" visible="true" physx-material="restitution: 0.8;" gltf-entities  physx-body="type: dynamic; emitCollisionEvents:true;" >
+                    </a-beaker>
+                <a-gltf-model button id="target26" src="./assets/cabinet1a.gltf" position="-3 0.5 -3" rotation="0 180 0" wall  toggleouverture clickable>
+                    <a-escaperoom-element solution="true" gltf-model="url(./assets/Tablette_papier.gltf)"  button raycast-target physx-material="restitution: 0.8;" gltf-entities  physx-body="type: kinematic; emitCollisionEvents:true;" position="-0.1 0.4 -0.1" ></a-escaperoom-element>
+
+                </a-gltf-model>
 
                 <a-gltf-model id="target36" src="./assets/cabinet1a.gltf"  physx-body="type: static;"  position="-3 0.5 -5" rotation="0 0 0" wall toggleouverture clickable></a-gltf-model>
-                <a-gltf-model id="target46" src="./assets/cabinet1a.gltf"  physx-body="type: static;" position="-3 0.5 -6" rotation="0 180 0" wall toggleouverture clickable></a-gltf-model>
+               <a-gltf-model id="target46" src="./assets/cabinet1a.gltf"  physx-body="type: static;" position="-3 0.5 -6" rotation="0 180 0" wall toggleouverture clickable></a-gltf-model>
 
                 <a-gltf-model id="target56" src="./assets/cabinet1a.gltf"  physx-body="type: static;" position="-3 0.5 -8" rotation="0 0 0" wall toggleouverture clickable></a-gltf-model>
                 <a-gltf-model id="target66" src="./assets/cabinet1a.gltf"   physx-body="type: static;" position="-3 0.5 -9" rotation="0 180 0" wall  toggleouverture clickable></a-gltf-model>

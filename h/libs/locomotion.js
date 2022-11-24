@@ -81,7 +81,7 @@ AFRAME.registerComponent("locomotion", {
         // showLine: true
       }
     })
-    this._teleportBeam = this._camera.ensure(".teleport-ray", "a-entity", {
+ /*   this._teleportBeam = this._camera.ensure(".teleport-ray", "a-entity", {
       class: "teleport-ray",
       raycaster: {
         deep: true,
@@ -93,7 +93,7 @@ AFRAME.registerComponent("locomotion", {
     this._teleportCursor = this.el.ensure(".teleport-cursor", "a-cylinder", {
       class: "teleport-cursor", radius: 0.5, height: 0.0625, material: "opacity:0.5;"
     })
-    this._teleportCursor.setAttribute("visible", false)
+    this._teleportCursor.setAttribute("visible", false)*/
   },
 
   update(oldData) {
@@ -479,7 +479,7 @@ AFRAME.registerComponent("locomotion", {
       }
 
       // Teleportation and jumping
-      if (Math.round(stick.y) < 0) {
+     /* if (Math.round(stick.y) < 0) {
         if (!this._teleporting && this.data.teleportDistance) {
           this._teleportCursor.setAttribute("visible", true)
           this._teleporting = true
@@ -525,7 +525,7 @@ AFRAME.registerComponent("locomotion", {
         this._teleportCursor.setAttribute("visible", false)
         this._teleportCursor.setAttribute("position", "0 0 0")
         this._teleporting = false
-      }
+      }*/
     }
   },
 
