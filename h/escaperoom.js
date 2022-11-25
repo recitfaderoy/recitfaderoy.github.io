@@ -57,6 +57,9 @@ AFRAME.registerComponent("injectplayer", {
         id:"lhand",
         position:"-0.4 1.4 -0.5",
         "oculus-touch-controls":"hand: left",
+        "laser-controls":"hand: Left",
+          raycaster:"objects:  .clickable; far: Infinity; lineColor: blue; lineOpacity: 0.5",
+       
         "desktop-vr-controller":""}
         )
       this.el.ensure("a-hand[side=\"right\"]", "a-hand", {
