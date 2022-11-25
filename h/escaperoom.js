@@ -60,21 +60,21 @@ AFRAME.registerComponent("injectplayer", {
         "laser-controls":"hand: Left",
           raycaster:"objects:  .clickable; far: Infinity; lineColor: blue; lineOpacity: 0.5",
        
-        "desktop-vr-controller":""}
+        }
         )
       this.el.ensure("a-hand[side=\"right\"]", "a-hand", {
          side: "right",
          id:"rhand",
          position:"0.4 1.4 -0.5",
          "laser-controls":"hand: right",
-          raycaster:"objects: [raycast-target], .clickable; far: Infinity; lineColor: red; lineOpacity: 0.5",
+          raycaster:"objects: [raycast-target],  far: Infinity; lineColor: red; lineOpacity: 0.5",
          "laser-manipulation":"",
          "thumbstick-states__right":{controller:"#rhand",
                                    tBindings:{"moving-in":"","moving-out":"","rotating-y-plus":"","rotating-y-minus":""},
                                    tgBindings:{"rotating-x-plus":"","rotating-x-minus":"","rotating-y-plus":"","rotating-y-minus":""}
       },
          "oculus-touch-controls":"hand: right",
-        "desktop-vr-controller":"" })
+         })
       this.el.setAttribute("wasd-controls", { enabled: false })
     }
   })
