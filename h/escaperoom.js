@@ -64,7 +64,7 @@ AFRAME.registerComponent("injectplayer", {
          id:"rhand",
          position:"0.4 1.4 -0.5",
          "laser-controls":"hand: right",
-          raycaster:"objects: [raycast-target]; far: Infinity; lineColor: red; lineOpacity: 0.5",
+          raycaster:"objects: [raycast-target], .clickable; far: Infinity; lineColor: red; lineOpacity: 0.5",
          "laser-manipulation":"",
          "thumbstick-states__right":{controller:"#rhand",
                                    tBindings:{"moving-in":"","moving-out":"","rotating-y-plus":"","rotating-y-minus":""},
