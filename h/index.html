@@ -209,8 +209,11 @@
                 ></a-escaperoom-element>
                 <a-gltf-model id="target1" src="./assets/rangement.gltf" wall position="2 0.2  -6"></a-gltf-model>
                 <a-gltf-model id="target16" src="./assets/cabinet1a.gltf" position="-3 0.5 -2" rotation="0 0 0"physx-body="type: static;"  wall button="action:toggleouverture;"" ></a-gltf-model>
-                    <a-becher id="becher1a" name= "bécher A" colorliq="olive"  percent=0.6 volume= "100ml"    opacity="0.9"  rotation="0 0 0" scale=" 1 1" position="-2.7 1.0 -4.4" visible="true" raycast-target>
+                <a-entity id="container1"
+                position="-2.7 1.0 -4.4">
+                    <a-becher id="becher1a" name= "bécher A" colorliq="purple"  percent=0.6 volume= "100ml"    opacity="0.9"  rotation="0 0 0" scale=" 1 1" position="0 0 0" visible="true" raycast-target>
                     </a-becher>
+                </a-entity>
                 <a-gltf-model button id="target26" src="./assets/cabinet1a.gltf" position="-3 0.5 -3" rotation="0 180 0" wall  toggleouverture clickable>
                     <a-escaperoom-element solution="true" gltf-model="url(./assets/Tablette_papier.gltf)"  button raycast-target physx-material="restitution: 0.8;" gltf-entities  physx-body="type: kinematic; emitCollisionEvents:true;" position="-0.1 0.4 -0.1" ></a-escaperoom-element>
 

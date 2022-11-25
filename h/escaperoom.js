@@ -52,22 +52,27 @@ AFRAME.registerComponent("injectplayer", {
           // showLine: true
         }
       })
-      this.el.ensure("a-hand[side=\"left\"]", "a-hand", { 
+      this.el.ensure(",a-hand[side=\"left\"]", "a-hand", { 
         side: "left" ,
         id:"lhand",
         position:"-0.4 1.4 -0.5",
         "oculus-touch-controls":"hand: left",
         "laser-controls":"hand: Left",
           raycaster:"objects:  .clickable; far: Infinity; lineColor: blue; lineOpacity: 0.5",
-       
+          "thumbstick-states__left":{controller:"#rhand",
+          tBindings:{"moving-in":"","moving-out":"","rotating-y-plus":"","rotating-y-minus":""},
+          tgBindings:{"rotating-x-plus":"","rotating-x-minus":"","rotating-y-plus":"","rotating-y-minus":""}
         }
-        )
+    })
+       
+        
+        
       this.el.ensure("a-hand[side=\"right\"]", "a-hand", {
          side: "right",
          id:"rhand",
          position:"0.4 1.4 -0.5",
          "laser-controls":"hand: right",
-          raycaster:"objects: [raycast-target],  far: Infinity; lineColor: red; lineOpacity: 0.5",
+          raycaster:"objects: [raycast-target];  far: Infinity; lineColor: red; lineOpacity: 0.5",
          "laser-manipulation":"",
          "thumbstick-states__right":{controller:"#rhand",
                                    tBindings:{"moving-in":"","moving-out":"","rotating-y-plus":"","rotating-y-minus":""},
