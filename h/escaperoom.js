@@ -52,7 +52,7 @@ AFRAME.registerComponent("injectplayer", {
           // showLine: true
         }
       })
-      this.el.ensure(",a-hand[side=\"left\"]", "a-hand", { 
+      this.el.ensure(".a-hand[side=\"left\"]", "a-hand", { 
         side: "left" ,
         id:"lhand",
         position:"-0.4 1.4 -0.5",
