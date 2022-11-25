@@ -107,7 +107,9 @@ AFRAME.registerComponent('laser-manipulation', {
       element.setAttribute('object-parent', 'parent', `#${this.el.id}-contact-point`)
 
       // store reference to grabbed element
-      this.grabbedEl = element
+      this.grabbedEl = element;
+       /*Recitfad add*/
+       this.grabbedEl.removeAttribute("physx-body")
     },
   
     triggerUp() {
@@ -115,6 +117,9 @@ AFRAME.registerComponent('laser-manipulation', {
       if (!this.grabbedEl) return
   
       this.grabbedEl.setAttribute('object-parent', 'parent', `#${this.originalParentEl.id}`)
+           /*Recitfad add*/
+             this.grabbedEl.setAttribute("physx-body", {type: "dynamic", emitCollisionEvents:true} )
+
       this.grabbedEl = null
     },
   

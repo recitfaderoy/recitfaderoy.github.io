@@ -301,6 +301,7 @@ AFRAME.registerComponent('mouse-manipulation', {
             this.originalParentEl = this.getParentEl(this.grabbedEl)
         }
         this.assureUsableId(this.originalParentEl)
+        /*Recitfad add*/
         this.grabbedEl.removeAttribute("physx-body")
 
         // set up a contact point at the position of the grabbed entity
@@ -316,6 +317,7 @@ AFRAME.registerComponent('mouse-manipulation', {
     releaseEl() {
         const contactPoint = this.grabbedEl.object3D.parent
         this.grabbedEl.setAttribute('object-parent', 'parent', `#${this.originalParentEl.id}`)
+           /*Recitfad add*/
         this.grabbedEl.setAttribute("physx-body", {type: "dynamic", emitCollisionEvents:true} )
         this.grabbedEl = null
         this.originalParentEl = null
