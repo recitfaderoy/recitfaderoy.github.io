@@ -67,8 +67,8 @@ AFRAME.registerComponent("injectbeaker", {
           this.el.ensure("a-gltf-model", "a-gltf-model", {
             "src": this.beackergltf,
             "class": "matlabo1",
-            "scale" : "1 1 1",
-            "raycast-target":""
+            "scale" : "1 1 1"/*,
+            "raycast-target":""*/
           })
           this.el.setAttribute("class","laboratory")  
           this.el.setAttribute("shape","cylinder")
@@ -175,7 +175,7 @@ console.log("lesd données"+this.data.colorliq + containlevely)
   levelw() {
     console.log("ceci = "+this)
     this.schema = this.el.querySelector(".cyl")
-    this.data.percent = this.el.components.injectbeaker.el.childNodes[2].childNodes[2].components["gui-slider"].data.percent
+    this.data.percent = this.el.components.becher.el.childNodes[2].childNodes[2].components["gui-slider"].data.percent
     this.data.percentsolute = this.el.components.injectbeaker.el.childNodes[2].children[4].components["gui-slider"].data.percent
     this.dataopacity = this.data.percentsolute /this.data.percent
     console.log("opafitu =" +this.dataopacity)
@@ -203,4 +203,95 @@ console.log("lesd données"+this.data.colorliq + containlevely)
       
 }
 })
+AFRAME.registerPrimitive("a-becher", {
+  defaultComponents: {
+    becher: {},
+    position:{},
+        rotation :{},
+        scale:{}
+  },
+  mappings: {
+        name: 'becher.name' ,
+        solute: 'becher.solute' ,
+        volume: 'becher.volume' ,
+        percent: 'becher.percent' ,
+        opacity: 'becher.opacity',
+        colorliq: 'becher.colorliq',
+        
+  }
+})
+
+AFRAME.registerComponent('becher', {
+  schema: {
+    name :  { default:' Appareil' },
+    volume:  {  type: 'string',    default: "100ml"},
+    solute:  {  type: 'number',default: 0.1 },
+    percent: { type: 'number', default: 0.2 },
+    opacity: { default:' 0.2' },
+    colorliq: { default:'#eef' },
+    position:{ default:'0 0 0' },
+    rotation :{ default:'0 0 0'},
+    scale:{ default:'1 1 1'}
+  }
+,
+  //dependencies: ['raycaster'],
+
+  init(){
+    this.beackergltf = "#b100";
+        this.beackervolumeheight = 0.07;
+        this.beackervolumediameter = 0.028;
+        this.containlevel = this.data.percent * this.beackervolumeheight;
+        this.containlevely= 0.0 +( this.containlevel / 2);
+        console.log("les données  couleur = "+this.data.colorliq + "   water level y  =" +this.containlevely + "   containlevel  =" + this.containlevel + "  this.data.volume ="+  this.data.volume )  
+  // Contain of the beaker
+      this.el.classList.add("clickable");
+      this.el.setAttribute("gltf-model","#b100") 
+      this.el.setAttribute("class","laboratory")  
+      this.el.setAttribute("gltf-entities","")
+    this.el.setAttribute("physx-body", {type: "dynamic", emitCollisionEvents:true} )
+      this.el.setAttribute("physx-material", "restitution", "0")
+      this.el.ensure("a-cylinder", "a-cylinder", {
+        "color": this.data.colorliq,
+        "class": "cyl",
+        "height" : this.containlevel, 
+        "radius" : this.beackervolumediameter ,
+        "position" :{x: 0,
+          y : this.containlevely,
+          z : 0
+          },
+        "opacity" :this.data.opacity ,
+        "transparent":"true"
+    })
+  },
+  levelw() {
+    console.log("ceci = "+this)
+    this.schema = this.el.querySelector(".cyl")
+    this.data.percent = this.el.components.injectbeaker.el.childNodes[2].childNodes[2].components["gui-slider"].data.percent
+    this.data.percentsolute = this.el.components.injectbeaker.el.childNodes[2].children[4].components["gui-slider"].data.percent
+    this.dataopacity = this.data.percentsolute /this.data.percent
+    console.log("opafitu =" +this.dataopacity)
+    console.log("volume"+ this.data.volume)
+    console.log("solute =" + this.data.percentsolute)
+    console.log("percent" + this.el.components.injectbeaker.el.childNodes[2].children[2].components["gui-slider"].data.percent)
+       this.containlevel  = this.data.percent * this.data.volume;
+       this.containlevely= 0.00 +( this.containlevel / 2);
+       this.el.emit('timetochange')
+       console.log(this.containlevel)
+      this.schema.setAttribute('height', this.containlevel)
+      this.schema.setAttribute('opacity', this.dataopacity)
+      this.schema.setAttribute('position', {x: 0, y : this.containlevely,z : 0})
+      console.log(this.el.getAttribute('containlevel'))
+      },
+
+ /* events: {
+      click: function (evt) {
+          if(this.data.solution){
+              let escapeDoorList = this.el.parentEl.querySelectorAll(`[escape_door]`);
+              for(let item of escapeDoorList){
+                  item.components.escape_door.open();
+              }
+          }
+      }
+  }*/
+});
 

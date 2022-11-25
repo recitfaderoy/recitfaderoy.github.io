@@ -24,7 +24,19 @@
         <script src="./libs/science/labmat.js" ></script>
         
         
-
+        <script src="./components/low-cost-raycasting.js"></script>
+        <script src="./components/polygon-wireframe.js"></script>
+        <script src="./components/cursor-tracker.js"></script>
+        <script src="./components/object-parent.js"></script>
+        <script src="./components/mouse-manipulation.js"></script>
+        <script src="./components/label.js"></script>
+        <script src="./components/thumbstick-states.js"></script>
+        <script src="./components/laser-manipulation.js"></script>
+        <script src="./components/desktop-vr-controller.js"></script>
+        <script src="./components/raycaster-thresholds.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/diarmidmackenzie/screen-display@latest/src/screen-display.js"></script>
+        <script src="./components/connecting-line.js"></script>
+        <script src="./components/raycast-target.js"></script>
 
         <script src="./libs/touchGestures.js" ></script>
         <script src="./escaperoom.js" ></script>
@@ -47,6 +59,18 @@
             <a-assets>
                 <img id="recitLogo" src="./assets/logo.jpg">
                 <a-asset-item id="b100" preload="true" response-type="arraybuffer" src="./assets/laboratoire/Becher100.gltf"></a-asset-item>
+                <a-asset-item id="trex-model"
+           src="./assets/t-rex/scene.gltf"
+           response-type="arraybuffer" crossorigin="anonymous">
+        </a-asset-item>
+        <a-asset-item id="eiffel-model"
+           src="./assets/eiffel/scene.gltf"
+           response-type="arraybuffer" crossorigin="anonymous">
+        </a-asset-item>
+        <a-asset-item id="cell-model"
+           src="./assets/cell/scene.gltf"
+           response-type="arraybuffer" crossorigin="anonymous">
+        </a-asset-item>
                 <!--
                 <a-asset-item id="baril1" preload="true" response-type="arraybuffer" src="./assets/baril1.gltf"></a-asset-item>
                 <a-asset-item id="baril2" preload="true" response-type="arraybuffer" src="./assets/baril2.gltf"></a-asset-item>
@@ -68,7 +92,7 @@
               physx-body="type: kinematic; emitCollisionEvents:true;"
               width="0.5"  
               depth="0.5" 
-              height="1.5"
+              height="0.5"
               position = "0 1 0"
               color = "#BBBBBB"
              >     
@@ -88,6 +112,10 @@
            
            <a-hand side="left" laser-controls="hand: left" color="red"></a-hand>
            <a-hand side="right" oculus-touch-controls="hand: right" color="blue"></a-hand>
+           <a-sphere id="up-marker" position = "0 10 0">
+        </a-sphere>
+        <a-sphere id="down-marker" position = "0 -10 0">
+        </a-sphere>
         </a-player>
         <a-box physx-body="type: static;" 
 
@@ -155,18 +183,34 @@
     <a-entity id="text" position="-2 2 -2" rotation="0 0 0"       text="value: Généralement, on utilise un texte en faux latin (le texte ne veut rien dire, il a été modifié), le Lorem ipsum ou Lipsum, qui permet donc de faire office de texte d'attente. L'avantage de le mettre en latin est que l'opérateur sait au premier coup d'oeil que la page contenant ces lignes n'est pas valide, et surtout l'attention du client n'est pas dérangée par le contenu, il demeure concentré seulement sur l'aspect graphique.; align: center; color: green; width: 1; opacity: 1; negate:false;    font:./assets/fonts/SourceCodePro-VariableFont_wght-msdf.json; font-image:./assets/fonts/SourceCodePro-VariableFont_wght.png;"></a-entity>
     <a-entity id="text" position="-2   2 -2" rotation="0 0 0"       text="value: Généralement, on utilise un texte en faux latin (le texte ne veut rien dire, il a été modifié), le Lorem ipsum ou Lipsum, qui permet donc de faire office de texte d'attente. L'avantage de le mettre en latin est que l'opérateur sait au premier coup d'oeil que la page contenant ces lignes n'est pas valide, et surtout l'attention du client n'est pas dérangée par le contenu, il demeure concentré seulement sur l'aspect graphique.; align: center; color: green; width: 1; opacity: 1; negate:false;    font:./assets/fonts/SourceCodePro-VariableFont_wght-msdf.json; font-image:./assets/fonts/SourceCodePro-VariableFont_wght.png;"></a-entity>-->
     <a-escaperoom-element solution="true" gltf-model="url(./assets/baril1aa.gltf)"  physx-material="restitution: 0.8;" gltf-entities  physx-body="type: dynamic; emitCollisionEvents:true;" position="-3 1.5 -7" ></a-escaperoom-element>
-    <a-sphere physx-body="type: dynamic;" physx-material="restitution: 0.8;"
-                        position="1 6 -5" 
+    <a-sphere physx-body="type: dynamic;" raycast-target grabbable physx-material="restitution: 0.8;"
+                        position="1 2 -5" 
                         radius="0.5" 
                         material="src:#ball; color:red;">
                         </a-sphere>
-
+                <a-entity id="container"
+                        position="0 1 -5">
+                  <a-entity id="eiffel" position="-2 0 0"
+                            adjusted-model="gltfModel: #eiffel-model;
+                                                    dimension: 0.5">
+                  </a-entity>
+                  <a-entity id="trex" position="0 0 0"
+                            adjusted-model="gltfModel: #trex-model;
+                                                    dimension: 0.2">
+                  </a-entity>
+                  <a-entity id="cell" position="2 0 0"
+                            adjusted-model="gltfModel: #cell-model;
+                                                    dimension: 1">
+                  </a-entity>
+                  <a-beaker id="becher1aa" name= "bécher A" colorliq="olive"  percent=0.6 volume= "100ml"    opacity="0.9"  rotation="0 0 0" scale=" 1 1" position="-2.7 1.0 0" visible="true" physx-material="restitution: 0.8;" gltf-entities raycast-target physx-body="type: dynamic; emitCollisionEvents:true;" >
+                </a-beaker>
+              </a-entity>           
                 <a-escaperoom-element material="color: #F00" solution="true" gltf-model="url(./assets/baril1aa.gltf)" position="0 0.5 -7" raycast-target  physx-material="restitution: 0.8;" gltf-entities  physx-body="type: dynamic; emitCollisionEvents:true;" 
                 ></a-escaperoom-element>
                 <a-gltf-model id="target1" src="./assets/rangement.gltf" wall position="2 0.2  -6"></a-gltf-model>
                 <a-gltf-model id="target16" src="./assets/cabinet1a.gltf" position="-3 0.5 -2" rotation="0 0 0"physx-body="type: static;"  wall button="action:toggleouverture;"" ></a-gltf-model>
-                    <a-beaker id="becher1a" name= "bécher A" colorliq="olive"  percent=0.6 volume= "100ml"  raycast-target   opacity="0.9"  rotation="0 0 0" scale=" 1 1" position="-2.7 1.0 -4.4" visible="true" physx-material="restitution: 0.8;" gltf-entities  physx-body="type: dynamic; emitCollisionEvents:true;" >
-                    </a-beaker>
+                    <a-becher id="becher1a" name= "bécher A" colorliq="olive"  percent=0.6 volume= "100ml"    opacity="0.9"  rotation="0 0 0" scale=" 1 1" position="-2.7 1.0 -4.4" visible="true" raycast-target>
+                    </a-becher>
                 <a-gltf-model button id="target26" src="./assets/cabinet1a.gltf" position="-3 0.5 -3" rotation="0 180 0" wall  toggleouverture clickable>
                     <a-escaperoom-element solution="true" gltf-model="url(./assets/Tablette_papier.gltf)"  button raycast-target physx-material="restitution: 0.8;" gltf-entities  physx-body="type: kinematic; emitCollisionEvents:true;" position="-0.1 0.4 -0.1" ></a-escaperoom-element>
 
