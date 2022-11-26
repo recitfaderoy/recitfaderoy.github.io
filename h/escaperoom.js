@@ -52,23 +52,27 @@ AFRAME.registerComponent("injectplayer", {
           // showLine: true
         }
       })
-     this.el.ensure("a-hand[side=\"left\"]", "a-hand", { 
+      this.handy=this.el.ensure(".handy",a-CustomElementRegistry,{
+        "handy-controls":"materialOverride:both; material:color:gold;metalness:1; roughness:0;"
+      })
+     this.handy.ensure("a-hand[side=\"left\"]", "a-hand", { 
+     
         side: "left" ,
         id:"lhand",
         position:"-0.4 1.4 -0.5",
-              "laser-controls":"hand: Left",
-          raycaster:"objects:  .clickable; far: Infinity; lineColor: blue; lineOpacity: 0.5",
-          "thumbstick-states__left":{controller:"#rhand",
-          tBindings:{"moving-in":"","moving-out":"","rotating-y-plus":"","rotating-y-minus":""},
-          tgBindings:{"rotating-x-plus":"","rotating-x-minus":"","rotating-y-plus":"","rotating-y-minus":""}
-        }
-    })
+       "data-left":"index-finger-tip",
+        mixin:"blink",
+        "blink-controls":"startEvents:pose_point;cancelEvents:pose_cancel_point;endEvents:pose_point_fuseLong;"
+              })
+     
        
         
         
-      this.el.ensure("a-hand[side=\"right\"]", "a-hand", {
+      this.handy.ensure("a-hand[side=\"right\"]", "a-hand", {
          side: "right",
          id:"rhand",
+         "data-left":"ray" ,
+         "mixin":"blink",
          position:"0.4 1.4 -0.5",
          "laser-controls":"hand: right",
          cursor:"",

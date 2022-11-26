@@ -86,38 +86,45 @@
                 <a-asset-item id="baril3" preload="true" response-type="arraybuffer" src="./assets/baril3.gltf"></a-asset-item>
                 <a-asset-item id="baril4" preload="true" response-type="arraybuffer" src="./assets/baril4.gltf"></a-asset-item>
                 -->
+                <a-mixin id="blink" blink-controls="cameraRig: #player; teleportOrigin: #head; collisionEntities:.navmesh;"></a-mixin>
+		
             </a-assets>
             <!--<a-plane floor material=" color:#00ffee; repeat: 700 700; transparent: true;" height="100" width="100"
             rotation="-90 0 0"></a-plane> -->
             
             <a-player locomotion grabbbing 
+            id="player"
             position=" 1 .01 -4.5"
             rotation="0 0 0"
             >          
-            <a-box 
-              cursor="rayOrigin: mouse" 
-              raycaster="far: 100; objects: .clickable;"
-              visible=false
-              physx-body="type: kinematic; emitCollisionEvents:true;"
-              width="0.5"  
-              depth="0.5" 
-              height="0.5"
-              position = "0 1 0"
-              color = "#BBBBBB"
-             >     
-           </a-box>
-           <a-box 
-              cursor="rayOrigin: mouse" 
-              raycaster="far: 100; objects:  [raycast-target];"
-              mouse-manipulation 
-              physx-body="type: kinematic; emitCollisionEvents:true;"
-              width="0.5"  
-              depth="0.5" 
-              height="1.5"
-              position = "0 1 0"
-              color = "#BBBBBB"
-             >     
-           </a-box>  
+                    <a-box 
+                    id="head"
+                    cursor="rayOrigin: mouse" 
+                    raycaster="far: 100; objects: .clickable;"
+                    visible=false
+                    physx-body="type: kinematic; emitCollisionEvents:true;"
+                    width="0.5"  
+                    depth="0.5" 
+                    height="0.5"
+                    position = "0 1 0"
+                    color = "#BBBBBB"
+                    >     
+                </a-box>
+                 <a-entity 
+               
+                     id="cursor"
+                     cursor="rayOrigin: mouse" 
+                    raycaster="far: Infinity; objects:  [raycast-target];"
+                    mouse-manipulation 
+                    physx-body="type: kinematic; emitCollisionEvents:true;"
+                    width="0.5"  
+                    depth="0.5" 
+                    height="1.5"
+                    position = "0 1 0"
+                    color = "#BBBBBB"
+                    >     
+                 </a-entity>  
+                    
            <!-- <a-entity handy-controls="materialOverride:both;" material="color:gold;metalness:1;roughness:0;">
 
             These also do teleportaion for Blink controls in VR -->
@@ -130,20 +137,20 @@
            
           <!-- <a-hand side="left" laser-controls="hand: left" color="red"></a-hand>
            <a-hand side="right" oculus-touch-controls="hand: right" laser-controls="hand: right"  color="blue"></a-hand>-->
-           <a-sphere id="up-marker" position = "0 10 0">
-        </a-sphere>
-        <a-sphere id="down-marker" position = "0 -10 0">
-        </a-sphere>
+                        <a-sphere id="up-marker" position = "0 10 0">
+                        </a-sphere>
+                        <a-sphere id="down-marker" position = "0 -10 0">
+                        </a-sphere>
         </a-player>
-        <a-box physx-body="type: static;" 
+                    <a-box physx-body="type: static;" 
 
-        class="environmentGround"
-          position="0 -0.01 0"
-          width="100" depth="100" height="0.1"
-          material=" color:#00ffee; repeat: 700 700; transparent: true;"
-          shadow="receive: true;"
-          floor>
- </a-box>
+                    class="environmentGround navmesh"
+                    position="0 -0.01 0"
+                    width="100" depth="100" height="0.1"
+                    material=" color:#00ffee; repeat: 700 700; transparent: true;"
+                    shadow="receive: true;"
+                    floor>
+                    </a-box>    
            
             
                 <!--<a-cursor id="cursor" raycaster fuse="true" fusetimeout="2000"></a-cursor>-->
@@ -186,20 +193,7 @@
         
         
           <a-entity light="type: spot; intensity: 0.3; angle: 23; target: #target66"  position="2 3.5 -3"></a-entity>
-          <!--
-  <a-entity id="text" position="0 1.5 -2" rotation="0 0 0"       text="value: Généralement, on utilise un texte en faux latin (le texte ne veut rien dire, il a été modifié), le Lorem ipsum ou Lipsum, qui permet donc de faire office de texte d'attente. L'avantage de le mettre en latin est que l'opérateur sait au premier coup d'oeil que la page contenant ces lignes n'est pas valide, et surtout l'attention du client n'est pas dérangée par le contenu, il demeure concentré seulement sur l'aspect graphique.; align: center; color: red; width: 1; opacity: 1; negate:false;    font:./assets/fonts/viga.regular-msdf.json; font-image:./assets/fonts/vigaregular.png;"> </a-entity>
-<a-entity id="text" position="1 1.5 -2" rotation="0 0 0"       text="value: Généralement, on utilise un texte en faux latin (le texte ne veut rien dire, il a été modifié), le Lorem ipsum ou Lipsum, qui permet donc de faire office de texte d'attente. L'avantage de le mettre en latin est que l'opérateur sait au premier coup d'oeil que la page contenant ces lignes n'est pas valide, et surtout l'attention du client n'est pas dérangée par le contenu, il demeure concentré seulement sur l'aspect graphique.; align: center; color: #fff; width: 1; opacity: 1; negate:false;    font:./assets/fonts/FredokaOne-Regular-msdf.json; font-image:./assets/fonts/FredokaOne-Regular.png;"></a-entity>
- <a-entity id="text" position="2 1.5 -2" rotation="0 0 0"       text="value: Généralement, on utilise un texte en faux latin (le texte ne veut rien dire, il a été modifié), le Lorem ipsum ou Lipsum, qui permet donc de faire office de texte d'attente. L'avantage de le mettre en latin est que l'opérateur sait au premier coup d'oeil que la page contenant ces lignes n'est pas valide, et surtout l'attention du client n'est pas dérangée par le contenu, il demeure concentré seulement sur l'aspect graphique.; align: center; color: #fff; width: 1; opacity: 1; negate:false;    font:./assets/fonts/Ubuntu-Th-msdf.json; font-image:./assets/fonts/Ubuntu-Th.png;">                </a-entity>
- <a-entity id="text" position="0 0.5 -2" rotation="0 0 0"       text="value: Généralement, on utilise un texte en faux latin (le texte ne veut rien dire, il a été modifié), le Lorem ipsum ou Lipsum, qui permet donc de faire office de texte d'attente. L'avantage de le mettre en latin est que l'opérateur sait au premier coup d'oeil que la page contenant ces lignes n'est pas valide, et surtout l'attention du client n'est pas dérangée par le contenu, il demeure concentré seulement sur l'aspect graphique.; align: center; color: #fff; width: 1; opacity: 1; negate:false;    font:./assets/fonts/IndieFlower-Regular-msdf.json; font-image:./assets/fonts/IndieFlower-Regular.png;"> </a-entity>
-  <a-entity id="text" position="1 0.5 -2" rotation="0 0 0"       text="value: Généralement, on utilise un texte en faux latin (le texte ne veut rien dire, il a été modifié), le Lorem ipsum ou Lipsum, qui permet donc de faire office de texte d'attente. L'avantage de le mettre en latin est que l'opérateur sait au premier coup d'oeil que la page contenant ces lignes n'est pas valide, et surtout l'attention du client n'est pas dérangée par le contenu, il demeure concentré seulement sur l'aspect graphique.; align: center; color: #eff; width: 1; opacity: 1; negate:false;    font:./assets/fonts/IndochineNF-msdf.json; font-image:./assets/fonts/IndochineNF.png;"></a-entity>
-  <a-entity id="text" position="2 0.5 -2" rotation="0 0 0"       text="value: Généralement, on utilise un texte en faux latin (le texte ne veut rien dire, il a été modifié), le Lorem ipsum ou Lipsum, qui permet donc de faire office de texte d'attente. L'avantage de le mettre en latin est que l'opérateur sait au premier coup d'oeil que la page contenant ces lignes n'est pas valide, et surtout l'attention du client n'est pas dérangée par le contenu, il demeure concentré seulement sur l'aspect graphique.; align: center; color: #eff; width: 1; opacity: 1; negate:false;    font:./assets/fonts/Lancelot-Regular-msdf.json; font-image:./assets/fonts/Lancelot-Regular.png;"></a-entity>
-  <a-entity id="text" position="-1 1.5 -2" rotation="0 0 0"       text="value: Généralement, on utilise un texte en faux latin (le texte ne veut rien dire, il a été modifié), le Lorem ipsum ou Lipsum, qui permet donc de faire office de texte d'attente. L'avantage de le mettre en latin est que l'opérateur sait au premier coup d'oeil que la page contenant ces lignes n'est pas valide, et surtout l'attention du client n'est pas dérangée par le contenu, il demeure concentré seulement sur l'aspect graphique.; align: center; color: #eff; width: 1; opacity: 1; negate:false;    font:./assets/fonts/PackardClipperNF-msdf.json; font-image:./assets/fonts/PackardClipperNF.png;"></a-entity>
-  <a-entity id="text" position="-2 1.5 -2" rotation="0 0 0"       text="value: Généralement, on utilise un texte en faux latin (le texte ne veut rien dire, il a été modifié), le Lorem ipsum ou Lipsum, qui permet donc de faire office de texte d'attente. L'avantage de le mettre en latin est que l'opérateur sait au premier coup d'oeil que la page contenant ces lignes n'est pas valide, et surtout l'attention du client n'est pas dérangée par le contenu, il demeure concentré seulement sur l'aspect graphique.; align: center; color: #eff; width: 1; opacity: 1; negate:false;    font:./assets/fonts/Peignot-msdf.json; font-image:./assets/fonts/Peignot.png;"></a-entity>
-  <a-entity id="text" position="0 2 -2" rotation="0 0 0"       text="value: Généralement, on utilise un texte en faux latin (le texte ne veut rien dire, il a été modifié), le Lorem ipsum ou Lipsum, qui permet donc de faire office de texte d'attente. L'avantage de le mettre en latin est que l'opérateur sait au premier coup d'oeil que la page contenant ces lignes n'est pas valide, et surtout l'attention du client n'est pas dérangée par le contenu, il demeure concentré seulement sur l'aspect graphique.; align: center; color: blue; width: 1; opacity: 1; negate:false;    font:./assets/fonts/PermanentMarker-Regular-msdf.json; font-image:./assets/fonts/PermanentMarker-Regular.png;"></a-entity>
-  <a-entity id="text" position="-1 2 -2" rotation="0 0 0"       text="value: Généralement, on utilise un texte en faux latin (le texte ne veut rien dire, il a été modifié), le Lorem ipsum ou Lipsum, qui permet donc de faire office de texte d'attente. L'avantage de le mettre en latin est que l'opérateur sait au premier coup d'oeil que la page contenant ces lignes n'est pas valide, et surtout l'attention du client n'est pas dérangée par le contenu, il demeure concentré seulement sur l'aspect graphique.; align: center; color: green; width: 1; opacity: 1; negate:false;    font:./assets/fonts/Poppins-Regular-msdf.json; font-image:./assets/fonts/Poppins-Regular.png;"></a-entity>
-
-    <a-entity id="text" position="-2 2 -2" rotation="0 0 0"       text="value: Généralement, on utilise un texte en faux latin (le texte ne veut rien dire, il a été modifié), le Lorem ipsum ou Lipsum, qui permet donc de faire office de texte d'attente. L'avantage de le mettre en latin est que l'opérateur sait au premier coup d'oeil que la page contenant ces lignes n'est pas valide, et surtout l'attention du client n'est pas dérangée par le contenu, il demeure concentré seulement sur l'aspect graphique.; align: center; color: green; width: 1; opacity: 1; negate:false;    font:./assets/fonts/SourceCodePro-VariableFont_wght-msdf.json; font-image:./assets/fonts/SourceCodePro-VariableFont_wght.png;"></a-entity>
-    <a-entity id="text" position="-2   2 -2" rotation="0 0 0"       text="value: Généralement, on utilise un texte en faux latin (le texte ne veut rien dire, il a été modifié), le Lorem ipsum ou Lipsum, qui permet donc de faire office de texte d'attente. L'avantage de le mettre en latin est que l'opérateur sait au premier coup d'oeil que la page contenant ces lignes n'est pas valide, et surtout l'attention du client n'est pas dérangée par le contenu, il demeure concentré seulement sur l'aspect graphique.; align: center; color: green; width: 1; opacity: 1; negate:false;    font:./assets/fonts/SourceCodePro-VariableFont_wght-msdf.json; font-image:./assets/fonts/SourceCodePro-VariableFont_wght.png;"></a-entity>-->
+          
     <a-escaperoom-element solution="true" gltf-model="url(./assets/baril1aa.gltf)"  physx-material="restitution: 0.8;" gltf-entities  physx-body="type: dynamic; emitCollisionEvents:true;" position="-3 1.5 -7" ></a-escaperoom-element>
     <a-sphere physx-body="type: dynamic;" raycast-target grabbable physx-material="restitution: 0.8;"
                         position="1 2 -5" 
@@ -207,7 +201,7 @@
                         material="src:#ball; color:red;">
                         </a-sphere>
                 <a-entity id="container"
-                        position="0 1 -5">
+                        position="0 1 -5" mouse-object-control  >
                   <a-entity id="eiffel" position="-2 0 0"
                             adjusted-model="gltfModel: #eiffel-model;
                                                     dimension: 0.5">
@@ -309,7 +303,7 @@
                 <a-escaperoom-element material="color: #F00" solution="true" gltf-model="url(./assets/baril2.gltf)" position="-3, 0, -7" collision-detection></a-escaperoom-element>
             </a-escaperoom>
            <!-- <a-sky color="#FFF"></a-sky>-->
-        
+       
         </a-scene>
       </body>
 </html>

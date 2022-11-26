@@ -96,3 +96,45 @@ AFRAME.registerComponent('static-body', {
       console.log("init");
   },
 });
+AFRAME.registerComponent('mouse-object-control', {
+
+  init: function () {
+
+      this.rbDown = false;
+      this.mbDown = false;
+
+      // Mouse 2D controls.
+      this.onMouseEvent = this.onMouseEvent.bind(this);
+      window.addEventListener('mouseup', this.onMouseEvent);
+      window.addEventListener('mousedown', this.onMouseEvent);
+
+      // disable right-click context menu
+      window.addEventListener('contextmenu', event => event.preventDefault());
+  },
+
+  onMouseEvent: function (evt) {
+      this.mbDown = (evt.buttons & 4)
+      this.rbDown = (evt.buttons & 2)
+
+      this.updateRotationControls()
+  },
+
+  updateRotationControls() {
+
+      if (this.rbDown) {
+          this.el.setAttribute("mouse-pitch-yaw", "")
+          this.el.setAttribute("mouse-dolly", "")
+      }
+      else {
+          this.el.removeAttribute("mouse-pitch-yaw")
+          this.el.removeAttribute("mouse-dolly")
+      }
+      if (this.mbDown) {
+          this.el.setAttribute("mouse-roll", "")
+      }
+      else {
+          this.el.removeAttribute("mouse-roll")
+          
+      }
+  }
+});
