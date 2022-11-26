@@ -71,6 +71,7 @@ AFRAME.registerComponent("injectplayer", {
          id:"rhand",
          position:"0.4 1.4 -0.5",
          "laser-controls":"hand: right",
+         cursor:"",
           raycaster:"objects: [raycast-target];  far: Infinity; lineColor: red; lineOpacity: 0.5",
          "laser-manipulation":"",
          "thumbstick-states__right":{controller:"#rhand",
@@ -81,12 +82,12 @@ AFRAME.registerComponent("injectplayer", {
          })
       this.el.setAttribute("wasd-controls", { enabled: false })
     }
-  })
+  })            
 /* global AFRAME, THREE */
 
 AFRAME.registerPrimitive("a-hand", {
     mappings: {
-      //side: "tracked-controls.hand"
+      side: "tracked-controls.hand"
     }
   })
   
