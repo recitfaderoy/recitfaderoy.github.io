@@ -52,10 +52,10 @@ AFRAME.registerComponent("injectplayer", {
           // showLine: true
         }
       })
-      this.handy=this.el.ensure(".handy",a-CustomElementRegistry,{
+      this.handy=this.el.ensure(".handy","a-entity",{
         "handy-controls":"materialOverride:both; material:color:gold;metalness:1; roughness:0;"
       })
-     this.handy.ensure("a-hand[side=\"left\"]", "a-hand", { 
+     this.handl=this.handy.ensure("a-hand[side=\"left\"]", "a-hand", { 
      
         side: "left" ,
         id:"lhand",
@@ -68,7 +68,7 @@ AFRAME.registerComponent("injectplayer", {
        
         
         
-      this.handy.ensure("a-hand[side=\"right\"]", "a-hand", {
+      this.handd=this.handy.ensure("a-hand[side=\"right\"]", "a-hand", {
          side: "right",
          id:"rhand",
          "data-left":"ray" ,
@@ -84,6 +84,11 @@ AFRAME.registerComponent("injectplayer", {
       },
          "oculus-touch-controls":"hand: right",
          })
+         this.handr=y=this.el.ensure(".handyd","a-entity",{
+            " laser-controls":"hand: right",
+            cursor:"",
+             raycaster:"objects: .clickable;  far: Infinity; lineColor: red; lineOpacity: 0.5"
+          })
       this.el.setAttribute("wasd-controls", { enabled: false })
     }
   })            
