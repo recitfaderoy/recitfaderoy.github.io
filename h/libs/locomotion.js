@@ -462,7 +462,7 @@ AFRAME.registerComponent("locomotion", {
       this.el.object3D.position.add(delta)
       this.centerPos.add(delta)
     }
-
+/*
     // Levitating
     if (this._godMode) {
       this.el.object3D.position.y += -stick.y * this.data.speed * seconds
@@ -479,7 +479,7 @@ AFRAME.registerComponent("locomotion", {
       }
 
       // Teleportation and jumping
-     /* if (Math.round(stick.y) < 0) {
+      if (Math.round(stick.y) < 0) {
         if (!this._teleporting && this.data.teleportDistance) {
           this._teleportCursor.setAttribute("visible", true)
           this._teleporting = true
@@ -525,8 +525,8 @@ AFRAME.registerComponent("locomotion", {
         this._teleportCursor.setAttribute("visible", false)
         this._teleportCursor.setAttribute("position", "0 0 0")
         this._teleporting = false
-      }*/
-    }
+      }
+    }*/
   },
 
   _callButtons() {

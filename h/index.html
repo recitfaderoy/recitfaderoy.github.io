@@ -24,6 +24,10 @@
         <script src="./libs/science/labmat.js" ></script>
         
         
+  <script src="https://cdn.jsdelivr.net/gh/AdaRoseCannon/aframe-blink-controls@573383a/dist/aframe-blink-controls.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/handy-work@3.1.9/build/handy-controls.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/handy-work@3.1.9/build/magnet-helpers.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aframe-htmlmesh@1.0.1/build/aframe-html.min.js"></script>               
         <script src="./components/low-cost-raycasting.js"></script>
         <script src="./components/polygon-wireframe.js"></script>
         <script src="./components/cursor-tracker.js"></script>
@@ -51,9 +55,14 @@
         
         <a-scene stats vr-mode-ui='enabled: true;'
        
-        
-        physx="autoLoad: true; delay: 1000; wasmUrl: ./libs/physx.release.wasm; useDefaultScene: true; wrapBounds: true;"
+        physx="autoLoad: true; delay: 1000; wasmUrl: https://stemkoski.github.io/A-Frame-Examples/js/physx.release.wasm; useDefaultScene: false;"
+		webxr="overlayElement:#dom-overlay;"
+        background="color:skyblue;"
         physx-contact-event
+        renderer="alpha:true;physicallyCorrectLights:true;colorManagement:true;exposure:2;toneMapping:ACESFilmic;"
+		ar-hit-test="target:#my-ar-objects;type:footprint;footprintDepth:0.2;"
+		shadow="type: pcfsoft"
+		gltf-model="dracoDecoderPath: https://cdn.jsdelivr.net/npm/three@0.129.0/examples/js/libs/draco/gltf/;"
         >
             
             <a-assets>
@@ -81,7 +90,7 @@
             <!--<a-plane floor material=" color:#00ffee; repeat: 700 700; transparent: true;" height="100" width="100"
             rotation="-90 0 0"></a-plane> -->
             
-            <a-player locomotion grabbbing 
+            <a-player locommotion grabbbing 
             position=" 1 .01 -4.5"
             rotation="0 0 0"
             >          
@@ -109,6 +118,15 @@
               color = "#BBBBBB"
              >     
            </a-box>  
+           <!-- <a-entity handy-controls="materialOverride:both;" material="color:gold;metalness:1;roughness:0;">
+
+            These also do teleportaion for Blink controls in VR -->
+            <!-- These are present for hand tracking but hands don't have joysticks so do nothing 
+            <a-hand data-right="ray"  cursor raycaster="showLine: true; far: 100; lineColor: red; objects: [html]; interval:100;"></a-hand>
+            <a-hand data-left="ray"  cursor raycaster="showLine: true; far: 100; lineColor: red; objects: [html]; interval:100;"></a-hand>
+
+            
+        </a-entity>-->
            
           <!-- <a-hand side="left" laser-controls="hand: left" color="red"></a-hand>
            <a-hand side="right" oculus-touch-controls="hand: right" laser-controls="hand: right"  color="blue"></a-hand>-->

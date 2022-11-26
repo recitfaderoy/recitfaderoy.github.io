@@ -52,12 +52,11 @@ AFRAME.registerComponent("injectplayer", {
           // showLine: true
         }
       })
-      this.el.ensure(".a-hand[side=\"left\"]", "a-hand", { 
+     this.el.ensure("a-hand[side=\"left\"]", "a-hand", { 
         side: "left" ,
         id:"lhand",
         position:"-0.4 1.4 -0.5",
-        "oculus-touch-controls":"hand: left",
-        "laser-controls":"hand: Left",
+              "laser-controls":"hand: Left",
           raycaster:"objects:  .clickable; far: Infinity; lineColor: blue; lineOpacity: 0.5",
           "thumbstick-states__left":{controller:"#rhand",
           tBindings:{"moving-in":"","moving-out":"","rotating-y-plus":"","rotating-y-minus":""},
