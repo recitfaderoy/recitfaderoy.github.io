@@ -75,7 +75,7 @@ AFRAME.registerComponent("injectplayer", {
          "mixin":"blink",
          position:"0.4 1.4 -0.5",
          "laser-controls":"hand: right",
-         cursor:"",
+       
           raycaster:"objects: [raycast-target];  far: Infinity; lineColor: red; lineOpacity: 0.5",
          "laser-manipulation":"",
          "thumbstick-states__right":{controller:"#rhand",
@@ -86,7 +86,7 @@ AFRAME.registerComponent("injectplayer", {
          })
          this.handr=y=this.el.ensure(".handyd","a-entity",{
             " laser-controls":"hand: right",
-            cursor:"",
+           
              raycaster:"objects: .clickable;  far: Infinity; lineColor: red; lineOpacity: 0.5"
           })
       this.el.setAttribute("wasd-controls", { enabled: false })
