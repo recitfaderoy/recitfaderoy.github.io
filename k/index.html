@@ -31,20 +31,24 @@
               
             </a-camera>
             <a-entity 
-            visible="true"
-            id="left-controller-entity"
-            oculus-touch-controls="hand: left"
-            controller-listener="hand: left">
+            id="controller-data" 
+            controller-listener="leftControllerId:  #left-controller; 
+                                 rightControllerId: #right-controller;">
         </a-entity>
+
+        <a-entity 
+            id="left-controller"
+            oculus-touch-controls="hand: left">
+        </a-entity>
+
+        <!-- experiment with raycasting interval; slight performance improvement but jittery appearance in world -->
         <a-entity
-        visible="true"
-        id="right-controller-entity"
-        laser-controls="hand: right"
-        raycaster="objects: .raycaster-target, .environmentGround;"
-        raycaster-graphics="beamImageSrc: #gradient; beamLength: 1;"
-        raycaster-controller-grabber
-        controller-listener="hand: right">
-    </a-entity>
+            id="right-controller"
+            oculus-touch-controls="hand: right"
+            raycaster="objects: .raycaster-target; interval: 0;"
+            raycaster-extras="controllerListenerId: #controller-data; 
+                              beamImageSrc: #gradient; beamLength: 0.5;">
+        </a-entity>
 
              </a-player>
                 <!--<a-cursor id="cursor" raycaster fuse="true" fusetimeout="2000"></a-cursor>-->
