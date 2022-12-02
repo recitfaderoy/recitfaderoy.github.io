@@ -52,9 +52,16 @@ AFRAME.registerComponent("injectplayer", {
           // showLine: true
         }
       })
-      this.handy=this.el.ensure(".handy","a-entity",{
-        "handy-controls":"materialOverride:both; material:color:gold;metalness:1; roughness:0;"
-      })
+
+      
+    /*  this.handy=this.el.ensure(".handy","a-entity",{
+        "handy-controls":"right:#right-gltf;materialOverride:right;",
+         material:"color:gold;metalness:1;roughness:0;"
+      })*/
+      console.log(this.el.children)
+      this.handy=this.el.querySelector("[handy-controls]")
+      console.log(this.el.querySelector("[handy-controls]"))
+     
      this.handl=this.handy.ensure("a-hand[side=\"left\"]", "a-hand", { 
      
         side: "left" ,
@@ -74,8 +81,7 @@ AFRAME.registerComponent("injectplayer", {
          "data-left":"ray" ,
          "mixin":"blink",
          position:"0.4 1.4 -0.5",
-         "laser-controls":"hand: right",
-       
+         "laser-controls":{hand:"right"},       
           raycaster:"objects: [raycast-target];  far: Infinity; lineColor: red; lineOpacity: 0.5",
          "laser-manipulation":"",
          "thumbstick-states__right":{controller:"#rhand",
@@ -84,11 +90,11 @@ AFRAME.registerComponent("injectplayer", {
       },
          "oculus-touch-controls":"hand: right",
          })
-         this.handr=y=this.el.ensure(".handyd","a-entity",{
+         /*this.handr=y=this.el.ensure(".handyd","a-entity",{
             " laser-controls":"hand: right",
            
              raycaster:"objects: .clickable;  far: Infinity; lineColor: red; lineOpacity: 0.5"
-          })
+          })*/
       this.el.setAttribute("wasd-controls", { enabled: false })
     }
   })            

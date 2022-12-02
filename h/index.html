@@ -1,98 +1,83 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Escape Room - Prototype</title>
-        <link rel="icon" type="image/x-icon" href="./assets/favicon.png">
-        <script src="./libs/aframe/aframe.min.js"></script>
-        <!-- for animations from your glTF mode we need the animation-mixer component from aframe-extras -->
-        <script src="./libs/animation-mixer.js"></script>
-        <script src="./libs/csg/csg.js"></script>
-        <script src="./libs/utils.js" ></script>
-        <script src="./libs/physics.js" ></script>
-        <script src="./libs/physx.release.js" ></script>
-       <!--  <script src="./libs/player-move.js" ></script>
+
+<head>
+  <title>Escape Room - Prototype</title>
+  <link rel="icon" type="image/x-icon" href="./assets/favicon.png">
+  <script src="./libs/aframe/aframe.min.js"></script>
+  <!-- for animations from your glTF mode we need the animation-mixer component from aframe-extras -->
+  <script src="./libs/animation-mixer.js"></script>
+  <script src="./libs/csg/csg.js"></script>
+  <script src="./libs/utils.js"></script>
+  <script src="./libs/physics.js"></script>
+  <script src="./libs/physx.release.js"></script>
+  <!--  <script src="./libs/player-move.js" ></script>
         <script src="./libs/controller-listener.js" ></script><script src="./libs/cmdCodec.js" ></script>-->
-        <script src="./libs/locomotion.js" ></script>
-        <script src="./libs/grabbing.js" ></script>
-        <script src="./libs/grabbing/button.js" ></script>
-        <script src="./libs/grabbing/grabbable.js" ></script>
-        <script src="./libs/grabbing/receptacle.js" ></script>
-        <script src="./libs/ensureElement.js" ></script>
-        <script src="./libs/copyWorldPosRot.js" ></script>
-        <script src="./libs/pools.js" ></script>
-        <script src="./libs/betterRaycaster.js" ></script>
-        <script src="./libs/science/labmat.js" ></script>
-        
-        
-  <script src="https://cdn.jsdelivr.net/gh/AdaRoseCannon/aframe-blink-controls@573383a/dist/aframe-blink-controls.min.js"></script>
+  <script src="./libs/locomotion.js"></script>
+  <script src="./libs/grabbing.js"></script>
+  <script src="./libs/grabbing/button.js"></script>
+  <script src="./libs/grabbing/grabbable.js"></script>
+  <script src="./libs/grabbing/receptacle.js"></script>
+  <script src="./libs/ensureElement.js"></script>
+  <script src="./libs/copyWorldPosRot.js"></script>
+  <script src="./libs/pools.js"></script>
+  <script src="./libs/betterRaycaster.js"></script>
+  <script    src="./libs/science/labmat.js"></script>
+  <!--  <script src="https://cdn.jsdelivr.net/gh/AdaRoseCannon/aframe-blink-controls@573383a/dist/aframe-blink-controls.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/handy-work@3.1.9/build/handy-controls.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/handy-work@3.1.9/build/magnet-helpers.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/aframe-htmlmesh@1.0.1/build/aframe-html.min.js"></script>               
-        <script src="./components/low-cost-raycasting.js"></script>
-        <script src="./components/polygon-wireframe.js"></script>
-        <script src="./components/cursor-tracker.js"></script>
-        <script src="./components/object-parent.js"></script>
-        <script src="./components/mouse-manipulation.js"></script>
-        <script src="./components/label.js"></script>
-        <script src="./components/thumbstick-states.js"></script>
-        <script src="./components/laser-manipulation.js"></script>
-        <script src="./components/desktop-vr-controller.js"></script>
-        <script src="./components/raycaster-thresholds.js"></script>
-        <script src="https://cdn.jsdelivr.net/gh/diarmidmackenzie/screen-display@latest/src/screen-display.js"></script>
-        <script src="./components/connecting-line.js"></script>
-        <script src="./components/raycast-target.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aframe-htmlmesh@1.0.1/build/aframe-html.min.js"></script>-->
+  <script src="./components/low-cost-raycasting.js"></script>
+  <script src="./components/polygon-wireframe.js"></script>
+  <script src="./components/cursor-tracker.js"></script>
+  <script src="./components/object-parent.js"></script>
+  <script src="./components/mouse-manipulation.js"></script>
+  <script src="./components/label.js"></script>
+  <script src="./components/thumbstick-states.js"></script>
+  <script src="./components/laser-manipulation.js"></script>
+  <script src="./components/desktop-vr-controller.js"></script>
+  <script src="./components/raycaster-thresholds.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/diarmidmackenzie/screen-display@latest/src/screen-display.js"></script>
+  <script src="./components/connecting-line.js"></script>
+  <script src="./components/raycast-target.js"></script>
+  <script src="./libs/touchGestures.js"></script>
+  <script src="./escaperoom.js"></script>
+  <!--<script type="text/javascript" src="./libs/webxr.js"></script>
+        <script src="./libs/cannon.js" ></script>-->
+  <script type="text/javascript" src="./libs/joystick.js"></script>
+</head>
 
-        <script src="./libs/touchGestures.js" ></script>
-        <script src="./escaperoom.js" ></script>
-    <!--<script type="text/javascript" src="./libs/webxr.js"></script>
-    <script src="./libs/cannon.js" ></script>-->
-        <script type="text/javascript" src="./libs/joystick.js"></script>
+<body>
 
-      </head>
-      
-      <body>
-        
-        
-        <a-scene stats vr-mode-ui='enabled: true;'
-       
-        physx="autoLoad: true; delay: 1000; wasmUrl: https://stemkoski.github.io/A-Frame-Examples/js/physx.release.wasm; useDefaultScene: false;"
-		webxr="overlayElement:#dom-overlay;"
-        background="color:skyblue;"
-        physx-contact-event
-        renderer="alpha:true;physicallyCorrectLights:true;colorManagement:true;exposure:2;toneMapping:ACESFilmic;"
-		ar-hit-test="target:#my-ar-objects;type:footprint;footprintDepth:0.2;"
-		shadow="type: pcfsoft"
-		gltf-model="dracoDecoderPath: https://cdn.jsdelivr.net/npm/three@0.129.0/examples/js/libs/draco/gltf/;"
-        >
-            
-            <a-assets>
-                <img id="recitLogo" src="./assets/logo.jpg">
-                <a-asset-item id="b100" preload="true" response-type="arraybuffer" src="./assets/laboratoire/Becher100.gltf"></a-asset-item>
-                <a-asset-item id="trex-model"
-           src="./assets/t-rex/scene.gltf"
+
+  <a-scene stats v r-mode-ui='enabled: true;''
+          physx="autoLoad: true; delay: 1000; wasmUrl: https://stemkoski.github.io/A-Frame-Examples/js/physx.release.wasm; useDefaultScene: false;"
+          webxr="overlayElement:#dom-overlay;"
+          background="color:skyblue;"
+          physx-contact-event
+          renderer="alpha:true;physicallyCorrectLights:true;colorManagement:true;exposure:2;toneMapping:ACESFilmic;"
+          ar-hit-test="target:#my-ar-objects;type:footprint;footprintDepth:0.2;"
+          shadow="type: pcfsoft"
+          gltf-model="dracoDecoderPath: https://cdn.jsdelivr.net/npm/three@0.129.0/examples/js/libs/draco/gltf/;">
+          <a-assets>
+            <img id="recitLogo" src="./assets/logo.jpg">
+            <a-asset-item id="b100" preload="true" response-type="arraybuffer" src="./assets/laboratoire/Becher100.gltf"></a-asset-item>
+            <a-asset-item id="trex-model" src="./assets/t-rex/scene.gltf" response-type="arraybuffer" crossorigin="anonymous">
+                 </a-asset-item>
+        <a-asset-item id="eiffel-model"            src="./assets/eiffel/scene.gltf"
            response-type="arraybuffer" crossorigin="anonymous">
         </a-asset-item>
-        <a-asset-item id="eiffel-model"
-           src="./assets/eiffel/scene.gltf"
-           response-type="arraybuffer" crossorigin="anonymous">
+        <a-asset-item id="cell-model" src="./assets/cell/scene.gltf"response-type="arraybuffer" crossorigin="anonymous">
         </a-asset-item>
-        <a-asset-item id="cell-model"
-           src="./assets/cell/scene.gltf"
-           response-type="arraybuffer" crossorigin="anonymous">
-        </a-asset-item>
-                <!--
+              <!--
                 <a-asset-item id="baril1" preload="true" response-type="arraybuffer" src="./assets/baril1.gltf"></a-asset-item>
                 <a-asset-item id="baril2" preload="true" response-type="arraybuffer" src="./assets/baril2.gltf"></a-asset-item>
                 <a-asset-item id="baril3" preload="true" response-type="arraybuffer" src="./assets/baril3.gltf"></a-asset-item>
                 <a-asset-item id="baril4" preload="true" response-type="arraybuffer" src="./assets/baril4.gltf"></a-asset-item>
                 -->
                 <a-mixin id="blink" blink-controls="cameraRig: #player; teleportOrigin: #head; collisionEntities:.navmesh;"></a-mixin>
-		
-            </a-assets>
-            <!--<a-plane floor material=" color:#00ffee; repeat: 700 700; transparent: true;" height="100" width="100"
-            rotation="-90 0 0"></a-plane> -->
-            
-            <a-player locomotion grabbbing 
+          
+            <a-player locomotionUUgrabbbing 
             id="player"
             position=" 1 .01 -4.5"
             rotation="0 0 0"
@@ -124,186 +109,272 @@
                     color = "#BBBBBB"
                     >     
                  </a-entity>  
+                 
+                <!-- <a-entity xr-follow>
+                    <a-becher id="sword" name= "bécher A" colorliq="purple"  percent=0.6 volume= "100ml"    opacity="0.9"  rotation="0 0 0" scale=" 1 1" position="0 0 0" visible="true" 
+                      shadow="receive:false;"
+                      data-pick-up class="magnet-left magnet-right"
+                      position="-0.2 -0.4 0" rotation="-30 180 0" scale="0.6,0.6"
+                      animation__restore_position="startEvents:putdown;pauseEvents:pickup;property:position;to:-0.2 -0.4 0;easing:easeOutBack;"
+                      animation__restore_rotation="startEvents:putdown;pauseEvents:pickup;property:rotation;to:-30 180 0;easing:easeOutBack;"
+                    >
+                      <a-box physx-body="type: kinematic;" width="0.03" height="0.03" depth="0.790" rotation="-16 0 0" position="0 -0.062 -0.331" visible="false"></a-box>
+                    </a-becher>
+                  </a-entity>-->
+                 <!--  <a-entity id="handy1" handy-controls="right:#right-gltf;materialOverride:right;" material="color:gold;metalness:1;roughness:0;">
+                  For screen space inputs like mobile AR -->
+               <!--<     <a-torus radius="0.008" radius-tubular="0.001" material="shader:flat;color:blue" data-none="screen-0"></a-torus>
+                    <a-torus radius="0.008" radius-tubular="0.001" material="shader:flat;color:green" data-none="screen-1"></a-torus>
+                    <a-torus radius="0.008" radius-tubular="0.001" material="shader:flat;color:red" data-none="screen-2"></a-torus>
+                Put an exit button on the wrist for handtracking -->
+                  <!--  <a-gltf-model src="#watch-gltf" data-left="wrist" position="-1000 0 0">
+                      <a-sphere radius="0.02" position="0 0.02 0" sphere-collider="radius:0.02;objects:[data-right$=-tip];" exit-on="hitend" visible="false"></a-sphere>
+                    </a-gltf-model>
                     
+                     Add a golden ring on the finger -->
+                    <!--<a-entity data-left="ring-finger-phalanx-proximal">
+                      <a-torus position="0 0 -0.03" radius="0.008" radius-tubular="0.001" scale="1 1 1.5" material="color:gold;metalness:1;roughness:0;"></a-torus>
+                    </a-entity>
+                    The direction hands are facing, we will also attach labels to show the currently detected pose or controller button -->
+                    <!-- These also do teleportaion for Blink controls in VR -->
+                  <!--   <a-entity data-right="ray" mixin="blink" html-pointer="" raycaster="objects:[html];far:0.3;showLine:false;lineColor:black;">
+                      <a-entity position="0 0 -0.22" visible="false" class="pose-label" text="value: Hello World; align: center;"></a-entity>
+                    </a-entity>
+                    <a-entity data-left="ray" mixin="blink" html-pointer="" raycaster="objects:[html];far:0.3;showLine:false;lineColor:black;">
+                      <a-entity position="0 0 -0.22" visible="false" class="pose-label" text="value: Hello World; align: center;"></a-entity>
+                    </a-entity>  
+                    <!-- These get drawn towards grabable objects, moving the whole hand and the attached elements
+                    <a-entity id="left-magnet" data-left="grip"  data-magnet="magnet-left"  grab-magnet-target="startEvents:squeezestart,pose_fist;stopEvents:pose_flat_fuseShort,squeezeend;noMagnetEl:#left-no-magnet;"></a-entity>
+                    <a-entity id="right-magnet" data-right="grip" data-magnet="magnet-right" grab-magnet-target="startEvents:squeezestart,pose_fist;stopEvents:pose_flat_fuseShort,squeezeend;noMagnetEl:#right-no-magnet;"></a-entity>-->
+                    <!-- markers to let us know the real location of the hands, you probably want to make them visible="false" or just make them empty <a-entities>
+                    <a-entity id="left-no-magnet" data-left="grip" data-no-magnet>
+                      <a-entity html="#my-interface" position="-0.142 -0.0166 -0.02928" rotation="-80 90 0" scale="0.7 0.7 0.7"></a-entity>
+                    </a-entity>
+                    <a-entity id="right-no-magnet" data-right="grip" data-no-magnet></a-entity> -->
+                    <!-- Invisible objects at the tips of each finger for physics or intersections -->
+                <!--    <a-sphere data-right="index-finger-tip" radius="0.004" visible="false" physx-body="type: kinematic;"></a-sphere>
+                    <a-sphere data-right="middle-finger-tip" radius="0.004" visible="false" physx-body="type: kinematic;"></a-sphere>
+                    <a-sphere data-right="ring-finger-tip" radius="0.004" visible="false" physx-body="type: kinematic;"></a-sphere>
+                    <a-sphere data-right="pinky-finger-tip" radius="0.004" visible="false" physx-body="type: kinematic;"></a-sphere>
+                    <a-sphere data-right="thumb-tip" radius="0.004" visible="false" physx-body="type: kinematic;"></a-sphere>
+                    <a-sphere data-left="index-finger-tip" radius="0.004" visible="false" physx-body="type: kinematic;"></a-sphere>
+                    <a-sphere data-left="middle-finger-tip" radius="0.004" visible="false" physx-body="type: kinematic;"></a-sphere>
+                    <a-sphere data-left="ring-finger-tip" radius="0.004" visible="false" physx-body="type: kinematic;"></a-sphere>
+                    <a-sphere data-left="pinky-finger-tip" radius="0.004" visible="false" physx-body="type: kinematic;"></a-sphere>
+                    <a-sphere data-left="thumb-tip" radius="0.004" visible="false" physx-body="type: kinematic;"></a-sphere>
+                  </a-entity>
+                </a-entity>
+                    -->
            <!-- <a-entity handy-controls="materialOverride:both;" material="color:gold;metalness:1;roughness:0;">
 
             These also do teleportaion for Blink controls in VR -->
-            <!-- These are present for hand tracking but hands don't have joysticks so do nothing 
-            <a-hand data-right="ray"  cursor raycaster="showLine: true; far: 100; lineColor: red; objects: [html]; interval:100;"></a-hand>
-            <a-hand data-left="ray"  cursor raycaster="showLine: true; far: 100; lineColor: red; objects: [html]; interval:100;"></a-hand>
+            <!-- These are present for hand tracking but hands don' t have joysticks so do nothing <a-hand
+    data-right="ray" cursor raycaster="showLine: true; far: 100; lineColor: red; objects: [html]; interval:100;">
+    </a-hand>
+    <a-hand data-left="ray" cursor raycaster="showLine: true; far: 100; lineColor: red; objects: [html]; interval:100;">
+    </a-hand>
 
-            
-        </a-entity>-->
-           
-          <!-- <a-hand side="left" laser-controls="hand: left" color="red"></a-hand>
-           <a-hand side="right" oculus-touch-controls="hand: right" laser-controls="hand: right"  color="blue"></a-hand>-->
-                        <a-sphere id="up-marker" position = "0 10 0">
-                        </a-sphere>
-                        <a-sphere id="down-marker" position = "0 -10 0">
-                        </a-sphere>
-        </a-player>
-                    <a-box physx-body="type: static;" 
 
-                    class="environmentGround navmesh"
-                    position="0 -0.01 0"
-                    width="100" depth="100" height="0.1"
-                    material=" color:#00ffee; repeat: 700 700; transparent: true;"
-                    shadow="receive: true;"
-                    floor>
-                    </a-box>    
-           
-            
-                <!--<a-cursor id="cursor" raycaster fuse="true" fusetimeout="2000"></a-cursor>-->
-            <a-escaperoom position="0 0 0">
-                <a-image src="#recitLogo" position="-5.7 2 -5" rotation="0 90 0" width="3"></a-image>
-                <a-escaperoom-wall side="back" width="12" height="3.65" thickness=".2" material="color: grey; "   wall doorhole='{"position": "center", "width": 1, "height": 2}'>
-                    <a-escape-door gltf-model="url(./assets/door.gltf)" wall></a-escape-door>
-                </a-escaperoom-wall>
-                <a-escaperoom-wall side="left" width="12" height="3.65" thickness=".2" material="color: grey; "   wall >
-                </a-escaperoom-wall>
-                <a-escaperoom-wall side="right" width="12" height="3.65" thickness=".2" material="color: grey; "  wall doorhole='{"position": "center", "width": 1, "height": 2}'>
-                    <a-escape-door gltf-model="url(./assets/porte_lab.gltf)" wall ></a-escape-door>
-                </a-escaperoom-wall>
-                <a-escaperoom-wall side="front" width="12" height="3.65" thickness=".2" material="color: grey; "  wall doorhole='{"position": "center", "width": 1, "height": 2}'>
-                    <a-escape-door gltf-model="url(./assets/portem2cmini.gltf)"></a-escape-door>
-                </a-escaperoom-wall>
-                <a-escaperoom-ceiling wall_thickness=".2" width="12" length="12" height="3.65" material="color: #0ff; "  wall></a-escaperoom-ceiling>
-                <a-escaperoom-floor wall_thickness=".2" width="12" length="12" height="3.65" material="color: eff; "  floor class="environmentGround " ></a-escaperoom-floor>
-                <!---->
-          <a-entity light="type: point; intensity: 0.4; distance: 100; decay: 6" position="0 3.5 -2"></a-entity>
-          <a-entity light="type: spot; intensity: 0.6; angle: 13; target: #target2"  position="0 3.5 -3"></a-entity>
-          <a-entity light="type: spot; intensity: 0.3; angle: 13; target: #target3"  position="3 3.5 -3"></a-entity>
-          <a-entity light="type: spot; intensity: 0.3; angle: 13; target: #target4"  position="5 3.5 -3"></a-entity>
-          <a-entity light="type: spot; intensity: 0.3; angle: 7; target: #target5"  position="5 3.5 -3"></a-entity>
-        
-        
-          <a-entity light="type: spot; intensity: 0.3; angle: 12; target: #target16"  position="2 3.5 -3"></a-entity>
-          <a-entity light="type: spot; intensity: 0.3; angle: 12; target: #target26"  position="2 3.5 -3"></a-entity>
-          <a-entity light="type: spot; intensity: 0.3; angle: 12; target: #target36"  position="2 3.5 -3"></a-entity>
-          <a-entity light="type: spot; intensity: 0.3; angle: 12; target: #target46"  position="2 3.5 -3"></a-entity>
-          <a-entity light="type: spot; intensity: 0.3; angle: 12; target: #target56"  position="2 3.5 -3"></a-entity>
-          <a-entity light="type: spot; intensity: 0.3; angle: 12; target: #target51"  position="2 3.5 -3"></a-entity>
-          <a-entity light="type: spot; intensity: 0.3; angle: 12; target: #target52"  position="2 3.5 -3"></a-entity>
-          <a-entity light="type: spot; intensity: 0.3; angle: 12; target: #target53"  position="2 3.5 -3"></a-entity>
-          <a-entity light="type: spot; intensity: 0.3; angle: 12; target: #target54"  position="2 3.5 -3"></a-entity>
-          <a-entity light="type: spot; intensity: 0.3; angle: 12; target: #target55"  position="2 3.5 -3"></a-entity>
+    </a-entity>-->
 
-          <a-entity light="type: spot; intensity: 0.3; angle: 23; target: #target55"  position="2 3.5 -3"></a-entity>
+    <!-- <a-hand side="left" laser-controls="hand: left" color="red"></a-hand>
+           <a-hand side="right" oculus-touch-controls="hand: right" laser-controls="hand: right"  color="blue"></a-hand>
+    <a-sphere id="up-marker" position="0 10 0">
+    </a-sphere>
+    <a-sphere id="down-marker" position="0 -10 0">
+    </a-sphere>-->
+    </a-player>
+    <a-box physx-body="type: static;" class="environmentGround navmesh" position="0 -0.01 0" width="100" depth="100"
+      height="0.1" material=" color:#00ffee; repeat: 700 700; transparent: true;" shadow="receive: true;" floor>
+    </a-box>
 
-        
-        
-          <a-entity light="type: spot; intensity: 0.3; angle: 23; target: #target66"  position="2 3.5 -3"></a-entity>
-          
-    <a-escaperoom-element solution="true" gltf-model="url(./assets/baril1aa.gltf)"  physx-material="restitution: 0.8;" gltf-entities  physx-body="type: dynamic; emitCollisionEvents:true;" position="-3 1.5 -7" ></a-escaperoom-element>
-    <a-sphere physx-body="type: dynamic;" raycast-target grabbable physx-material="restitution: 0.8;"
-                        position="1 2 -5" 
-                        radius="0.5" 
-                        material="src:#ball; color:red;">
-                        </a-sphere>
-                <a-entity id="container"
-                        position="0 1 -5" mouse-object-control  >
-                  <a-entity id="eiffel" position="-2 0 0"
-                            adjusted-model="gltfModel: #eiffel-model;
+
+    <!--<a-cursor id="cursor" raycaster fuse="true" fusetimeout="2000"></a-cursor>-->
+    <a-escaperoom position="0 0 0">
+      <a-image src="#recitLogo" position="-5.7 2 -5" rotation="0 90 0" width="3"></a-image>
+      <a-escaperoom-wall side="back" width="12" height="3.65" thickness=".2" material="color: grey; " wall
+        doorhole='{"position": "center", "width": 1, "height": 2}'>
+        <a-escape-door gltf-model="url(./assets/door.gltf)" wall></a-escape-door>
+      </a-escaperoom-wall>
+      <a-escaperoom-wall side="left" width="12" height="3.65" thickness=".2" material="color: grey; " wall>
+      </a-escaperoom-wall>
+      <a-escaperoom-wall side="right" width="12" height="3.65" thickness=".2" material="color: grey; " wall
+        doorhole='{"position": "center", "width": 1, "height": 2}'>
+        <a-escape-door gltf-model="url(./assets/porte_lab.gltf)" wall></a-escape-door>
+      </a-escaperoom-wall>
+      <a-escaperoom-wall side="front" width="12" height="3.65" thickness=".2" material="color: grey; " wall
+        doorhole='{"position": "center", "width": 1, "height": 2}'>
+        <a-escape-door gltf-model="url(./assets/portem2cmini.gltf)"></a-escape-door>
+      </a-escaperoom-wall>
+      <a-escaperoom-ceiling wall_thickness=".2" width="12" length="12" height="3.65" material="color: #0ff; " wall>
+      </a-escaperoom-ceiling>
+      <a-escaperoom-floor wall_thickness=".2" width="12" length="12" height="3.65" material="color: eff; " floor
+        class="environmentGround "></a-escaperoom-floor>
+      <!---->
+            <a-entity light="type: point; intensity: 0.4; distance: 100; decay: 6" position="0 3.5 -2"></a-entity>
+            <a-entity light="type: spot; intensity: 0.6; angle: 13; target: #target2" position="0 3.5 -3"></a-entity>
+            <a-entity light="type: spot; intensity: 0.3; angle: 13; target: #target3" position="3 3.5 -3"></a-entity>
+            <a-entity light="type: spot; intensity: 0.3; angle: 13; target: #target4" position="5 3.5 -3"></a-entity>
+            <a-entity light="type: spot; intensity: 0.3; angle: 7; target: #target5" position="5 3.5 -3"></a-entity>
+            <a-entity light="type: ambient; intensity: 0.4" position="5 3.5 -3"></a-entity>
+            <a-entity light="type: point; intensity: 0.4; distance: 100; decay: 6" position="10 3 -6"></a-entity>
+
+            <a-entity light="type: spot; intensity: 0.3; angle: 12; target: #target16" position="2 3.5 -3"></a-entity>
+            <a-entity light="type: spot; intensity: 0.3; angle: 12; target: #target26" position="2 3.5 -3"></a-entity>
+            <a-entity light="type: spot; intensity: 0.3; angle: 12; target: #target36" position="2 3.5 -3"></a-entity>
+            <a-entity light="type: spot; intensity: 0.3; angle: 12; target: #target46" position="2 3.5 -3"></a-entity>
+            <a-entity light="type: spot; intensity: 0.3; angle: 12; target: #target56" position="2 3.5 -3"></a-entity>
+            <a-entity light="type: spot; intensity: 0.3; angle: 12; target: #target51" position="2 3.5 -3"></a-entity>
+            <a-entity light="type: spot; intensity: 0.3; angle: 12; target: #target52" position="2 3.5 -3"></a-entity>
+            <a-entity light="type: spot; intensity: 0.3; angle: 12; target: #target53" position="2 3.5 -3"></a-entity>
+            <a-entity light="type: spot; intensity: 0.3; angle: 12; target: #target54" position="2 3.5 -3"></a-entity>
+            <a-entity light="type: spot; intensity: 0.3; angle: 12; target: #target55" position="2 3.5 -3"></a-entity>
+            <a-entity light="type: spot; intensity: 0.3; angle: 12; target: #target55" position="2 3.5 -3"></a-entity>
+            <a-entity light="type: spot; intensity: 0.3; angle: 23; target: #target99" position="2 3.5 -3"></a-entity>
+            <a-entity light="type: spot; intensity: 0.3; angle: 23; target: #target66" position="2 3.5 -3"></a-entity>
+
+      <a-escaperoom-element solution="true" gltf-model="url(./assets/baril1aa.gltf)" physx-material="restitution: 0.8;"
+        gltf-entities physx-body="type: dynamic; emitCollisionEvents:true;" position="-3 1.5 -7"></a-escaperoom-element>
+      <a-sphere id="target99" physx-body="type: dynamic;" raycast-target grabbable physx-material="restitution: 0.8;"
+        position="1 2 -5" radius="0.5" material="src:#ball; color:red;">
+      </a-sphere>
+      <a-entity id="container" position="0 1 -5" mouse-object-control>
+        <a-entity id="eiffel" position="-2 0 0" adjusted-model="gltfModel: #eiffel-model;
                                                     dimension: 0.5">
-                  </a-entity>
-                  <a-entity id="trex" position="0 0 0"
-                            adjusted-model="gltfModel: #trex-model;
+        </a-entity>
+        <a-entity id="trex" position="0 0 0" adjusted-model="gltfModel: #trex-model;
                                                     dimension: 0.2">
-                  </a-entity>
-                  <a-entity id="cell" position="2 0 0"
-                            adjusted-model="gltfModel: #cell-model;
+        </a-entity>
+        <a-entity id="cell" position="2 0 0" adjusted-model="gltfModel: #cell-model;
                                                     dimension: 1">
-                  </a-entity>
-                  <a-beaker id="becher1aa" name= "bécher A" colorliq="olive"  percent=0.6 volume= "100ml"    opacity="0.9"  rotation="0 0 0" scale=" 1 1" position="-2.7 1.0 0" visible="true" physx-material="restitution: 0.8;" gltf-entities raycast-target physx-body="type: dynamic; emitCollisionEvents:true;" >
-                </a-beaker>
-              </a-entity>           
-                <a-escaperoom-element material="color: #F00" solution="true" gltf-model="url(./assets/baril1aa.gltf)" position="0 0.5 -7" raycast-target  physx-material="restitution: 0.8;" gltf-entities  physx-body="type: dynamic; emitCollisionEvents:true;" 
-                ></a-escaperoom-element>
-                <a-gltf-model id="target1" src="./assets/rangement.gltf" wall position="2 0.2  -6"></a-gltf-model>
-                <a-gltf-model id="target16" src="./assets/cabinet1a.gltf" position="-3 0.5 -2" rotation="0 0 0"physx-body="type: static;"  wall button="action:toggleouverture;"" ></a-gltf-model>
-                <a-entity id="container1"
-                position="-2.7 1.0 -4.4">
-                    <a-becher id="becher1a" name= "bécher A" colorliq="purple"  percent=0.6 volume= "100ml"    opacity="0.9"  rotation="0 0 0" scale=" 1 1" position="0 0 0" visible="true" raycast-target>
-                    </a-becher>
-                </a-entity>
-                <a-gltf-model button id="target26" src="./assets/cabinet1a.gltf" position="-3 0.5 -3" rotation="0 180 0" wall  toggleouverture clickable>
-                    <a-escaperoom-element solution="true" gltf-model="url(./assets/Tablette_papier.gltf)"  button raycast-target physx-material="restitution: 0.8;" gltf-entities  physx-body="type: kinematic; emitCollisionEvents:true;" position="-0.1 0.4 -0.1" ></a-escaperoom-element>
+        </a-entity>
+        <a-beaker id="becher1aa" name="bécher A" colorliq="olive" percent=0.6 volume="100ml" opacity="0.9"
+          rotation="0 0 0" scale=" 1 1" position="-2.7 1.0 0" visible="true" physx-material="restitution: 0.8;"
+          gltf-entities raycast-target physx-body="type: dynamic; emitCollisionEvents:true;">
+        </a-beaker>
+      </a-entity>
+      <a-escaperoom-element material="color: #F00" solution="true" gltf-model="url(./assets/baril1aa.gltf)"
+        position="0 0.5 -7" raycast-target physx-material="restitution: 0.8;" gltf-entities
+        physx-body="type: dynamic; emitCollisionEvents:true;"></a-escaperoom-element>
+      <a-gltf-model id="target1" src="./assets/rangement.gltf" wall position="2 0.2  -6"></a-gltf-model>
+      <a-gltf-model id="target16" src="./assets/cabinet1a.gltf" position="-3 0.5 -2" rotation="0 0 0"
+        physx-body="type: static;" wall button="action:toggleouverture;"" ></a-gltf-model>
+                <a-entity id=" container1" position="-2.7 1.0 -4.4">
+        <a-becher id="becher1a" name="bécher A" colorliq="purple" percent=0.6 volume="100ml" opacity="0.9"
+          rotation="0 0 0" scale=" 1 1" position="0 0 0" visible="true" raycast-target>
+        </a-becher>
+        </a-entity>
+        <a-gltf-model button id="target26" src="./assets/cabinet1a.gltf" position="-3 0.5 -3" rotation="0 180 0" wall
+          toggleouverture clickable>
+          <a-escaperoom-element solution="true" gltf-model="url(./assets/Tablette_papier.gltf)" button raycast-target
+            physx-material="restitution: 0.8;" gltf-entities physx-body="type: kinematic; emitCollisionEvents:true;"
+            position="-0.1 0.4 -0.1"></a-escaperoom-element>
 
-                </a-gltf-model>
+        </a-gltf-model>
 
-                <a-gltf-model id="target36" src="./assets/cabinet1a.gltf"  physx-body="type: static;"  position="-3 0.5 -5" rotation="0 0 0" wall toggleouverture clickable></a-gltf-model>
-               <a-gltf-model id="target46" src="./assets/cabinet1a.gltf"  physx-body="type: static;" position="-3 0.5 -6" rotation="0 180 0" wall toggleouverture clickable></a-gltf-model>
+        <a-gltf-model id="target36" src="./assets/cabinet1a.gltf" physx-body="type: static;" position="-3 0.5 -5"
+          rotation="0 0 0" wall toggleouverture clickable></a-gltf-model>
+        <a-gltf-model id="target46" src="./assets/cabinet1a.gltf" physx-body="type: static;" position="-3 0.5 -6"
+          rotation="0 180 0" wall toggleouverture clickable></a-gltf-model>
 
-                <a-gltf-model id="target56" src="./assets/cabinet1a.gltf"  physx-body="type: static;" position="-3 0.5 -8" rotation="0 0 0" wall toggleouverture clickable></a-gltf-model>
-                <a-gltf-model id="target66" src="./assets/cabinet1a.gltf"   physx-body="type: static;" position="-3 0.5 -9" rotation="0 180 0" wall  toggleouverture clickable></a-gltf-model>
+        <a-gltf-model id="target56" src="./assets/cabinet1a.gltf" physx-body="type: static;" position="-3 0.5 -8"
+          rotation="0 0 0" wall toggleouverture clickable></a-gltf-model>
+        <a-gltf-model id="target66" src="./assets/cabinet1a.gltf" physx-body="type: static;" position="-3 0.5 -9"
+          rotation="0 180 0" wall toggleouverture clickable></a-gltf-model>
 
 
-                <a-gltf-model id="target50" src="./assets/marty.gltf" position="-5.8 0.1 -1" rotation="0 90 0"  wall toggleouverture clickable></a-gltf-model>
-                 <a-gltf-model id="target51" src="./assets/marty.gltf" position="-5.8 0.1 -2.3" rotation="0 90  0" wall toggleouverture clickable></a-gltf-model>
-                 <a-gltf-model id="target52" src="./assets/marty.gltf" position="-5.8 0.1 -7" rotation="0 90 0" wall toggleouverture clickable></a-gltf-model>
-               
-                 <a-gltf-model id="target53" src="./assets/marty.gltf" position="-5.8 0.1 -9" rotation="0 90 0" wall toggleouverture clickable></a-gltf-model>
-                
-                <a-gltf-model id="target54" src="./assets/meuble_tiroir2.gltf" position="-2 0.2 -0.1" rotation="0 90 0" wall toggleouverture clickable></a-gltf-model>
-                <a-gltf-model id="target55" src="./assets/table1.gltf" position="0 0.2 -5" rotation="0 90 0" physx-material="restitution: 0.8;" gltf-entities  physx-body="type: dynamic; emitCollisionEvents:true;"w></a-gltf-model>
+        <a-gltf-model id="target50" src="./assets/marty.gltf" position="-5.8 0.1 -1" rotation="0 90 0" wall
+          toggleouverture clickable></a-gltf-model>
+        <a-gltf-model id="target51" src="./assets/marty.gltf" position="-5.8 0.1 -2.3" rotation="0 90  0" wall
+          toggleouverture clickable></a-gltf-model>
+        <a-gltf-model id="target52" src="./assets/marty.gltf" position="-5.8 0.1 -7" rotation="0 90 0" wall
+          toggleouverture clickable></a-gltf-model>
 
-                <a-gltf-model id="target56" src="./assets/chair.gltf" position="0 0.2 -6" rotation="0 90 0" physx-material="restitution: 0.8;" gltf-entities  physx-body="type: dynamic; emitCollisionEvents:true;"w></a-gltf-model>
-                <a-gltf-model id="target2" src="./assets/presentoire.gltf" position="0 0 -4" rotation="0 -90 0" wall collision-detection>
-                    <a-entity id="text1" position="0 0.75 0" rotation="-65 90 0"       text="wrap-count:15; wrapPixels:450;value: Vous devez cliquer sur le baril pour ouvir la porte. Trouvez le baril contenant de l'acide chlorydrique; align: center; color: #000; opacity: 1; negate:false;     font:./assets/fonts/Orbitron-VariableFont_wght-msdf.json; font-image:./assets/fonts/Orbitron-VariableFontwght.png; width: 0.8;"></a-entity>
+        <a-gltf-model id="target53" src="./assets/marty.gltf" position="-5.8 0.1 -9" rotation="0 90 0" wall
+          toggleouverture clickable></a-gltf-model>
 
-                </a-gltf-model>
-                <a-gltf-model id="target3" src="./assets/presentoire.gltf" position="3 0 -4" rotation="0 -90 0" wall collision-detection>
-                    <a-entity id="text1" position="0 0.75 0" rotation="-65 90 0"       text="wrap-count:15; wrapPixels:450;value: Vous devez cliquer sur le baril pour ouvir la porte. Trouvez le baril contenant de l'acide chlorydrique; align: center; color: #000; opacity: 1; negate:false;     font:./assets/fonts/Orbitron-VariableFont_wght-msdf.json; font-image:./assets/fonts/Orbitron-VariableFontwght.png; width: 0.8;"></a-entity>
+        <a-gltf-model id="target54" src="./assets/meuble_tiroir2.gltf" position="-2 0.2 -0.1" rotation="0 90 0" wall
+          toggleouverture clickable></a-gltf-model>
+        <a-gltf-model id="target55" src="./assets/table1.gltf" position="0 0.2 -5" rotation="0 90 0"
+          physx-material="restitution: 0.8;" gltf-entities physx-body="type: dynamic; emitCollisionEvents:true;" w>
+        </a-gltf-model>
 
-                </a-gltf-model>
-                <a-gltf-model id="target4" src="./assets/presentoire.gltf" position="5 0 -4" rotation="0 -90 0" wall collision-detection>
-                    <a-entity id="text1" position="0 0.75 0" rotation="-65 90 0"       text="wrap-count:15; wrapPixels:450;value: Vous devez cliquer sur le baril pour ouvir la porte. Trouvez le baril contenant de l'acide chlorydrique; align: center; color: #000; opacity: 1; negate:false;     font:./assets/fonts/Orbitron-VariableFont_wght-msdf.json; font-image:./assets/fonts/Orbitron-VariableFontwght.png; width: 0.8;"></a-entity>
+        <a-gltf-model id="target56" src="./assets/chair.gltf" position="0 0.2 -6" rotation="0 90 0"
+          physx-material="restitution: 0.8;" gltf-entities physx-body="type: dynamic; emitCollisionEvents:true;" w>
+        </a-gltf-model>
+        <a-gltf-model id="target2" src="./assets/presentoire.gltf" position="0 0 -4" rotation="0 -90 0" wall
+          collision-detection>
+          <a-entity id="text1" position="0 0.75 0" rotation="-65 90 0"
+            text="wrap-count:15; wrapPixels:450;value: Vous devez cliquer sur le baril pour ouvir la porte. Trouvez le baril contenant de l'acide chlorydrique; align: center; color: #000; opacity: 1; negate:false;     font:./assets/fonts/Orbitron-VariableFont_wght-msdf.json; font-image:./assets/fonts/Orbitron-VariableFontwght.png; width: 0.8;">
+          </a-entity>
 
-                </a-gltf-model>
-                <a-gltf-model id="target2" src="./assets/board1.gltf" position="0 0 4" rotation="0 90 0"  collision-detection>
-                    <a-entity id="text1" position="0 0.75 0" rotation="-65 90 0"       text="wrap-count:15; wrapPixels:450;value: Vous devez cliquer sur le baril pour ouvir la porte. Trouvez le baril contenant de l'acide chlorydrique; align: center; color: #000; opacity: 1; negate:false;     font:./assets/fonts/Orbitron-VariableFont_wght-msdf.json; font-image:./assets/fonts/Orbitron-VariableFontwght.png; width: 0.8;"></a-entity>
+        </a-gltf-model>
+        <a-gltf-model id="target3" src="./assets/presentoire.gltf" position="3 0 -4" rotation="0 -90 0" wall
+          collision-detection>
+          <a-entity id="text1" position="0 0.75 0" rotation="-65 90 0"
+            text="wrap-count:15; wrapPixels:450;value: Vous devez cliquer sur le baril pour ouvir la porte. Trouvez le baril contenant de l'acide chlorydrique; align: center; color: #000; opacity: 1; negate:false;     font:./assets/fonts/Orbitron-VariableFont_wght-msdf.json; font-image:./assets/fonts/Orbitron-VariableFontwght.png; width: 0.8;">
+          </a-entity>
 
-                </a-gltf-model>
+        </a-gltf-model>
+        <a-gltf-model id="target4" src="./assets/presentoire.gltf" position="5 0 -4" rotation="0 -90 0" wall
+          collision-detection>
+          <a-entity id="text1" position="0 0.75 0" rotation="-65 90 0"
+            text="wrap-count:15; wrapPixels:450;value: Vous devez cliquer sur le baril pour ouvir la porte. Trouvez le baril contenant de l'acide chlorydrique; align: center; color: #000; opacity: 1; negate:false;     font:./assets/fonts/Orbitron-VariableFont_wght-msdf.json; font-image:./assets/fonts/Orbitron-VariableFontwght.png; width: 0.8;">
+          </a-entity>
 
-                <!--
+        </a-gltf-model>
+        <a-gltf-model id="target2" src="./assets/board1.gltf" position="0 0 4" rotation="0 90 0" collision-detection>
+          <a-entity id="text1" position="0 0.75 0" rotation="-65 90 0"
+            text="wrap-count:15; wrapPixels:450;value: Vous devez cliquer sur le baril pour ouvir la porte. Trouvez le baril contenant de l'acide chlorydrique; align: center; color: #000; opacity: 1; negate:false;     font:./assets/fonts/Orbitron-VariableFont_wght-msdf.json; font-image:./assets/fonts/Orbitron-VariableFontwght.png; width: 0.8;">
+          </a-entity>
+
+        </a-gltf-model>
+
+        <!--
                     <a-light type="spot" target="#target1" position="2 3.65 -1"></a-light>
                     <a-escape-room-element gltf-model="url(./assets/baril1.gltf)" position="-4, -1.5, -5" ></a-escape-room-element>
                 <a-escape-room-element gltf-model="url(./assets/baril3.gltf)" position="3, -1.5, -7" ></a-escape-room-element>
                 <a-escape-room-element gltf-model="url(./assets/baril4.gltf)" position="4, -1.5, -5" ></a-escape-room-element>
                 -->
-                
 
-                <!--
+
+        <!--
                 <a-escape-room-element gltf-model="#baril1" position="-4, -1.5, -5" ></a-escape-room-element>
                 <a-escape-room-element gltf-model="#baril2" solution="true"  position="-3, -1.5, -7" ></a-escape-room-element>
                 <a-escape-room-element gltf-model="#baril3" position="3, -1.5, -7" ></a-escape-room-element>
                 <a-escape-room-element gltf-model="#baril4" position="4, -1.5, -5" ></a-escape-room-element>
                 -->
-            </a-escaperoom>  <a-gltf-model id="target5" src="./assets/labmodule1.gltf" position="3.7 1 -5.4" rotation="0 180 0"  floor wall></a-gltf-model>
-            <a-entity light="type: point; intensity: 0.4; distance: 100; decay: 6" position="10 3 -6"></a-entity>
+    </a-escaperoom>
+    <a-gltf-model id="target5" src="./assets/labmodule1.gltf" position="3.7 1 -5.4" rotation="0 180 0" floor wall>
+    </a-gltf-model>
 
 
 
-            <a-escaperoom position="0 0 -12.21">
-              
-                <a-image src="#recitLogo" position="5.7 2.5 -5" rotation="0 270 0" width="3"></a-image>
-                <a-escaperoom-wall side="left" width="12" height="3.65" thickness=".2" material="color: grey; wireframe: false; shader: flat; src: ./assets/texture-wall2.jpg"  wall >
-                </a-escaperoom-wall>
-                <a-escaperoom-wall side="right" width="12" height="3.65" thickness=".2" material="wireframe: false; shader: flat; src: ./assets/texture-wall2.jpg" wall >
-                </a-escaperoom-wall>
-                <a-escaperoom-wall side="front" width="12" height="3.65" thickness=".2" material="shader: flat; src: ./assets/texture-wall2.jpg" wall doorhole='{"position": "center", "width": 1, "height": 2}'>
-                    <a-escape-door gltf-model="url(./assets/door.gltf)"></a-escape-door>
-                </a-escaperoom-wall>
-                <a-escaperoom-wall side="back" width="12" height="3.65" thickness=".2" material="wireframe: false; shader: flat; src: ./assets/texture-wall2.jpg"  doorhole='{"position": "center", "width": 1, "height": 2}'>
-                </a-escaperoom-wall>
-                <a-escaperoom-ceiling wall_thickness=".2" width="12" length="12" height="3.65" material="shader: flat; src: ./assets/texture-ceiling2.jpg" wall></a-escaperoom-ceiling>
-                <a-escaperoom-floor wall_thickness=".2" width="12" length="12" height="3.65" material="shader: flat; src: ./assets/texture-floor2.jpg" floor></a-escaperoom-floor>
-
-                
-                <a-escaperoom-element material="color: #F00" solution="true" gltf-model="url(./assets/baril2.gltf)" position="-3, 0, -7" collision-detection></a-escaperoom-element>
-            </a-escaperoom>
-           <!-- <a-sky color="#FFF"></a-sky>-->
-       
-        </a-scene>
-      </body>
+    <a-escaperoom position="0 0 -12.21">
+      <a-image src="#recitLogo" position="5.7 2.5 -5" rotation="0 270 0" width="3"></a-image>
+      <a-escaperoom-wall side="left" width="12" height="3.65" thickness=".2"
+        material="color: grey; wireframe: false; shader: flat; src: ./assets/texture-wall2.jpg" wall>
+      </a-escaperoom-wall>
+      <a-escaperoom-wall side="right" width="12" height="3.65" thickness=".2"
+        material="wireframe: false; shader: flat; src: ./assets/texture-wall2.jpg" wall>
+      </a-escaperoom-wall>
+        <a-escaperoom-wall side="front" width="12" height="3.65" thickness=".2"
+          material="shader: flat; src: ./assets/texture-wall2.jpg" wall
+          doorhole='{"position": "center", "width": 1, "height": 2}'>
+          <a-escape-door gltf-model="url(./assets/door.gltf)"></a-escape-door>
+        </a-escaperoom-wall>
+        <a-escaperoom-wall side="back" width="12" height="3.65" thickness=".2"
+          material="wireframe: false; shader: flat; src: ./assets/texture-wall2.jpg"
+          doorhole='{"position": "center", "width": 1, "height": 2}'>
+        </a-escaperoom-wall>
+        <a-escaperoom-ceiling wall_thickness=".2" width="12" length="12" height="3.65"
+          material="shader: flat; src: ./assets/texture-ceiling2.jpg" wall></a-escaperoom-ceiling>
+        <a-escaperoom-floor wall_thickness=".2" width="12" length="12" height="3.65"
+          material="shader: flat; src: ./assets/texture-floor2.jpg" floor></a-escaperoom-floor>
+        <a-escaperoom-element material="color: #F00" solution="true" gltf-model="url(./assets/baril2.gltf)"
+          position="-3, 0, -7" collision-detection></a-escaperoom-element>
+     </a-escaperoom>
+    <!-- <a-sky color="#FFF"></a-sky>-->
+    </a-scene>
+  </body>
 </html>
