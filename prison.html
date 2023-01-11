@@ -8,6 +8,9 @@
         <script src="./libs/aframe/aframe-extra.min.js"></script>
         <script src="./libs/csg/csg.js"></script>
         <script src="./libs/physics.js" ></script>
+        <script src="./libs/controller-listener.js" ></script>
+        <script src="./libs/player-move.js" ></script>
+        <script src="./libs/raycaster-extras.js" ></script>
         <script src="./escaperoom.js" ></script>
        <script src="./lib1.js" ></script>
 
@@ -29,10 +32,10 @@
 
                 
             </a-assets>
-            <a-camera look-controls >
+           <!--  <a-camera look-controls >
                 <a-player start="0 0 -6" material="color: red;"></a-player>
-            </a-camera>
-         <!--   <a-entity 
+            </a-camera>-->
+           <a-player start="0 0 -6" material="color: red;" 
             id="player" 
             position="0 0 0" 
             player-move="controllerListenerId: #controller-data;">               
@@ -57,7 +60,7 @@
                               beamImageSrc: #gradient; beamLength: 0.5;">
         </a-entity>
 
-    </a-entity>-->
+    </a--player>
             <a-escaperoom position="-12 0 -0">
                 
                  <a-escaperoom-ceiling visible="true" wall_thickness=".2" width="40" length="40" height="3.65" material="shader: standard; repeat: 4 4; src: ./assets/texture-ceiling.jpg; repeat: 40 40;" collision-detection></a-escaperoom-ceiling>
