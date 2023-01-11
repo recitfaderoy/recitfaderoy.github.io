@@ -1,0 +1,11 @@
+Model Information:
+* title:	Powered Wheelchair
+* source:	https://sketchfab.com/3d-models/powered-wheelchair-7435f8558e3d472fbf6973e20b76567c
+* author:	dudecon (https://sketchfab.com/dudecon)
+
+Model License:
+* license type:	CC-BY-SA-4.0 (http://creativecommons.org/licenses/by-sa/4.0/)
+* requirements:	Author must be credited. Modified versions must have the same license. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Powered Wheelchair" (https://sketchfab.com/3d-models/powered-wheelchair-7435f8558e3d472fbf6973e20b76567c) by dudecon (https://sketchfab.com/dudecon) licensed under CC-BY-SA-4.0 (http://creativecommons.org/licenses/by-sa/4.0/)

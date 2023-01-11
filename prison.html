@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Escape Room - Prototype</title>
+        <link rel="icon" type="image/x-icon" href="./assets/favicon.png">
+        <script src="./libs/aframe/aframe.min.js"></script>
+        <!-- for animations from your glTF mode we need the animation-mixer component from aframe-extras -->
+        <script src="./libs/aframe/aframe-extra.min.js"></script>
+        <script src="./libs/csg/csg.js"></script>
+        <script src="./libs/physics.js" ></script>
+        <script src="./escaperoom.js" ></script>
+       <script src="./lib1.js" ></script>
+
+
+    </head>
+      
+      <body>
+        
+        <a-scene 
+        physics cursor="rayOrigin: mouse" 
+        raycaster="far: 100; objects: .clickable; useWorldCoordinates: false;"
+        renderer="alpha:true;physicallyCorrectLights:true;colorManagement:true;exposure:2;toneMapping:ACESFilmic;"
+        xfog="type: linear; color: #000000; near:2; far:10;" 
+        shadow="type: pcfsoft">
+        >
+            
+            <a-assets>
+                <img id="recitLogo" src="./assets/logo.jpg">
+
+                
+            </a-assets>
+            <a-camera look-controls >
+                <a-player start="0 0 -6" material="color: red;"></a-player>
+            </a-camera>
+         <!--   <a-entity 
+            id="player" 
+            position="0 0 0" 
+            player-move="controllerListenerId: #controller-data;">               
+            <a-camera>
+            </a-camera>
+            <a-entity 
+            id="controller-data" 
+            controller-listener="leftControllerId:  #left-controller; 
+                                 rightControllerId: #right-controller;">
+        </a-entity>
+
+        <a-entity 
+            id="left-controller"
+            oculus-touch-controls="hand: left">
+        </a-entity>
+
+        <a-entity
+            id="right-controller"
+            oculus-touch-controls="hand: right"
+            raycaster="objects: .raycaster-target, .environmentGround;"
+            raycaster-extras="controllerListenerId: #controller-data; 
+                              beamImageSrc: #gradient; beamLength: 0.5;">
+        </a-entity>
+
+    </a-entity>-->
+            <a-escaperoom position="-12 0 -0">
+                
+                 <a-escaperoom-ceiling visible="true" wall_thickness=".2" width="40" length="40" height="3.65" material="shader: standard; repeat: 4 4; src: ./assets/texture-ceiling.jpg; repeat: 40 40;" collision-detection></a-escaperoom-ceiling>
+                 <a-escaperoom-floor wall_thickness=".2" width="60" length="60" height="3.65" material="shader: standard; src: ./assets/texture-floor.jpg; repeat: 10 10;" ></a-escaperoom-floor>
+              
+             </a-escaperoom>
+                <a-escaperoom position="-12 0 -4.2">
+                    <a-escaperoom-wall side="back" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg" collision-detection >
+                    </a-escaperoom-wall>
+                    <a-escaperoom-wall side="left" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg"  collision-detection></a-escaperoom-wall>
+                    <a-escaperoom-wall side="right" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg" collision-detection  collision-detection></a-escape-door>
+                    </a-escaperoom-wall>
+                    <a-escaperoom-wall side="front" width="4" height="3.65" thickness=".2" material="shader: standard; src: ./assets/texture-wall.jpg" collision-detection="method: m2;" >
+                    </a-escaperoom-wall>
+                    
+                    
+                    
+                 
+                </a-escaperoom>
+                <a-escaperoom position="-12 0 -8.4">
+                    <a-escaperoom-wall side="back" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg" collision-detection >
+                    </a-escaperoom-wall>
+                    <a-escaperoom-wall side="left" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg"  collision-detection></a-escaperoom-wall>
+                    <a-escaperoom-wall side="right" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg" collision-detection doorhole='{"position": "center", "width": 2, "height": 2}'>                        
+                        <a-escape-door door_id="1" gltf-model="url(./assets/prison_door_3lock.gltf)" collision-detection></a-escape-door>
+                    </a-escaperoom-wall>
+                    <a-escaperoom-wall side="front" width="4" height="3.65" thickness=".2" material="shader: standard; src: ./assets/texture-wall.jpg" collision-detection="method: m2;" >
+                    </a-escaperoom-wall>
+                    
+                    
+                 
+                </a-escaperoom>
+                <a-escaperoom position="-12 0 -12.6">
+                    <!-- <a-image src="#recitLogo" position="-5.7 0 -5" rotation="0 90 0" width="3"></a-image>-->
+                     <a-escaperoom-wall side="back" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg" collision-detection >
+                     </a-escaperoom-wall>
+                     <a-escaperoom-wall side="left" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg"  collision-detection></a-escaperoom-wall>
+                     <a-escaperoom-wall side="right" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg" collision-detection doorhole='{"position": "center", "width": 2, "height": 2}'>                        
+                         <a-escape-door door_id="2" gltf-model="url(./assets/prison_door_3lock.gltf)" collision-detection></a-escape-door>
+                     </a-escaperoom-wall>
+                     <a-escaperoom-wall side="front" width="4" height="3.65" thickness=".2" material="shader: standard; src: ./assets/texture-wall.jpg" collision-detection="method: m2;" >
+                     </a-escaperoom-wall>
+                     
+                     
+                  
+                 </a-escaperoom>
+
+                 <a-escaperoom position="-12 0 -16.8">
+                    <!-- <a-image src="#recitLogo" position="-5.7 0 -5" rotation="0 90 0" width="3"></a-image>-->
+                     <a-escaperoom-wall side="back" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg" collision-detection >
+                     </a-escaperoom-wall>
+                     <a-escaperoom-wall side="left" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg"  collision-detection></a-escaperoom-wall>
+                     <a-escaperoom-wall side="right" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg" collision-detection doorhole='{"position": "center", "width": 2, "height": 2}'>                        
+                         <a-escape-door door_id="3" gltf-model="url(./assets/prison_door_3lock.gltf)" collision-detection></a-escape-door>
+                     </a-escaperoom-wall>
+                     <a-escaperoom-wall side="front" width="4" height="3.65" thickness=".2" material="shader: standard; src: ./assets/texture-wall.jpg" collision-detection="method: m2;" >
+                     </a-escaperoom-wall>
+                     
+                     
+                  
+                 </a-escaperoom>
+                <a-escaperoom position="-8 0 0">
+                   <!-- <a-image src="#recitLogo" position="-5.7 0 -5" rotation="0 90 0" width="3"></a-image>-->
+                    <a-escaperoom-wall side="back" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg" collision-detection >
+                    </a-escaperoom-wall>
+                    <a-escaperoom-wall side="left" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg"  collision-detection></a-escaperoom-wall>
+                    <a-escaperoom-wall side="right" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg" collision-detection></a-escaperoom-wall>
+                    <a-escaperoom-wall side="front" width="4" height="3.65" thickness=".2" material="shader: standard; src: ./assets/texture-wall.jpg" collision-detection="method: m2;" doorhole='{"position": "center", "width": 2, "height": 2}'>
+                        <a-escape-door door_id="25" gltf-model="url(./assets/prison_door_3.gltf)" collision-detection></a-escape-door>
+                    </a-escaperoom-wall>
+                    
+                
+                </a-escaperoom> 
+                <a-escaperoom rotation="0 180 0" position="-8 0 -21">
+                    <!-- <a-image src="#recitLogo" position="-5.7 0 -5" rotation="0 90 0" width="3"></a-image>-->
+                     <a-escaperoom-wall side="back" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg" collision-detection >
+                     </a-escaperoom-wall>
+                     <a-escaperoom-wall side="left" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg"  collision-detection></a-escaperoom-wall>
+                     <a-escaperoom-wall side="right" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg" collision-detection></a-escaperoom-wall>
+                     <a-escaperoom-wall side="front" width="4" height="3.65" thickness=".2" material="shader: standard; src: ./assets/texture-wall.jpg" collision-detection="method: m2;" doorhole='{"position": "center", "width": 2, "height": 2}'>
+                         <a-escape-door door_id="45" gltf-model="url(./assets/prison_door_3.gltf)" collision-detection></a-escape-door>
+                     </a-escaperoom-wall>
+                     
+                    </a-escaperoom>
+                    <a-escaperoom rotation="0 180 0" position="-12 0 -21">
+                        <!-- <a-image src="#recitLogo" position="-5.7 0 -5" rotation="0 90 0" width="3"></a-image>-->
+                         <a-escaperoom-wall side="back" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg" collision-detection >
+                         </a-escaperoom-wall>
+                         <a-escaperoom-wall side="left" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg"  collision-detection></a-escaperoom-wall>
+                         <a-escaperoom-wall side="right" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg" collision-detection></a-escaperoom-wall>
+                         <a-escaperoom-wall side="front" width="4" height="3.65" thickness=".2" material="shader: standard; src: ./assets/texture-wall.jpg" collision-detection="method: m2;" doorhole='{"position": "center", "width": 2, "height": 2}'>
+                             <a-escape-door door_id="45" gltf-model="url(./assets/prison_door_3.gltf)" collision-detection></a-escape-door>
+                         </a-escaperoom-wall>
+                         
+                        </a-escaperoom>
+                    <a-escaperoom rotation="0 180 0" position="-20 0 -21">
+                        <!-- <a-image src="#recitLogo" position="-5.7 0 -5" rotation="0 90 0" width="3"></a-image>-->
+                         <a-escaperoom-wall side="back" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg" collision-detection >
+                         </a-escaperoom-wall>
+                         <a-escaperoom-wall side="left" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg"  collision-detection></a-escaperoom-wall>
+                         <a-escaperoom-wall side="right" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg" collision-detection></a-escaperoom-wall>
+                         <a-escaperoom-wall side="front" width="4" height="3.65" thickness=".2" material="shader: standard; src: ./assets/texture-wall.jpg" collision-detection="method: m2;" >
+                         </a-escaperoom-wall>
+                 </a-escaperoom> 
+                 <a-escaperoom rotation="0 180 0" position="-4 0 -21">
+                    <!-- <a-image src="#recitLogo" position="-5.7 0 -5" rotation="0 90 0" width="3"></a-image>-->
+                     <a-escaperoom-wall side="back" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg" collision-detection >
+                     </a-escaperoom-wall>
+                     <a-escaperoom-wall side="left" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg"  collision-detection></a-escaperoom-wall>
+                     <a-escaperoom-wall side="right" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg" collision-detection></a-escaperoom-wall>
+                     <a-escaperoom-wall side="front" width="4" height="3.65" thickness=".2" material="shader: standard; src: ./assets/texture-wall.jpg" collision-detection="method: m2;" doorhole='{"position": "center", "width": 2, "height": 2}'>
+                         <a-escape-door door_id="24" gltf-model="url(./assets/prison_door_3.gltf)" collision-detection></a-escape-door>
+                     </a-escaperoom-wall>
+                     
+                 
+                 </a-escaperoom>
+                 <a-escaperoom position="20 0 -21" rotation="0 180 0">
+                    
+                     <a-escaperoom-wall side="back" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg" collision-detection>
+                     </a-escaperoom-wall>></a-escaperoom-wall>
+                     <a-escaperoom-wall side="left" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg"  collision-detection></a-escaperoom-wall>
+                     <a-escaperoom-wall side="right" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg" collision-detection></a-escaperoom-wall>
+                     <a-escaperoom-wall side="front" width="4" height="3.65" thickness=".2" material="shader: standard; src: ./assets/texture-wall.jpg" collision-detection="method: m2;" doorhole='{"position": "center", "width": 2, "height": 2}'>
+                         <a-escape-door door_id="6" gltf-model="url(./assets/prison_door_3.gltf)" collision-detection></a-escape-door>
+                     </a-escaperoom-wall>
+                    </a-escaperoom>
+                 <a-escaperoom rotation="0 180 0" position="4 0 -21">
+                    <!-- <a-image src="#recitLogo" position="-5.7 0 -5" rotation="0 90 0" width="3"></a-image>-->
+                     <a-escaperoom-wall side="back" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg" collision-detection >
+                     </a-escaperoom-wall>
+                     <a-escaperoom-wall side="left" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg"  collision-detection></a-escaperoom-wall>
+                     <a-escaperoom-wall side="right" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg" collision-detection></a-escaperoom-wall>
+                     <a-escaperoom-wall side="front" width="4" height="3.65" thickness=".2" material="shader: standard; src: ./assets/texture-wall.jpg" collision-detection="method: m2;" doorhole='{"position": "center", "width": 2, "height": 2}'>
+                     </a-escaperoom-wall>
+                     
+                 
+                 </a-escaperoom>
+                <a-escaperoom position="-4 0 0">
+                   <!-- <a-image src="#recitLogo" position="-5.7 0 -5" rotation="0 90 0" width="3"></a-image>-->
+                    <a-escaperoom-wall side="back" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg" collision-detection >
+                    </a-escaperoom-wall>
+                    <a-escaperoom-wall side="left" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg"  collision-detection>
+
+                    </a-escaperoom-wall>
+                    <a-escaperoom-wall side="right" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg" collision-detection>
+
+                    </a-escaperoom-wall>
+                    <a-escaperoom-wall side="front" width="4" height="3.65" thickness=".2" material="shader: standard; src: ./assets/texture-wall.jpg" collision-detection="method: m2;" doorhole='{"position": "center", "width": 2, "height": 2}'>
+                        <a-escape-door door_id="35" gltf-model="url(./assets/prison_door_3.gltf)" collision-detection>
+
+                        </a-escape-door>
+                    </a-escaperoom-wall>
+                    
+                        
+                </a-escaperoom>
+
+                <a-escaperoom position="0 0 0">
+               <!-- <a-image src="#recitLogo" position="-5.7 0 -5" rotation="0 90 0" width="3"></a-image>-->
+                <a-escaperoom-wall side="back" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg" collision-detection >
+                </a-escaperoom-wall>></a-escaperoom-wall>
+                <a-escaperoom-wall side="left" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg"  collision-detection></a-escaperoom-wall>
+                <a-escaperoom-wall side="right" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg" collision-detection></a-escaperoom-wall>
+                <a-escaperoom-wall side="front" width="4" height="3.65" thickness=".2" material="shader: standard; src: ./assets/texture-wall.jpg" collision-detection="method: m2;" doorhole='{"position": "center", "width": 2, "height": 2}'>
+                    <a-escape-door door_id="34" gltf-model="url(./assets/prison_door_3.gltf)" collision-detection></a-escape-door>
+                </a-escaperoom-wall>
+               
+                
+                
+             
+            </a-escaperoom>
+            <a-escaperoom position="4 0 0">
+               <!-- <a-image src="#recitLogo" position="-5.7 0 -5" rotation="0 90 0" width="3"></a-image>-->
+                <a-escaperoom-wall side="back" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg" collision-detection >
+                </a-escaperoom-wall>></a-escaperoom-wall>
+                <a-escaperoom-wall side="left" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg"  collision-detection></a-escaperoom-wall>
+                <a-escaperoom-wall side="right" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg" collision-detection></a-escaperoom-wall>
+                <a-escaperoom-wall side="front" width="4" height="3.65" thickness=".2" material="shader: standard; src: ./assets/texture-wall.jpg" collision-detection="method: m2;" doorhole='{"position": "center", "width": 2, "height": 2}'>
+                    <a-escape-door door_id="51" gltf-model="url(./assets/prison_door_3.gltf)" collision-detection></a-escape-door>
+                </a-escaperoom-wall>
+                
+                
+            <a-escaperoom-object unlock_on="click" door_id="51" gltf-model="url(./assets/boutonvert.gltf)"rotation="0 90 0" position="-1.40, -0.5, -4.4" collision-detection></a-escaperoom-object>
+            <a-escaperoom-object unlock_on="click" door_id="34" gltf-model="url(./assets/boutonrouge.gltf)" rotation="0 90 0" position="-1.40, -0.9, -4.4" collision-detection></a-escaperoom-object>
+            <a-escaperoom-object gltf-model="url(./assets/boutonjaune.gltf)" rotation="0 90 0" position="-1.6, -0.5, -4.4"unlock_on="click" door_id="33" collision-detection></a-escaperoom-object>
+            <a-escaperoom-object gltf-model="url(./assets/boutonbleu.gltf)" rotation="0 90 0" position="-1.6, -0.9, -4.4" collision-detection></a-escaperoom-object>
+            </a-escaperoom>
+
+            <a-escaperoom position="8 0 0">
+               <!-- <a-image src="#recitLogo" position="-5.7 0 -5" rotation="0 90 0" width="3"></a-image>-->
+                <a-escaperoom-wall side="back" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg" collision-detection doorhole='{"position": "center", "width": 2, "height": 2}'>
+                    <a-escape-door  door_id="91" gltf-model="url(./assets/prison_door_3.gltf)" collision-detection></a-escape-door>
+                </a-escaperoom-wall>></a-escaperoom-wall>
+                <a-escaperoom-wall side="left" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg"  collision-detection></a-escaperoom-wall>
+                <a-escaperoom-wall side="right" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg" collision-detection></a-escaperoom-wall>
+                <a-escaperoom-wall side="front" width="4" height="3.65" thickness=".2" material="shader: standard; src: ./assets/texture-wall.jpg" collision-detection="method: m2;" doorhole='{"position": "center", "width": 2, "height": 2}'>
+                    <a-escape-door door_id="19" manage-gltf-material='mat:{"color":"red","metalness":1, "roughtness":0}$/${"color":"red","metalness":1, "roughtness":0}' gltf-model="url(./assets/prison_door_3.gltf)" collision-detection></a-escape-door>
+                </a-escaperoom-wall>
+                
+              
+            </a-escaperoom>
+            <a-escaperoom position="20 0 0">
+                                <a-escaperoom-wall side="left" width="20" height="3.65" thickness=".2" material="wireframe: false; ide:double; shader: standard; src: ./assets/texture-wall.jpg"  collision-detection></a-escaperoom-wall>
+                </a-escaperoom>
+            <a-escaperoom-object  gltf-model="url(./assets/serrure2a.gltf)" position="6.5, -0.72, -4.4" drop-zone  rotation="0 90 0" scale="2 2 2">
+                <a-sphere data-drop-zone-animation color="red" radius=".4" material="opacity: 0.5" rotation="-90, 0, 0"
+                        animation="property: radius; from: 0.2; to: 0.4; dur: 1000;
+                        easing: easeInOutSine; dir: alternate; loop: true;" visible="false"></a-sphere> 
+            </a-escaperoom-object>
+
+            <a-escaperoom-object scale="2 2 2" manage-gltf-material='mat:{"color":"pink","metalness":0.82, "roughtness":0.2}$/${"no":1}}'  draggable gltf-model="url(./assets/clef2a.gltf)" rotation="0 90 0" position="6, -.5, -6.5"> 
+
+            </a-escaperoom-object>
+            <a-escaperoom-object scale="2 2 2"  draggable gltf-model="url(./assets/clef2ajaune.gltf)" rotation="0 90 0" position="-7.6, -.5, -1.5"> 
+
+            </a-escaperoom-object>
+            <a-escaperoom-object scale="2 2 2"  draggable gltf-model="url(./assets/clef2avert.gltf)" rotation="0 90 0" position="-8, -.5, -1.5"> 
+
+            </a-escaperoom-object>
+            <a-escaperoom-object scale="2 2 2"  draggable gltf-model="url(./assets/clef2aviolet.gltf)" rotation="0 90 0" position="-4, -.5, -1.5"> 
+
+            </a-escaperoom-object>
+            <a-escaperoom-object scale="2 2 2"  draggable gltf-model="url(./assets/clef2ableu.gltf)" rotation="0 90 0" position="0, -.5, -1.5"> 
+
+            </a-escaperoom-object>
+
+           
+            <a-escaperoom-object unlock_on="click" door_id="35" gltf-model="url(./assets/bank/contenants/barilrouge1.gltf)" position="-5, -1.7, -5" collision-detection>
+
+            </a-escaperoom-object>
+            <a-escaperoom-object unlock_on="click" door_id="25" gltf-model="url(./assets/bank/contenants/bariljaune3.gltf)" position="-7, -1.7, -5" collision-detection>
+
+            </a-escaperoom-object>
+            <a-escaperoom-object toggleouverture   rotation="0 90 0" gltf-model="url(./assets/bank/contenants/valise1Aa.gltf)" position="
+            4, -1., -8" >
+                    <a-escaperoom-object scale="2 2 2" unlock_on="drop" door_id="19" draggable gltf-model="url(./assets/clef2arouge.gltf)" rotation="0 0 0" position="-0.15, 0, -0.1">  </a-escaperoom-object>
+            </a-escaperoom-object>
+            <a-light type= "point" intensity="6" position="-1.45, 0.72, -2.4"></a-light>
+            <a-entity light="type: ambient; color: white; groundColor: #brown; intensity: 1"></a-entity>
+
+        <a-sky color="grey"></a-sky>
+        
+        </a-scene>
+        <script>
+            
+        </script>
+      </body>
+</html>

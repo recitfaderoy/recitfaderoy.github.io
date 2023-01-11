@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="icon" type="image/x-icon" href="./assets/favicon.png">
+        <script src="./libs/aframe/aframe.min.js"></script>
+        <!-- for animations from your glTF mode we need the animation-mixer component from aframe-extras -->
+        <script src="./libs/aframe/aframe-extra.min.js"></script>
+        <script src="./libs/csg/csg.js"></script>
+        <script src="./libs/physics.js" ></script>
+        <script src="./escaperoom.js" ></script>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,72 +16,125 @@
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  <title>Exemple RÉCIT</title>
+  <title>Exemple Étienne Roy</title>
 </head>
 <body class="">
-  <section data-tag-id="2">
-    <div class=" media p-2 p-md-5" style="background-color:#45818e" data-tag-id="3">
-      <img class="mr-2 mr-md-5" src="https://recitfad.ca/widgets/assets/images/recit.png" style="width:84px;height:124px" data-tag-id="4">
-      <div class="media-body align-self-center" data-tag-id="5">
-        <h3 class="h1 text-light font-weight-bold" data-tag-id="6">Exemples et documentation RÉCIT VR</h3>
-      </div>
+  <body>
+    <div class="hamburger" id="hamburger" onclick="toggleSidenav();"><div></div><div></div><div></div></div>
+    <nav>
+    <div class="links"> 
+    <a class="active" href="index.html">Accueil</a>
+    <a class="active" href="h/">Jeux d'évasion h</a>
+    <a class="active" href="l/">Jeux d'évasion l</a>
+    <a class="active" href="k/">Jeux d'évasion J</a>
+   <!-- <a class="active" href="ecommerce/">WebVR E-Commerce</a>
+    <a class="active" href="companies/">WebVR Companies</a>-->
+     <div class="wrapgood">
+     
+     
+    <!--<a href="http://drawvr.com/minigolf/">drawvr.com/minigolf/</a>
+    <a href="http://drawvr.com/pirate/">drawvr.com/pirate/</a>
+    <a href="http://drawvr.com/castle/">drawvr.com/castle/</a>
+    <a href="http://drawvr.com/lava-cave/">drawvr.com/lava-cave/</a>
+    <a href="http://drawvr.com/escape2/">drawvr.com/escape2/</a>
+    <a href="http://www.wsundine.com/a-frame/Bostock-maze-3d">wsundine.com/a-frame/Bostock-maze-3d</a>
+    <a href="http://drawvr.com/escape/">drawvr.com/escape/</a>
+    <a href="https://sandbox.donmccurdy.com/vr/playground/">sandbox.donmccurdy.com/vr/playground/</a> 
+    <a href="https://scenevr.github.io/chess/">scenevr.github.io/chess/</a> 
+    <a href="http://joshgalvin.github.io/aframemulti/">joshgalvin.github.io/aframemulti/</a> 
+    <a href="http://joshgalvin.github.io/arunner/">joshgalvin.github.io/arunner/</a>
+    <a href="http://ybinstock.github.io/carmensandiego_360/">ybinstock.github.io/carmensandiego_360/</a>
+    <a href="http://swimminglessonsformodernlife.com/a-invaders/">swimminglessonsformoder nlife.com/a-invaders/</a>
+    <a href="http://chrismwaite.github.io/cardboard-dungeon/">chrismwaite.github.io/cardboard-dungeon/</a>-->
+     </div>
     </div>
-    <div class="p-2" style="background-color:#76a5af" ;="" data-tag-id="7"></div>
-  </section>
-  <p dir="ltr" style="text-align: left;" data-tag-id="8"><br data-tag-id="9"></p>
-  <section class="px-0 px-md-3 px-lg-5 pt-0 pt-md-3 pt-lg-5 pb-0 pb-md-3 pb-lg-5 cover bg-white" data-tag-id="10">
-    <div class="container-fluid px-md-4 px-lg-5 py-3 py-md-4 py-lg-5" data-tag-id="11">
-      <div class="row flex-md-row justify-content-md-center" data-tag-id="12">
-        <div class="col-12 col-md-4 py-2 py-md-0" data-tag-id="13">
-          <div class="card m-2 border-0 rounded-0 p-0 shadow h-100" data-version="0.1.1" data-recit-block="2" data-tag-id="14">
-            <div class="card-body" data-tag-id="15">
-              <i class="fa fa-3x fa-map-o" data-tag-id="16"></i>
-              <h4 class="text-dark h3" data-tag-id="17">
-                Monte charge
-              </h4>
-              <p style="font-size: 16px;" data-tag-id="18">
-                Animation de style examen de fin d'année en Science e technologie secondaire 4 en réalité virtuelle. &nbsp;</p>
-              <div class=" imgclick" data-tag-id="19"><img src="./asssets/montecharge.png" class="img-fluid" data-tag-id="20">
-                <div class="imgclickcontent" data-tag-id="21"><a class="border border-white rounded p-2"  href="./montecharges/"  target="_blank" data-tag-id="22">Commencer</a></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 col-md-4 py-2 py-md-0" data-tag-id="23">
-          <div class="card m-2 border-0 rounded-0 p-0 shadow h-100" data-version="0.1.1" data-recit-block="2" data-tag-id="24">
-            <div class="card-body" data-tag-id="25">
-              <i class="fa fa-3x fa-map-o" data-tag-id="26"></i>
-              <h4 class="text-dark h3" data-tag-id="27">
-                Titre de la carte
-              </h4>
-              <p style="font-size: 16px;" data-tag-id="28">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis commodo sapien sed sapien consectetur congue. Nam commodo suscipit risus. Proin et erat nulla. In congue ex eros, ut suscipit lectus consectetur eget.&nbsp;</p>
-              <div class="imgclick" data-tag-id="29"><img src="https://recitfad.ca/widgets/assets/images/header4.jpg" class="img-fluid" data-tag-id="30">
-                <div class="imgclickcontent" data-tag-id="31"><a class="border border-white rounded p-2" href="#" data-tag-id="32">Commencer</a></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 col-md-4 py-2 py-md-0" data-tag-id="33">
-          <div class="card m-2 border-0 rounded-0 p-0 shadow h-100" data-version="0.1.1" data-recit-block="2" data-tag-id="34">
-            <div class="card-body" data-tag-id="35">
-              <i class="fa fa-3x fa-map-o" data-tag-id="36"></i>
-              <h4 class="text-dark h3" data-tag-id="37">
-                Matériels et textures
-              </h4>
-              <p style="font-size: 16px;" data-tag-id="38">
-                https://www.cgbookcase.com/ <br>
-                https://freestocktextures.com/<br>
-                https://www.archinspirations.com/ 
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis commodo sapien sed sapien consectetur congue. Nam commodo suscipit risus. Proin et erat nulla. In congue ex eros, ut suscipit lectus consectetur eget.&nbsp;</p>
-              <div class="imgclick" data-tag-id="39"><img src="https://recitfad.ca/widgets/assets/images/header4.jpg" class="img-fluid" data-tag-id="40">
-                <div class="imgclickcontent" data-tag-id="41"><a class="border border-white rounded p-2" href="#" data-tag-id="42">Commencer</a></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    </nav>
+    <a-scene physics cursor="rayOrigin: mouse" raycaster="far: 100; objects: .clickable; useWorldCoordinates: false;">
+            
+      <a-assets>
+          <img id="recitLogo" src="./assets/logo.jpg">
+
+          <!--
+          <a-asset-item id="baril1" preload="true" response-type="arraybuffer" src="./assets/bank/contenants/baril1.gltf"></a-asset-item>
+          <a-asset-item id="baril2" preload="true" response-type="arraybuffer" src="./assets/bank/contenants/baril2.gltf"></a-asset-item>
+          <a-asset-item id="baril3" preload="true" response-type="arraybuffer" src="./assets/bank/contenants/baril3.gltf"></a-asset-item>
+          <a-asset-item id="baril4" preload="true" response-type="arraybuffer" src="./assets/bank/contenants/baril4.gltf"></a-asset-item>
+          -->
+      </a-assets>
+                  
+      <a-camera look-controls position="0,-.5, -1">
+          <a-player material="color: red;"></a-player>
+      </a-camera>
+      <a-image src="#recitLogo" position="0  0 0.1 " rotation="0 0 0" width="3"></a-image>
+          <!--<a-cursor id="cursor" raycaster fuse="true" fusetimeout="2000"></a-cursor>-->
+      <a-escaperoom position="0 0 0">
+          <a-image src="#recitLogo" position="-5.7 0 -5" rotation="0 90 0" width="3"></a-image>
+          <a-escaperoom-wall side="back" width="12" height="3.65" thickness=".2" material="wireframe: false; shader: flat; src: ./assets/texture-wall.jpg" collision-detection></a-escaperoom-wall>
+          <a-escaperoom-wall side="left" width="12" height="3.65" thickness=".2" material="wireframe: false; shader: flat; src: ./assets/texture-wall.jpg"  collision-detection></a-escaperoom-wall>
+          <a-escaperoom-wall side="right" width="12" height="3.65" thickness=".2" material="wireframe: false; shader: flat; src: ./assets/texture-wall.jpg" collision-detection></a-escaperoom-wall>
+          <a-escaperoom-wall side="front" width="12" height="3.65" thickness=".2" material="shader: flat; src: ./assets/texture-wall.jpg" collision-detection="method: m2;" doorhole='{"position": "center", "width": 1, "height": 2}'>
+              <a-escape-door door_id="1" gltf-model="url(./assets/bank/portes_fenetres/portem2c.gltf)"></a-escape-door>
+          </a-escaperoom-wall>
+          <a-escaperoom-ceiling wall_thickness=".2" width="12" length="12" height="3.65" material="shader: flat; repeat: 4 4; src: ./assets/texture-ceiling.jpg" collision-detection></a-escaperoom-ceiling>
+          <a-escaperoom-floor wall_thickness=".2" width="12" length="12" height="3.65" material="shader: flat; src: ./assets/texture-floor.jpg" collision-detection></a-escaperoom-floor>
+          
+          <a-escaperoom-object unlock_on="click" door_id="1" gltf-model="url(./assets/bank/contenants/bariljaune1.gltf)" position="-3, -1.5, -7" collision-detection></a-escaperoom-object>
+          <a-escaperoom-object  gltf-model="url(./assets/bank/contenants/barilturquoise3.gltf)" position="-4, -1.5, -5" collision-detection></a-escaperoom-object>
+          <!--<a-escaperoom-object gltf-model="url(./assets/baril3.gltf)" position="3, -1.5, -7" collision-detection></a-escaperoom-object>
+          <a-escaperoom-object gltf-model="url(./assets/baril4.gltf)" position="4, -1.5, -5" collision-detection></a-escaperoom-object>-->
+      </a-escaperoom>
+
+     
+      <a-escaperoom position="0 0 -12.4">
+      <!--<a-escaperoom position="0 0 0">    -->
+          <a-image src="#recitLogo" position="5.7 0 -5" rotation="0 270 0" width="3"></a-image>
+          <a-escaperoom-wall side="left" width="12" height="3.65" thickness=".2" material="wireframe: false; shader: flat; src: ./assets/texture-wall2.jpg"  collision-detection >
+          </a-escaperoom-wall>
+          <a-escaperoom-wall side="right" width="12" height="3.65" thickness=".2" material="wireframe: false; shader: flat; src: ./assets/texture-wall2.jpg" collision-detection >
+          </a-escaperoom-wall>
+          <a-escaperoom-wall side="front" width="12" height="3.65" thickness=".2" material="shader: flat; src: ./assets/texture-wall2.jpg" collision-detection="method: m2;" doorhole='{"position": "center", "width": 1, "height": 2}'>
+              <a-escape-door door_id="2" gltf-model="url(./assets/bank/portes_fenetres/portem2c.gltf)"></a-escape-door>
+          </a-escaperoom-wall>
+          <a-escaperoom-wall side="back" width="12" height="3.65" thickness=".2" material="wireframe: false; shader: flat; src: ./assets/texture-wall2.jpg" collision-detection="method: m2;"  doorhole='{"position": "center", "width": 1, "height": 2}'>
+          </a-escaperoom-wall>
+          <a-escaperoom-ceiling wall_thickness=".2" width="12" length="12" height="3.65" material="shader: flat; src: ./assets/texture-ceiling2.jpg" collision-detection></a-escaperoom-ceiling>
+          <a-escaperoom-floor wall_thickness=".2" width="12" length="12" height="3.65" material="shader: flat; src: ./assets/texture-floor2.jpg" collision-detection></a-escaperoom-floor>
+
+          
+          <a-escaperoom-object gltf-model="url(./assets/bank/meubles/rangement.gltf)" position="-1, -1.5, -3" rotation="0, 90, 0" collision-detection></a-escaperoom-object>
+          <a-escaperoom-object unlock_on="drop" door_id="2" draggable gltf-model="url(./assets/bank/science/laboratoire/Becher100.gltf)" position="-1, -.5, -2.5">
+              <a-cylinder color="#eef" height="0.042" radius="0.028" position="0, 0.014, 0" opacity=".9" transparent="true"></a-cylindre>
+          </a-escaperoom-object>
+          <a-escaperoom-object draggable gltf-model="url(./assets/bank/science/laboratoire/Becher100.gltf)" position="0, -.5, -2.5">
+              <a-cylinder color="#F00" height="0.06" radius="0.028" position="0, 0.014, 0" opacity=".9" transparent="true"></a-cylindre>
+          </a-escaperoom-object>
+          <a-escaperoom-object gltf-model="url(./assets/bank/meubles/table_no_top.gltf)" position="1.5, -1.5, -3"  collision-detection>
+              <a-escaperoom-object gltf-model="url(./assets/bank/science/laboratoire/tray.gltf)" position="0, .85, 0" drop-zone >
+                  <a-circle data-drop-zone-animation color="blue" radius=".4" material="opacity: 0.5" rotation="-90, 0, 0"
+                      animation="property: radius; from: 0.2; to: 0.4; dur: 1000;
+                      easing: easeInOutSine; dir: alternate; loop: true;" visible="false"></a-circle>
+              </a-escaperoom-object>
+          </a-escaperoom-object>
+          
+      </a-escaperoom>
+      
+      <a-sky color="#FFF"></a-sky>
+  
+  </a-scene>
+  <script>
+    function toggleSidenav() {
+    document.body.classList.toggle('sidenav-active');
+    }
+    </script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    
+      ga('create', 'UA-56782327-25', 'auto');
+      ga('send', 'pageview');
+    
+    </script>
 </body>
 </html>
