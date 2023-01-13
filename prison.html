@@ -3,16 +3,18 @@
     <head>
         <title>Escape Room - Prototype</title>
         <link rel="icon" type="image/x-icon" href="./assets/favicon.png">
-        <script src="./libs/aframe/aframe.min.js"></script>
+        <script src="./libs/aframe/aframe-v1.4.1.min.js"></script>
         <!-- for animations from your glTF mode we need the animation-mixer component from aframe-extras -->
         <script src="./libs/aframe/aframe-extra.min.js"></script>
         <script src="./libs/csg/csg.js"></script>
         <script src="./libs/physics.js" ></script>
         <script src="./libs/controller-listener.js" ></script>
-        <script src="./libs/player-move.js" ></script>
         <script src="./libs/raycaster-extras.js" ></script>
+        <script src="./libs/aframe-troika-text.min.js" ></script>
         <script src="./escaperoom.js" ></script>
+
        <script src="./lib1.js" ></script>
+       
 
 
     </head>
@@ -35,10 +37,10 @@
            <!--  <a-camera look-controls >
                 <a-player start="0 0 -6" material="color: red;"></a-player>
             </a-camera>-->
-           <a-player start="0 0 -6" material="color: red;" 
+           <a-player start="0 -0.5 -6" material="color: red;" 
             id="player" 
-            position="0 0 0" 
-            player-move="controllerListenerId: #controller-data;">               
+            position="0 -1.5 -9" 
+            player="controllerListenerId: #controller-data;">               
             <a-camera>
             </a-camera>
             <a-entity 
@@ -60,7 +62,7 @@
                               beamImageSrc: #gradient; beamLength: 0.5;">
         </a-entity>
 
-    </a--player>
+    </a-player>
             <a-escaperoom position="-12 0 -0">
                 
                  <a-escaperoom-ceiling visible="true" wall_thickness=".2" width="40" length="40" height="3.65" material="shader: standard; repeat: 4 4; src: ./assets/texture-ceiling.jpg; repeat: 40 40;" collision-detection></a-escaperoom-ceiling>
@@ -256,7 +258,7 @@
                 <a-escaperoom-wall side="left" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg"  collision-detection></a-escaperoom-wall>
                 <a-escaperoom-wall side="right" width="4" height="3.65" thickness=".2" material="wireframe: false; shader: standard; src: ./assets/texture-wall.jpg" collision-detection></a-escaperoom-wall>
                 <a-escaperoom-wall side="front" width="4" height="3.65" thickness=".2" material="shader: standard; src: ./assets/texture-wall.jpg" collision-detection="method: m2;" doorhole='{"position": "center", "width": 2, "height": 2}'>
-                    <a-escape-door door_id="19" manage-gltf-material='mat:{"color":"red","metalness":1, "roughtness":0}$/${"color":"red","metalness":1, "roughtness":0}' gltf-model="url(./assets/prison_door_3.gltf)" collision-detection></a-escape-door>
+                    <a-escape-door door_id="19" Xmanage-gltf-material='mat:{"color":"red","metalness":1, "roughtness":0}$/${"color":"red","metalness":1, "roughtness":0}' gltf-model="url(./assets/prison_door_3.gltf)" collision-detection></a-escape-door>
                 </a-escaperoom-wall>
                 
               
@@ -270,32 +272,51 @@
                         easing: easeInOutSine; dir: alternate; loop: true;" visible="false"></a-sphere> 
             </a-escaperoom-object>
 
-            <a-escaperoom-object scale="2 2 2" manage-gltf-material='mat:{"color":"pink","metalness":0.82, "roughtness":0.2}$/${"no":1}}'  draggable gltf-model="url(./assets/clef2a.gltf)" rotation="0 90 0" position="6, -.5, -6.5"> 
+            <a-escaperoom-object scale="2 2 2" raycaster-target Xmanage-gltf-material='mat:{"color":"pink","metalness":0.82, "roughtness":0.2}$/${"no":1}}'  draggable gltf-model="url(./assets/clef2a.gltf)" rotation="0 90 0" position="6, -.5, -6.5"> 
 
             </a-escaperoom-object>
-            <a-escaperoom-object scale="2 2 2"  draggable gltf-model="url(./assets/clef2ajaune.gltf)" rotation="0 90 0" position="-7.6, -.5, -1.5"> 
+            <a-escaperoom-object scale="2 2 2" raycaster-target draggable gltf-model="url(./assets/clef2ajaune.gltf)" rotation="0 90 0" position="-7.6, -.5, -1.5"> 
 
             </a-escaperoom-object>
-            <a-escaperoom-object scale="2 2 2"  draggable gltf-model="url(./assets/clef2avert.gltf)" rotation="0 90 0" position="-8, -.5, -1.5"> 
+            <a-escaperoom-object scale="2 2 2" raycaster-target draggable gltf-model="url(./assets/clef2avert.gltf)" rotation="0 90 0" position="-8, -.5, -1.5"> 
 
             </a-escaperoom-object>
-            <a-escaperoom-object scale="2 2 2"  draggable gltf-model="url(./assets/clef2aviolet.gltf)" rotation="0 90 0" position="-4, -.5, -1.5"> 
+            <a-escaperoom-object scale="2 2 2" raycaster-target draggable gltf-model="url(./assets/clef2aviolet.gltf)" rotation="0 90 0" position="-4, -.5, -1.5"> 
 
             </a-escaperoom-object>
-            <a-escaperoom-object scale="2 2 2"  draggable gltf-model="url(./assets/clef2ableu.gltf)" rotation="0 90 0" position="0, -.5, -1.5"> 
+            <a-escaperoom-object scale="2 2 2" raycaster-target draggable gltf-model="url(./assets/clef2ableu.gltf)" rotation="0 90 0" position="0, -.5, -1.5"> 
 
             </a-escaperoom-object>
 
            
-            <a-escaperoom-object unlock_on="click" door_id="35" gltf-model="url(./assets/bank/contenants/barilrouge1.gltf)" position="-5, -1.7, -5" collision-detection>
+            <a-escaperoom-object unlock_on="click" door_id="35" gltf-model="url(./assets/bank/contenants/barilnoir2a.gltf)" position="-5, -1.7, -5" manage-gltf-material='mat:{"metalness":1, "roughtness":0}$/${"mapuri":"./assets/bank/contenants/i/j1.png"}' collision-detection>
+                <a-troika-text
+        position="0 0.6 -0.43"
+        fontSize=1
+        font-size="0.1"
+        rotation="0 180 0"
+        color="#99F"
+        max-width="1.5"
+        curve-radius="-.43"
+        value="Masse du baril à vide : 20 kg        Volume du baril : 200 L        Masse avec le liquide : 170 k    "
+      ></a-troika-text>
 
             </a-escaperoom-object>
             <a-escaperoom-object unlock_on="click" door_id="25" gltf-model="url(./assets/bank/contenants/bariljaune3.gltf)" position="-7, -1.7, -5" collision-detection>
-
+                <a-troika-text
+                position="0 0.6 -0.43"
+                fontSize=1
+                font-size="0.1"
+                rotation="0 180 0"
+                color="#99F"
+                max-width="1.5"
+                curve-radius="-.43"
+                value="Masse du baril à vide : 20 kg        Volume du baril : 200 L        Masse avec le liquide : 170 k    "
+              ></a-troika-text>
             </a-escaperoom-object>
             <a-escaperoom-object toggleouverture   rotation="0 90 0" gltf-model="url(./assets/bank/contenants/valise1Aa.gltf)" position="
             4, -1., -8" >
-                    <a-escaperoom-object scale="2 2 2" unlock_on="drop" door_id="19" draggable gltf-model="url(./assets/clef2arouge.gltf)" rotation="0 0 0" position="-0.15, 0, -0.1">  </a-escaperoom-object>
+                    <a-escaperoom-object raycaster-target scale="2 2 2" unlock_on="drop" door_id="19" draggable gltf-model="url(./assets/clef2arouge.gltf)" rotation="0 0 0" position="-0.15, 0, -0.1">  </a-escaperoom-object>
             </a-escaperoom-object>
             <a-light type= "point" intensity="6" position="-1.45, 0.72, -2.4"></a-light>
             <a-entity light="type: ambient; color: white; groundColor: #brown; intensity: 1"></a-entity>

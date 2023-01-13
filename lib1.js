@@ -59,20 +59,24 @@ Element.prototype.ensure = function (selector, name = selector, attrs = {}, inne
           //console.log(element.material)
           ell.olditems.push(element.material);
   
-  console.log(newdatajson[i].no, newdatajson[i].map, newdatajson[i].color)
+  console.log(newdatajson[i].no, newdatajson[i].mapuri, newdatajson[i].color)
           if(newdatajson[i].no === 1)
                {element.material = element.material
                //console.log("newdata",JSON.parse(newdata[i]).color)}
                }
-          
+               else if(newdatajson[i].value){
+                // element.material = element.material
+                 console.log("newdata",JSON.parse(newdata[i]).color)
+                 element.material= new THREE.MeshBasicMaterial({value: newdatajson[i].valu})
+              }
           else if(newdatajson[i].color){
                  // element.material = element.material
                   console.log("newdata",JSON.parse(newdata[i]).color)
                   element.material= new THREE.MeshBasicMaterial({color: newdatajson[i].color})
                }
-          else if(newdatajson[i].map)
+          else if(newdatajson[i].mapuri)
            {
-            ell.textures[i] = new THREE.TextureLoader().load(newdatajson[i].map);
+            ell.textures[i] = new THREE.TextureLoader().load(newdatajson[i].mapuri);
            element.material= new THREE.MeshBasicMaterial({map: ell.textures[i]})
                console.log("newdata",newdatajson[i].map)
               }      

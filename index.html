@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
   <link rel="icon" type="image/x-icon" href="./assets/favicon.png">
-        <script src="./libs/aframe/aframe.min.js"></script>
+        <script src="./libs/aframe/aframe-v1.4.1.min.js"></script>
         <!-- for animations from your glTF mode we need the animation-mixer component from aframe-extras -->
         <script src="./libs/aframe/aframe-extra.min.js"></script>
         <script src="./libs/csg/csg.js"></script>
         <script src="./libs/physics.js" ></script>
+        <script src="./libs/a.js" ></script>
         <script src="./escaperoom.js" ></script>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -65,6 +66,8 @@
       <a-camera look-controls position="0,-.5, -1">
           <a-player material="color: red;"></a-player>
       </a-camera>
+      <a-entity id="title" fader="show:true;speed:1" text3d="curveSegments:2;text:PLANETS BY EARTH" position="-3.3 2.8 -6" material="color:#fff;emissive:#778dc4;transparent:true;"></a-entity>
+      <a-entity id="credits" fader="show:true;speed:1" position="-3.3 2.6 -6" scale="0.185 0.185 0.185" text3d="curveSegments:1;text:DEVELOPED BY KODUB.COM                                                                                                             VERSION 1.00.1&#10;&#10;&#10;                        SOLARSYSTEMSCOPE.COM/TEXTURES/  -  PLANET TEXTURES LICENSED CC BY 4.0&#10;&#10;&#10;                           NASA/GODDARD SPACE FLIGHT CENTER SCIENTIFIC VISUALIZATION STUDIO&#10;                                                          SVS.GSFC.NASA.GOV/3895  -  STAR MAP&#10;&#10;&#10;             OPENGAMEART.ORG/CONTENT/CALM-AMBIENT-2-SYNTHWAVE-15K  -  MUSIC LICENSED CC0" material="color:#fff;emissive:#778dc4;transparent:true;"></a-entity>
       <a-image src="#recitLogo" position="0  0 0.1 " rotation="0 0 0" width="3"></a-image>
           <!--<a-cursor id="cursor" raycaster fuse="true" fusetimeout="2000"></a-cursor>-->
       <a-escaperoom position="0 0 0">

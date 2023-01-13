@@ -82,7 +82,7 @@ AFRAME.registerComponent("player-move", {
         // always update deltaTime!
         this.deltaTime = this.clock.getDelta();
 
-        if ( !this.enabled )
+     /*   if ( !this.enabled )
             return;
         
         // =====================================================================
@@ -125,10 +125,10 @@ AFRAME.registerComponent("player-move", {
             // hide marker if raycaster not hovering over navigation mesh
             this.navTarget1.object3D.visible = false;
             this.navTarget2.object3D.visible = false;
-        }
+        }*/
 
         // currently teleporting
-        if (this.fadeInProgress)
+    /*    if (this.fadeInProgress)
         {
             this.fadeTime += this.deltaTime;
 
@@ -144,8 +144,7 @@ AFRAME.registerComponent("player-move", {
             {
                 this.fadeInProgress = false;
                 this.fadeSphere.object3D.visible = false;
-            }
-        }
+            }*/
 
         // =====================================================================
         // moving on horizontal (XZ) plane
