@@ -16,7 +16,7 @@
        <script src="./lib1.js" ></script>
        
 
-
+<!--   -->
     </head>
       
       <body>
@@ -27,7 +27,7 @@
         renderer="alpha:true;physicallyCorrectLights:true;colorManagement:true;exposure:2;toneMapping:ACESFilmic;"
         xfog="type: linear; color: #000000; near:2; far:10;" 
         shadow="type: pcfsoft">
-        >
+        
             
             <a-assets>
                 <img id="recitLogo" src="./assets/logo.jpg">
@@ -41,13 +41,13 @@
             id="player" 
             position="0 -1.5 -9" 
             player="controllerListenerId: #controller-data;">               
-            <a-camera>
-            </a-camera>
-            <a-entity 
-            id="controller-data" 
-            controller-listener="leftControllerId:  #left-controller; 
-                                 rightControllerId: #right-controller;">
-        </a-entity>
+                <a-camera>
+                </a-camera>
+                <a-entity 
+                id="controller-data" 
+                controller-listener="leftControllerId:  #left-controller; 
+                                    rightControllerId: #right-controller;">
+             </a-entity>
 
         <a-entity 
             id="left-controller"
@@ -289,7 +289,7 @@
             </a-escaperoom-object>
 
            
-            <a-escaperoom-object unlock_on="click" door_id="35" gltf-model="url(./assets/bank/contenants/barilnoir2a.gltf)" position="-5, -1.7, -5" manage-gltf-material='mat:{"metalness":1, "roughtness":0}$/${"mapuri":"./assets/bank/contenants/i/j1.png"}' collision-detection>
+            <a-escaperoom-object unlock_on="click" door_id="35" gltf-model="url(./assets/bank/contenants/barilnoir2a.gltf)" position="-5, -1.7, -5" manage-gltf-material='mat:{"metalness":1, "roughtness":0}$/${"mapuri":"./assets/bank/contenants/i/j1.png", "normalMapuri":"./assets/bank/contenants/i/j1n.png","aoMapuri":"./assets/bank/contenants/i/j1mr.png"}' collision-detection>
                 <a-troika-text
         position="0 0.6 -0.43"
         fontSize=1
@@ -302,7 +302,7 @@
       ></a-troika-text>
 
             </a-escaperoom-object>
-            <a-escaperoom-object unlock_on="click" door_id="25" gltf-model="url(./assets/bank/contenants/bariljaune3.gltf)" position="-7, -1.7, -5" collision-detection>
+            <a-escaperoom-object unlock_on="click" door_id="25" gltf-model="url(./assets/bank/contenants/bariljaune3.gltf)"  manage-gltf-material=''position="-7, -1.7, -5" collision-detection>
                 <a-troika-text
                 position="0 0.6 -0.43"
                 fontSize=1
@@ -319,9 +319,9 @@
                     <a-escaperoom-object raycaster-target scale="2 2 2" unlock_on="drop" door_id="19" draggable gltf-model="url(./assets/clef2arouge.gltf)" rotation="0 0 0" position="-0.15, 0, -0.1">  </a-escaperoom-object>
             </a-escaperoom-object>
             <a-light type= "point" intensity="6" position="-1.45, 0.72, -2.4"></a-light>
-            <a-entity light="type: ambient; color: white; groundColor: #brown; intensity: 1"></a-entity>
+             <a-entity light="type: ambient; color: white; groundColor: #brown; intensity: 1"></a-entity>
 
-        <a-sky color="grey"></a-sky>
+       <a-sky color="grey"></a-sky><!--mat:{"metalness":1, "roughtness":0}$/${"mapuri":"./assets/bank/contenants/i/n2.png", "normalMap":"./assets/bank/contenants/i/n2n.png", "aoMapuri":"./assets/bank/contenants/i/n2mr.png"}-->
         
         </a-scene>
         <script>

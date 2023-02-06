@@ -23,6 +23,7 @@ AFRAME.registerSystem("escaperoom", {
     init() {
         this.objectList = [];
         this.doorList = [];
+        this.materialSet = new Set();
     },
 
     getElementList(type){
@@ -31,6 +32,8 @@ AFRAME.registerSystem("escaperoom", {
                 return 'objectList';
             case 'door':
                 return 'doorList';
+            case 'material':
+                return "materialSet";
             default:
                 console.log(`Element type '${type}' unknown.`);
                 return null;
