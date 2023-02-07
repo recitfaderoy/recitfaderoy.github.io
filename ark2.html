@@ -62,36 +62,96 @@
       </select>
     </div>
     <div class="example-container">
-      <a-scene mindar-image="imageTargetSrc: ./assets/targets4.mind; showStats: true;" embedded color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+      <a-scene mindar-image="imageTargetSrc: ./assets/targets6.mind; showStats: true;" embedded color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
         <a-assets>
             <img id="recitLogo" src="./assets/logo.jpg">
             <img id="card1" src="./assets/card-example/card.png" />
             <img id="card2" src="./assets/card-example/card.png" />
             <a-asset-item id="eti" src="./assets/characters/etienne/etienne_animated/etienne1.gltf"></a-asset-item>
+            <a-asset-item id="avatarModel0" src="./assets/mazinkaiser.gltf"></a-asset-item>
             <a-asset-item id="avatarModel1" src="./assets/great_mazinger_z.glb"></a-asset-item>
-            <a-asset-item id="avatarModel2" src="./assets/goldo2.gltf"></a-asset-item>
+            <a-asset-item id="n1" src="./assets/3d_number_-_0_zero.glb"></a-asset-item><a-asset-item id="avatarModel2" src="./assets/goldo2.gltf"></a-asset-item>
+            <a-asset-item id="n1" src="./assets/3d_number_-_1_one.glb"></a-asset-item>
+            <a-asset-item id="n2" src="./assets/3d_number_-_2_two.glb"></a-asset-item>
+            <a-asset-item id="n3" src="./assets/3d_number_-_3_three.glb"></a-asset-item>
+            <a-asset-item id="n4" src="./assets/3d_number_-_4_four.glb"></a-asset-item>
+            <a-asset-item id="n5" src="./assets/3d_number_-_5_five.glb"></a-asset-item>
+            <a-asset-item id="n6" src="./assets/3d_number_-_6_six.glb"></a-asset-item>
+            <a-asset-item id="n7" src="./assets/3d_number_-_7_seven.glb"></a-asset-item>
+            <a-asset-item id="n8" src="./assets/3d_number_-_8_eight.glb"></a-asset-item>
+            <a-asset-item id="n9" src="./assets/3d_number_-_9_nine.glb"></a-asset-item>
+            <a-asset-item id="n10" src="./assets/3d_number_-_10_ten.glb"></a-asset-item>
         </a-assets>
 
         <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
         <a-entity mindar-image-target="targetIndex: 0">
-          <a-plane src="#recitLogo" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
+        <!--  <a-plane src="#recitLogo" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>-->
 
-          <a-gltf-model rotation="0 0 0 " position="0 0 0.1" scale="0.5 0.5 0.5" src="#eti"
+          <a-gltf-model rotation="0 180 0 " position="0 0 0.1" scale="1 1 1" src="#n0"
           animation-mixer="clip: spell1; loop:true;"
           >
         </a-entity>
-        <a-entity mindar-image-target="targetIndex: 2>
+        <a-entity mindar-image-target="targetIndex: 1>
           <a-plane src="#recitLogo" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
 
-          <a-gltf-model rotation="0 0 0 " position="0 0 0.1" scale="0.0051 0.0051 0.0051" src="#avatarModel2"
+          <a-gltf-model rotation="0 0 0 " position="0 0 0.1" scale="1 1 1" src="#n1"
           animation-mixer="clip: spell1; loop:true;"
           >
         </a-entity>
-        <a-entity mindar-image-target="targetIndex: 1">
+        <a-entity mindar-image-target="targetIndex: 2">
           <a-plane src="#recitLogo" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
 
-          <a-gltf-model rotation="0 0 0 " position="0 0 0.051" scale="0.0051 0.0051 0.0051" src="#avatarModel1"
+          <a-gltf-model rotation="0 0 0 " position="0 0 0.051" scale="1 1 1" src="#n2"
+          animation-mixer="clip: spell1; loop:true;"
+          >
+        </a-entity>
+        <a-entity mindar-image-target="targetIndex: 3">
+          <a-plane src="#recitLogo" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
+
+          <a-gltf-model rotation="0 0 0 " position="0 0 0.051" scale="1 1 1" src="#n3"
+          animation-mixer="clip: spell1; loop:true;"
+          >
+        </a-entity>
+        <a-entity mindar-image-target="targetIndex: 4">
+          <a-plane src="#recitLogo" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
+
+          <a-gltf-model rotation="0 0 0 " position="0 0 0.051" scale="1 1 1" src="#n4"
+          animation-mixer="clip: spell1; loop:true;"
+          >
+        </a-entity>
+        <a-entity mindar-image-target="targetIndex: 5">
+          <a-plane src="#recitLogo" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
+
+          <a-gltf-model rotation="0 0 0 " position="0 0 0.051" scale="1 1 1" src="#n5"
+          animation-mixer="clip: spell1; loop:true;"
+          >
+        </a-entity>
+        <a-entity mindar-image-target="targetIndex: 6">
+          <a-plane src="#recitLogo" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
+
+          <a-gltf-model rotation="0 0 0 " position="0 0 0.051" scale="1 1 1" src="#n6"
+          animation-mixer="clip: spell1; loop:true;"
+          >
+        </a-entity>
+        <a-entity mindar-image-target="targetIndex: 7">
+          <a-plane src="#recitLogo" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
+
+          <a-gltf-model rotation="0 0 0 " position="0 0 0.051" scale="1 1 1" src="#n7"
+          animation-mixer="clip: spell1; loop:true;"
+          >
+        </a-entity>
+        <a-entity mindar-image-target="targetIndex: 8">
+          <a-plane src="#recitLogo" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
+
+          <a-gltf-model rotation="0 0 0 " position="0 0 0.051" scale="1 1 1" src="#n8"
+          animation-mixer="clip: spell1; loop:true;"
+          >
+        </a-entity>
+        <a-entity mindar-image-target="targetIndex: 9">
+          <a-plane src="#recitLogo" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
+
+          <a-gltf-model rotation="0 0 0 " position="0 0 0.051" scale="1 1 1" src="#n9"
           animation-mixer="clip: spell1; loop:true;"
           >
         </a-entity>
