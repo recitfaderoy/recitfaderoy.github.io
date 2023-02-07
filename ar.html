@@ -2,25 +2,45 @@
 <script src="./libs/ar/aframe-ar-nft.js"></script>
 
 <style>
-  .arjs-loader {
-    height: 100%;
+  body {
+    margin: 0;
+  }
+  .example-container {
+    overflow: hidden;
+    position: relative;
     width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.8);
-    z-index: 9999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 100%;
   }
+  .controls {
+text-align: center;
+padding: 0.5em 0;
+background: #333e5a;
+}
 
-  .arjs-loader div {
-    text-align: center;
-    font-size: 1.25em;
-    color: white;
-  }
+.controls {
+color: #fff;
+z-index: 1000;
+}
+.controls p {
+margin: 0;
+}
+.controls > div {
+margin-bottom: 0.5em;
+}
+.controls > div:last-child {
+margin-bottom: 0;
+}
+.mindar-ui-overlay {
+
+right: 0;
+top: 100!important;
+bottom: 0;
+background: transparent;
+z-index: 2;
 </style>
+<script>
+ 
+</script>
 
 <!-- rawgithack development URL -->
 <!--<script src='https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js'></script>

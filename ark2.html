@@ -1,0 +1,101 @@
+<!--
+ Basic example
+-->
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- <script src="../../dist-dev/mindar-image.js" type="module"></script> -->
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/16/Stats.min.js"></script>
+    <script src="./libs/mindar-image-aframe.js" ></script>
+   
+    <style>
+      body {
+        margin: 0;
+      }
+      .example-container {
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+      .controls {
+  text-align: center;
+  padding: 0.5em 0;
+  background: #333e5a;
+}
+
+.controls {
+  color: #fff;
+  z-index: 1000;
+}
+.controls p {
+  margin: 0;
+}
+.controls > div {
+  margin-bottom: 0.5em;
+}
+.controls > div:last-child {
+  margin-bottom: 0;
+}
+.mindar-ui-overlay {
+   
+    right: 0;
+    top: 100!important;
+    bottom: 0;
+    background: transparent;
+    z-index: 2;
+}
+    </style>
+    <script>
+     
+    </script>
+
+  </head>
+
+    <body>
+    <div class="controls">
+      <button id="button">Get camera</button>
+      <select id="select">
+        <option></option>
+      </select>
+    </div>
+    <div class="example-container">
+      <a-scene mindar-image="imageTargetSrc: ./assets/targets4.mind; showStats: true;" embedded color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+        <a-assets>
+            <img id="recitLogo" src="./assets/logo.jpg">
+            <img id="card1" src="./assets/card-example/card.png" />
+            <img id="card2" src="./assets/card-example/card.png" />
+            <a-asset-item id="eti" src="./assets/characters/etienne/etienne_animated/etienne1.gltf"></a-asset-item>
+            <a-asset-item id="avatarModel1" src="./assets/great_mazinger_z.glb"></a-asset-item>
+            <a-asset-item id="avatarModel2" src="./assets/goldo.gltf"></a-asset-item>
+        </a-assets>
+
+        <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+        <a-entity mindar-image-target="targetIndex: 0">
+          <a-plane src="#recitLogo" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
+
+          <a-gltf-model rotation="0 0 0 " position="0 0 0.1" scale="0.5 0.5 0.5" src="#eti"
+          animation-mixer="clip: spell1; loop:true;"
+          >
+        </a-entity>
+        <a-entity mindar-image-target="targetIndex: 2>
+          <a-plane src="#recitLogo" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
+
+          <a-gltf-model rotation="0 0 0 " position="0 0 0.1" scale="0.5 0.5 0.5" src="#avatarModel2"
+          animation-mixer="clip: spell1; loop:true;"
+          >
+        </a-entity>
+        <a-entity mindar-image-target="targetIndex: 1">
+          <a-plane src="#recitLogo" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
+
+          <a-gltf-model rotation="0 0 0 " position="0 0 0.051" scale="0.0051 0.0051 0.0051" src="#avatarModel1"
+          animation-mixer="clip: spell1; loop:true;"
+          >
+        </a-entity>
+      </a-scene>
+    </div>
+  </body>
+</html>
