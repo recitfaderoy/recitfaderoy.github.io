@@ -6,7 +6,7 @@
         <!-- for animations from your glTF mode we need the animation-mixer component from aframe-extras -->
         <script src="./libs/aframe/aframe-extra.min.js"></script>
         <script src="./libs/csg/csg.js"></script>
-        <script src="./libs/physics.js" ></script>
+        <script src="./libs/physics2.js" ></script>
         <script src="./libs/a.js" ></script>
         <script src="./escaperoom.js" ></script>
   <meta charset="UTF-8">
@@ -81,7 +81,8 @@
           <a-escaperoom-ceiling wall_thickness=".2" width="12" length="12" height="3.65" material="shader: flat; repeat: 4 4; src: ./assets/texture-ceiling.jpg" collision-detection></a-escaperoom-ceiling>
           <a-escaperoom-floor wall_thickness=".2" width="12" length="12" height="3.65" material="shader: flat; src: ./assets/texture-floor.jpg" collision-detection></a-escaperoom-floor>
           
-          <a-escaperoom-object unlock_on="click" door_id="1" gltf-model="url(./assets/bank/contenants/bariljaune1.gltf)" position="-3, -1.5, -7" collision-detection></a-escaperoom-object>
+          <a-escaperoom-object unlock_on="click" door_id="1" gltf-model="url(./assets/robot.gltf)" position="0, -1.5, -7" collision-detection></a-escaperoom-object>
+          <a-escaperoom-object  gltf-model="url(./assets/bank/contenants/barilturquoise3.gltf)" position="-4, -1.5, -5" collision-detection></a-escaperoom-object>
           <a-escaperoom-object  gltf-model="url(./assets/bank/contenants/barilturquoise3.gltf)" position="-4, -1.5, -5" collision-detection></a-escaperoom-object>
           <!--<a-escaperoom-object gltf-model="url(./assets/baril3.gltf)" position="3, -1.5, -7" collision-detection></a-escaperoom-object>
           <a-escaperoom-object gltf-model="url(./assets/baril4.gltf)" position="4, -1.5, -5" collision-detection></a-escaperoom-object>-->
